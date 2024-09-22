@@ -22,18 +22,18 @@ public class machine {
         hardwareMap = hwMap;
 
         //Connect Motors
-        frontRight = hardwareMap.get(DcMotor.class, "rightFront");
-        frontLeft = hardwareMap.get(DcMotor.class, "leftFront");
-        backRight = hardwareMap.get(DcMotor.class, "rightBack");
-        backLeft = hardwareMap.get(DcMotor.class, "leftBack");
+//        frontRight = hardwareMap.get(DcMotor.class, "rightFront");
+  //      frontLeft = hardwareMap.get(DcMotor.class, "leftFront");
+//        backRight = hardwareMap.get(DcMotor.class, "rightBack");
+//        backLeft = hardwareMap.get(DcMotor.class, "leftBack");
 
 
 
         //Set motor direction
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        frontLeft.setDirection(DcMotor.Direction.FORWARD);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
+//        frontRight.setDirection(DcMotor.Direction.FORWARD);
+//        frontLeft.setDirection(DcMotor.Direction.FORWARD);
+//        backRight.setDirection(DcMotor.Direction.FORWARD);
+//        backLeft.setDirection(DcMotor.Direction.REVERSE);
 
 
 
