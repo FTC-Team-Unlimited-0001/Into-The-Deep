@@ -21,7 +21,7 @@ public class DeepTeleop extends LinearOpMode{
 
     @Override
     public void runOpMode() throws InterruptedException {
-
+int i =0;
 
         machine robot = new machine(hardwareMap);
 
