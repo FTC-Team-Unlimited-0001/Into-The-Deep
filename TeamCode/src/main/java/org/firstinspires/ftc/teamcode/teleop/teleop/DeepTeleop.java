@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.util.machine;
 
 @Config
 @TeleOp
+
 public class DeepTeleop extends LinearOpMode{
 
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -117,9 +118,16 @@ public class DeepTeleop extends LinearOpMode{
 
             if (gamepad2.a) {
                 robot.armTargetPosition += 10;  // Increment target position (move up)
+
             } else if (gamepad2.b) {
                 robot.armTargetPosition -= 10;  // Decrement target position (move down)
+
             }
+
+            if(gamepad2.dpad_up){
+                robot.armTargetPosition = -30;
+            }
+
 
           controlArmsWithPID();
 
@@ -129,7 +137,7 @@ public class DeepTeleop extends LinearOpMode{
         // Method to control the arms using PID controller
         private void controlArmsWithPID() {
             // Get the current position of both arms (average)
-            double currentPosition = (robot.anglerleft.getCurrentPosition() + robot.anglerright.getCurrentPosition()) / 2.0;
+            double currentPosition = (robot.anglerright.getCurrentPosition());
 
             // Calculate PID output
             double armOutput = robot.armPIDController.calculate(currentPosition, robot.armTargetPosition);
@@ -150,6 +158,6 @@ public class DeepTeleop extends LinearOpMode{
 
 
 
-
+// pid issue , use 1
 
 }

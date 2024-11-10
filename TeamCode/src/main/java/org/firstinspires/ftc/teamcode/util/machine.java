@@ -25,9 +25,9 @@ public class machine {
     public static double armTargetPosition;
 
     // PID coefficients
-    public static double kP = 0.0000001;
-    public static double kI = 0.0;
-    public static double kD = 0.0000001;
+    public static double kP = 0.001;
+    public static double kI = 0.001;
+    public static double kD = 0.001;
 
 
 
@@ -60,7 +60,7 @@ public class machine {
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
-        anglerleft.setDirection(DcMotor.Direction.REVERSE);
+        anglerright.setDirection(DcMotor.Direction.REVERSE);
 
 
 
