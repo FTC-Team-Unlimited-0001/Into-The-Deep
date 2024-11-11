@@ -81,39 +81,17 @@ public class DeepTeleop extends LinearOpMode{
                 robot.backRight.setPower(backRightPower);
             }
 
-            if (gamepad1.y) {
-                robot.anglerright.setPower(0.5);
-                robot.anglerleft.setPower(0.5);
-            } else {
-                robot.anglerright.setPower(0);
-                robot.anglerleft.setPower(0);
-            }
-            ;
 
-            if (gamepad1.b) {
-                robot.anglerright.setPower(-0.5);
-                robot.anglerleft.setPower(-0.5);
-            } else {
-                robot.anglerright.setPower(0);
-                robot.anglerleft.setPower(0);
-            }
-            ;
 
             if (gamepad1.a) {
                 robot.spoolleft.setPower(1);
                 robot.spoolright.setPower(1);
-            } else {
-                robot.spoolright.setPower(0);
-                robot.spoolleft.setPower(0);
-            }
-
-
-            if (gamepad1.x) {
+            } else if (gamepad1.x) {
                 robot.spoolleft.setPower(-1);
                 robot.spoolright.setPower(-1);
             } else {
-                robot.spoolright.setPower(0);
                 robot.spoolleft.setPower(0);
+                robot.spoolright.setPower(0);
             }
 
             if (gamepad2.a) {
@@ -128,19 +106,20 @@ public class DeepTeleop extends LinearOpMode{
                 robot.armTargetPosition = -30;
             }
 
-
-          controlArmsWithPID();
+            robot.updatePIDFCoefficients();
+            controlArmsWithPIDF();
 
         }
     }
 
-        // Method to control the arms using PID controller
-        private void controlArmsWithPID() {
-            // Get the current position of both arms (average)
+        // Method to control the arms using PIDF controller
+        private void controlArmsWithPIDF() {
+
+        // Get the current position of both arms (average)
             double currentPosition = (robot.anglerright.getCurrentPosition());
 
             // Calculate PID output
-            double armOutput = robot.armPIDController.calculate(currentPosition, robot.armTargetPosition);
+            double armOutput = robot.armPIDFController.calculate(currentPosition, robot.armTargetPosition);
 
             // Apply the output to both motors
             robot.anglerleft.setPower(armOutput);
@@ -149,7 +128,7 @@ public class DeepTeleop extends LinearOpMode{
             // Telemetry to display information on the driver station
             telemetry.addData("Arm Target", robot.armTargetPosition);
             telemetry.addData("Arm Position", currentPosition);
-            telemetry.addData("PID Output", armOutput);
+            telemetry.addData("PIDF Output", armOutput);
             telemetry.addData("Left Arm Encoder", robot.anglerleft.getCurrentPosition());
             telemetry.addData("Right Arm Encoder", robot.anglerright.getCurrentPosition());
             telemetry.update();

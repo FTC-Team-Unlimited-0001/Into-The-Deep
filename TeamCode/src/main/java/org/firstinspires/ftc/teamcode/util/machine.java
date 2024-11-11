@@ -21,13 +21,14 @@ public class machine {
     public DcMotor anglerright;
     public DcMotor anglerleft;
 
-    public PIDController armPIDController;
+    public PIDFController armPIDFController;
     public static double armTargetPosition;
 
     // PID coefficients
     public static double kP = 0.001;
     public static double kI = 0.001;
     public static double kD = 0.001;
+    public static double kF = 0.05;
 
 
 
@@ -65,16 +66,20 @@ public class machine {
 
 
         anglerright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        anglerright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        anglerright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         anglerleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        anglerleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        anglerleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Initialize the PID controller for the arms
-        armPIDController = new PIDController(kP, kI, kD);
+        armPIDFController = new PIDFController(kP, kI, kD, kF);
 
         // Set an initial target position for the arms (e.g., 500 ticks)
         armTargetPosition = 0;
 
+    }
+
+    public void updatePIDFCoefficients() {
+        armPIDFController.setPIDF(kP, kI, kD, kF);
     }
 }
