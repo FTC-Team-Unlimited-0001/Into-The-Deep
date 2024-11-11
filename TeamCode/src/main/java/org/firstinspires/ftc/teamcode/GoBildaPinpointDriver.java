@@ -63,7 +63,6 @@ public class GoBildaPinpointDriver extends I2cDeviceSynchDevice<I2cDeviceSynchSi
 
     private static final float goBILDA_SWINGARM_POD = 13.26291192f; //ticks-per-mm for the goBILDA Swingarm Pod
     private static final float goBILDA_4_BAR_POD    = 19.89436789f; //ticks-per-mm for the goBILDA 4-Bar Pod
-    private static final float optiOdom_V1_POD = 37.25135125168f;
 
     //i2c address of the device
     public static final byte DEFAULT_ADDRESS = 0x31;
@@ -148,6 +147,7 @@ public class GoBildaPinpointDriver extends I2cDeviceSynchDevice<I2cDeviceSynchSi
     public enum GoBildaOdometryPods {
         goBILDA_SWINGARM_POD,
         goBILDA_4_BAR_POD;
+
     }
     //enum that captures a limited scope of read data. More options may be added in future update
     public enum readData {
