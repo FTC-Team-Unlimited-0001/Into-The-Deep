@@ -3,9 +3,12 @@ package org.firstinspires.ftc.teamcode.util;
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.controller.PIDFController;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.GoBildaPinpointDriver;
 
 @Config
 public class machine {
@@ -21,15 +24,18 @@ public class machine {
     public DcMotor anglerright;
     public DcMotor anglerleft;
 
+    public CRServo servoright;
+    GoBildaPinpointDriver pinpoint;
+
     public PIDFController armPIDFController;
     public static double armTargetPosition;
 
     // PID coefficients
-    public static double kP = 0.001;
-    public static double kI = 0.001;
-    public static double kD = 0.001;
-    public static double kF = 0.05;
-
+    public static double kP = 0.0001;
+    public static double kI = 0.0000001;
+    public static double kD = 0.000001;
+    public static double kF = 0.00001;
+//f is for predicting the power before something has happened.
 
 
 
@@ -54,6 +60,8 @@ public class machine {
         spoolleft = hardwareMap.get(DcMotor.class, "spoolleft");
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
 
+        servoright = hardwareMap.get(CRServo.class, "rightservo");
+        pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
 
 
         //Set motor direction

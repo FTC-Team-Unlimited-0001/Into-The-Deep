@@ -81,7 +81,9 @@ public class DeepTeleop extends LinearOpMode{
                 robot.backRight.setPower(backRightPower);
             }
 
-
+            if (gamepad2.x){
+                robot.servoright.setPower(0.5);
+            }
 
             if (gamepad1.a) {
                 robot.spoolleft.setPower(1);
@@ -94,17 +96,21 @@ public class DeepTeleop extends LinearOpMode{
                 robot.spoolright.setPower(0);
             }
 
-            if (gamepad2.a) {
-                robot.armTargetPosition += 10;  // Increment target position (move up)
+            if (gamepad2.dpad_up) {
+                robot.armTargetPosition = -406;  // Increment target position (move up)
 
-            } else if (gamepad2.b) {
-                robot.armTargetPosition -= 10;  // Decrement target position (move down)
+            } else if (gamepad2.dpad_down) {
+                robot.armTargetPosition = -695;  // Decrement target position (move down)
 
             }
 
-            if(gamepad2.dpad_up){
-                robot.armTargetPosition = -30;
+            if(gamepad2.right_bumper){
+                robot.armTargetPosition = -380;
             }
+            if(gamepad2.y){
+                robot.armTargetPosition = 600;
+            }
+
 
             robot.updatePIDFCoefficients();
             controlArmsWithPIDF();
