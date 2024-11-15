@@ -25,7 +25,7 @@ public class machine {
     public DcMotor anglerleft;
 
     public CRServo servoright;
-    GoBildaPinpointDriver pinpoint;
+
 
     public PIDFController armPIDFController;
     public static double armTargetPosition;
@@ -61,7 +61,7 @@ public class machine {
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
 
         servoright = hardwareMap.get(CRServo.class, "rightservo");
-        pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
+
 
 
         //Set motor direction
