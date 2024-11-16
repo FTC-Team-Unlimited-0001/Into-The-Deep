@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.GoBildaPinpointDriver;
 
@@ -25,6 +26,8 @@ public class machine {
     public DcMotor anglerleft;
 
     public CRServo servoright;
+    public CRServo servoleft;
+    public Servo servopinch;
 
 
     public PIDFController armPIDFController;
@@ -60,7 +63,9 @@ public class machine {
         spoolleft = hardwareMap.get(DcMotor.class, "spoolleft");
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
 
-        servoright = hardwareMap.get(CRServo.class, "rightservo");
+        servoright = hardwareMap.get(CRServo.class, "servoright");
+        servopinch = hardwareMap.get(Servo.class, "servopinch");
+
 
 
 
