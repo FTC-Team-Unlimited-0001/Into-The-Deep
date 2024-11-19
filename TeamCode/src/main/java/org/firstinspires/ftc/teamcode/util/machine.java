@@ -25,7 +25,7 @@ public class machine {
     public DcMotor anglerright;
     public DcMotor anglerleft;
 
-    public CRServo servoright;
+    public Servo servoright;
     public CRServo servoleft;
     public Servo servopinch;
 
@@ -63,7 +63,7 @@ public class machine {
         spoolleft = hardwareMap.get(DcMotor.class, "spoolleft");
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
 
-        servoright = hardwareMap.get(CRServo.class, "servoright");
+        servoright = hardwareMap.get(Servo.class, "servoright");
         servopinch = hardwareMap.get(Servo.class, "servopinch");
 
 

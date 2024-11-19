@@ -68,7 +68,6 @@ public class DeepTeleop extends LinearOpMode{
             robot.backLeft.setZeroPowerBehavior(brake);
             robot.backRight.setZeroPowerBehavior(brake);
 
-
             if (gamepad1.left_bumper) {
                 robot.frontLeft.setPower(frontLeftPower / 4);
                 robot.backLeft.setPower(backLeftPower / 4);
@@ -81,40 +80,79 @@ public class DeepTeleop extends LinearOpMode{
                 robot.backRight.setPower(backRightPower);
             }
 
-            if (gamepad2.x){
-                robot.servoright.setPower(0.5);
+
+
+
+            //Preset variables:
+            int zero = 0;
+            int high_basket = 125;
+            int pickup = 680;
+            int clipper = 230;
+
+            //Claw presets
+            double open = 0.8;
+            double close = 0.1;
+
+            //Spools
+            double MAX_POSITION = 0;
+            double MIN_POSITION = 1;
+
+
+            // Handle servo positions
+            if (gamepad2.x) {
+                robot.servoright.setPosition(180);  // Example: fully open position
             }
-            if(gamepad2.y){
-                robot.servopinch.setPosition(70);
-            }
-            if(gamepad2.a){
-                robot.servopinch.setPosition(0);
+            if (gamepad2.y) {
+                robot.servopinch.setPosition(open);  // Example: partially open position
+            } else if (gamepad2.a) {
+                robot.servopinch.setPosition(close);   // Fully closed position
             }
 
-            if (gamepad1.a) {
-                robot.spoolleft.setPower(1);
-                robot.spoolright.setPower(1);
-            } else if (gamepad1.x) {
-                robot.spoolleft.setPower(-1);
-                robot.spoolright.setPower(-1);
-            } else {
-                robot.spoolleft.setPower(0);
-                robot.spoolright.setPower(0);
+            // Handle spool power for lifting mechanism
+
+            // Get the trigger values
+            double extendPower = gamepad1.right_trigger;  // Extending slides
+            double retractPower = gamepad1.left_trigger;  // Retracting slides
+
+            // Calculate motor power
+            double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
+
+            // Set power to the slide motor
+            robot.spoolleft.setPower(slidePower);
+            robot.spoolright.setPower(slidePower);
+
+            if (robot.spoolright.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
+                slidePower = 0;  // Prevent extending further
+            } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
+                slidePower = 0;  // Prevent retracting further
             }
 
+            robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+//            if (gamepad1.a) {
+//                robot.spoolleft.setPower(1);
+//                robot.spoolright.setPower(1);  // Spool moving up
+//            } else if (gamepad1.x) {
+//                robot.spoolleft.setPower(-1);
+//                robot.spoolright.setPower(-1); // Spool moving down
+//            } else {
+//                robot.spoolleft.setPower(0);
+//                robot.spoolright.setPower(0);  // Stop spool
+//            }
+
+            // Handle arm target position adjustments
             if (gamepad2.dpad_up) {
-                robot.armTargetPosition = 125;  // Increment target position (move up)
-
+                robot.armTargetPosition = high_basket;  // Increment target position
             } else if (gamepad2.dpad_down) {
-                robot.armTargetPosition = 0;  // Decrement target position (move down)
-
+                robot.armTargetPosition = zero;    // Decrement target position
             }
 
-            if(gamepad2.right_bumper){
-                robot.armTargetPosition = 200;
-            }
-            if(gamepad2.dpad_right){
-                robot.armTargetPosition = 690;
+            if (gamepad2.right_bumper) {
+                robot.armTargetPosition = clipper;  // Set specific position
+            } else if (gamepad2.dpad_right) {
+                robot.armTargetPosition = pickup;  // Set to maximum position
             }
 
 
