@@ -121,15 +121,18 @@ public class DeepTeleop extends LinearOpMode{
             robot.spoolleft.setPower(slidePower);
             robot.spoolright.setPower(slidePower);
 
-            if (robot.spoolright.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
-                slidePower = 0;  // Prevent extending further
-            } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
-                slidePower = 0;  // Prevent retracting further
-            }
+//            if (robot.spoolleft.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
+//                slidePower = 0;  // Prevent extending further
+//            } else if (robot.spoolleft.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
+//                slidePower = 0;  // Prevent retracting further
+//            }
 
             robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+            telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
+            telemetry.addData("Slide Power", slidePower);
+            telemetry.update();
 
 //            if (gamepad1.a) {
 //                robot.spoolleft.setPower(1);
@@ -182,6 +185,7 @@ public class DeepTeleop extends LinearOpMode{
             telemetry.addData("Left Arm Encoder", robot.anglerleft.getCurrentPosition());
             telemetry.addData("Right Arm Encoder", robot.anglerright.getCurrentPosition());
             telemetry.update();
+
 
         }
 
