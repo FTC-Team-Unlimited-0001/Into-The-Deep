@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.util.machine;
 
@@ -44,8 +45,12 @@ public class DeepTeleop extends LinearOpMode{
 // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
         imu.initialize(parameters);
 
+        ElapsedTime timer = new ElapsedTime();
+
 
         waitForStart();
+
+        timer.reset();
 
         while (opModeIsActive()) {
 
@@ -68,6 +73,7 @@ public class DeepTeleop extends LinearOpMode{
             robot.backLeft.setZeroPowerBehavior(brake);
             robot.backRight.setZeroPowerBehavior(brake);
 
+
             if (gamepad1.left_bumper) {
                 robot.frontLeft.setPower(frontLeftPower / 4);
                 robot.backLeft.setPower(backLeftPower / 4);
@@ -84,23 +90,40 @@ public class DeepTeleop extends LinearOpMode{
 
 
             //Preset variables:
-            int zero = 0;
-            int high_basket = 125;
-            int pickup = 680;
-            int clipper = 230;
+            int high_basket = 400;
+            int pickup = 1000;
+            int clipper = 450;
+            int pickup_assist = 900;
 
             //Claw presets
-            double open = 0.8;
-            double close = 0.1;
+            double open = 0.5;
+            double close = 0;
 
             //Spools
             double MAX_POSITION = 0;
             double MIN_POSITION = 1;
 
+            double big = 0.5;
 
-            // Handle servo positions
-            if (gamepad2.x) {
-                robot.servoright.setPosition(180);  // Example: fully open position
+
+
+            if (timer.milliseconds() > 500) {
+                // Handle servo positions
+                if (gamepad2.x) {
+                    robot.servoright.setPosition(big);// Example: fully open position
+                    robot.servoleft.setPosition(big);
+                    timer.reset();
+                }
+                if (gamepad2.b) {
+                    robot.servoleft.setPosition(robot.servoleft.getPosition() + 0.1);
+                    robot.servoright.setPosition(robot.servoright.getPosition() + 0.1);
+                    timer.reset();
+                }
+                if(gamepad2.left_bumper){
+                    robot.servoleft.setPosition(robot.servoleft.getPosition() - 0.5);
+                    robot.servoright.setPosition(robot.servoright.getPosition() - 0.5);
+                    timer.reset();
+                }
             }
             if (gamepad2.y) {
                 robot.servopinch.setPosition(open);  // Example: partially open position
@@ -149,13 +172,15 @@ public class DeepTeleop extends LinearOpMode{
             if (gamepad2.dpad_up) {
                 robot.armTargetPosition = high_basket;  // Increment target position
             } else if (gamepad2.dpad_down) {
-                robot.armTargetPosition = zero;    // Decrement target position
+                robot.armTargetPosition = pickup_assist;    // Decrement target position
             }
 
             if (gamepad2.right_bumper) {
                 robot.armTargetPosition = clipper;  // Set specific position
-            } else if (gamepad2.dpad_right) {
-                robot.armTargetPosition = pickup;  // Set to maximum position
+            }
+
+            if (gamepad2.dpad_right) {
+                robot.armTargetPosition = pickup; // Set to maximum position
             }
 
 

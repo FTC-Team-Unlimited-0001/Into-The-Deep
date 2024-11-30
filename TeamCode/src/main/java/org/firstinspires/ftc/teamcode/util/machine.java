@@ -25,8 +25,9 @@ public class machine {
     public DcMotor anglerright;
     public DcMotor anglerleft;
 
+
     public Servo servoright;
-    public CRServo servoleft;
+    public Servo servoleft;
     public Servo servopinch;
 
 
@@ -34,10 +35,10 @@ public class machine {
     public static double armTargetPosition;
 
     // PID coefficients
-    public static double kP = 0.0001;
-    public static double kI = 0.0000001;
+    public static double kP = 0.0005;
+    public static double kI = 0;
     public static double kD = 0.000001;
-    public static double kF = 0.00001;
+    public static double kF = 0;
 //f is for predicting the power before something has happened.
 
 
@@ -63,6 +64,7 @@ public class machine {
         spoolleft = hardwareMap.get(DcMotor.class, "spoolleft");
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
 
+        servoleft = hardwareMap.get(Servo.class, "servoleft");
         servoright = hardwareMap.get(Servo.class, "servoright");
         servopinch = hardwareMap.get(Servo.class, "servopinch");
 
@@ -83,6 +85,7 @@ public class machine {
 
         anglerleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         anglerleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        servoleft.setDirection(Servo.Direction.REVERSE);
 
         // Initialize the PID controller for the arms
         armPIDFController = new PIDFController(kP, kI, kD, kF);
