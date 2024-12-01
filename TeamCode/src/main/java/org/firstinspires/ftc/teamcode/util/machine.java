@@ -8,6 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.LLResultTypes;
+import com.qualcomm.hardware.limelightvision.LLStatus;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 
 import org.firstinspires.ftc.teamcode.GoBildaPinpointDriver;
 
@@ -67,8 +71,6 @@ public class machine {
         servoleft = hardwareMap.get(Servo.class, "servoleft");
         servoright = hardwareMap.get(Servo.class, "servoright");
         servopinch = hardwareMap.get(Servo.class, "servopinch");
-
-
 
 
         //Set motor direction

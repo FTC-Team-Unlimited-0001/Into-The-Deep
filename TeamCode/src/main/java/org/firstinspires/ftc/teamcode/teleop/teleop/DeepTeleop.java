@@ -6,13 +6,16 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PController;
 import com.arcrobotics.ftclib.controller.PIDController;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.util.LLresults;
 import org.firstinspires.ftc.teamcode.util.machine;
 
 
@@ -31,6 +34,7 @@ public class DeepTeleop extends LinearOpMode{
 
         robot = new machine(hardwareMap);
 
+
         //Telem stuff
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
         telemetry.addData("status", "initalized");
@@ -44,6 +48,12 @@ public class DeepTeleop extends LinearOpMode{
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
 // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
         imu.initialize(parameters);
+
+
+        LLresults limelight = new LLresults();
+        limelight.init(hardwareMap);
+
+
 
         ElapsedTime timer = new ElapsedTime();
 
@@ -75,10 +85,10 @@ public class DeepTeleop extends LinearOpMode{
 
 
             if (gamepad1.left_bumper) {
-                robot.frontLeft.setPower(frontLeftPower / 4);
-                robot.backLeft.setPower(backLeftPower / 4);
-                robot.frontRight.setPower(frontRightPower / 4);
-                robot.backRight.setPower(backRightPower / 4);
+                robot.frontLeft.setPower(frontLeftPower / 3);
+                robot.backLeft.setPower(backLeftPower / 3);
+                robot.frontRight.setPower(frontRightPower / 3);
+                robot.backRight.setPower(backRightPower / 3);
             } else {
                 robot.frontLeft.setPower(frontLeftPower);
                 robot.backLeft.setPower(backLeftPower);
@@ -100,8 +110,8 @@ public class DeepTeleop extends LinearOpMode{
             double close = 0;
 
             //Spools
-            double MAX_POSITION = 0;
-            double MIN_POSITION = 1;
+            double MAX_POSITION = 3140;
+            double MIN_POSITION = 0;
 
             double big = 0.5;
 
@@ -144,11 +154,11 @@ public class DeepTeleop extends LinearOpMode{
             robot.spoolleft.setPower(slidePower);
             robot.spoolright.setPower(slidePower);
 
-//            if (robot.spoolleft.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
-//                slidePower = 0;  // Prevent extending further
-//            } else if (robot.spoolleft.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
-//                slidePower = 0;  // Prevent retracting further
-//            }
+            if (robot.spoolright.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
+                slidePower = 0;  // Prevent extending further
+            } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
+                slidePower = 0;  // Prevent retracting further
+            }
 
             robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -186,6 +196,9 @@ public class DeepTeleop extends LinearOpMode{
 
             robot.updatePIDFCoefficients();
             controlArmsWithPIDF();
+            double angle = limelight.getOrientation();
+
+            telemetry.addData("Sample Orientation", angle);
 
         }
     }
@@ -209,6 +222,7 @@ public class DeepTeleop extends LinearOpMode{
             telemetry.addData("PIDF Output", armOutput);
             telemetry.addData("Left Arm Encoder", robot.anglerleft.getCurrentPosition());
             telemetry.addData("Right Arm Encoder", robot.anglerright.getCurrentPosition());
+            telemetry.addData("right spool pos",robot.spoolright.getCurrentPosition());
             telemetry.update();
 
 
