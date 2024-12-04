@@ -32,7 +32,7 @@ public class ParkRed extends LinearOpMode {
 
         Actions.runBlocking(
                 drive.actionBuilder(initialPose)
-                        .lineToX(52)
+                        .lineToY(52)
                         .turn(Math.toRadians(90))
                         .build());
 

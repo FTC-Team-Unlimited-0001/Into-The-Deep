@@ -10,26 +10,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-
-
 import java.util.List;
-
-
 import java.util.ArrayList;
-
 
 @Config
 public class LLresults {
 
     private Telemetry telemetry;
 
-
-
-
     List<List<Double>> newCorners = new ArrayList<>();
-
-
 
     // Call sortCorners function and store result in cornerIndices
     int[] cornerIndices;

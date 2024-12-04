@@ -27,6 +27,7 @@ public class DeepTeleop extends LinearOpMode{
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
 
     public machine robot;
+    public double orientationToPos;
 
 
     @Override
@@ -196,9 +197,11 @@ public class DeepTeleop extends LinearOpMode{
 
             robot.updatePIDFCoefficients();
             controlArmsWithPIDF();
-            double angle = limelight.getOrientation();
-
-            telemetry.addData("Sample Orientation", angle);
+//            double angle = limelight.getOrientation();
+//
+//            orientationToPos = angle/355;
+//
+//            telemetry.addData("Sample Orientation", angle);
 
         }
     }
