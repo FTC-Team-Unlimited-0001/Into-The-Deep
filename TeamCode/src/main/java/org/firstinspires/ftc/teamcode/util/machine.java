@@ -41,7 +41,7 @@ public class machine {
     // PID coefficients
     public static double kP = 0.0005;
     public static double kI = 0;
-    public static double kD = 0.000001;
+    public static double kD = 0.00001;
     public static double kF = 0;
 //f is for predicting the power before something has happened.
 

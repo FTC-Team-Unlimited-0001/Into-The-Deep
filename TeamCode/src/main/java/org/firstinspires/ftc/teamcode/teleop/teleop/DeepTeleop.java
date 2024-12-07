@@ -35,6 +35,21 @@ public class DeepTeleop extends LinearOpMode{
 
         robot = new machine(hardwareMap);
 
+        int high_basket = 250;
+        int pickup = 950;
+        int clipper = 450;
+        int pickup_assist = 900;
+
+        //Claw presets
+        double open = 0.35;
+        double close = 0;
+
+        //Spools
+        double MAX_POSITION = 3140;
+        double MIN_POSITION = 0;
+
+        double big = 1;
+
 
         //Telem stuff
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
@@ -101,20 +116,7 @@ public class DeepTeleop extends LinearOpMode{
 
 
             //Preset variables:
-            int high_basket = 400;
-            int pickup = 1000;
-            int clipper = 450;
-            int pickup_assist = 900;
 
-            //Claw presets
-            double open = 0.5;
-            double close = 0;
-
-            //Spools
-            double MAX_POSITION = 3140;
-            double MIN_POSITION = 0;
-
-            double big = 0.5;
 
 
 
@@ -125,14 +127,14 @@ public class DeepTeleop extends LinearOpMode{
                     robot.servoleft.setPosition(big);
                     timer.reset();
                 }
-                if (gamepad2.b) {
-                    robot.servoleft.setPosition(robot.servoleft.getPosition() + 0.1);
-                    robot.servoright.setPosition(robot.servoright.getPosition() + 0.1);
+                if (gamepad2.left_bumper) {
+                    robot.servoleft.setPosition(0);
+                    robot.servoright.setPosition(0);
                     timer.reset();
                 }
-                if(gamepad2.left_bumper){
-                    robot.servoleft.setPosition(robot.servoleft.getPosition() - 0.5);
-                    robot.servoright.setPosition(robot.servoright.getPosition() - 0.5);
+                if(gamepad2.right_bumper){
+                    robot.servoleft.setPosition(.63);
+                    robot.servoright.setPosition(.63);
                     timer.reset();
                 }
             }
@@ -145,8 +147,8 @@ public class DeepTeleop extends LinearOpMode{
             // Handle spool power for lifting mechanism
 
             // Get the trigger values
-            double extendPower = gamepad1.right_trigger;  // Extending slides
-            double retractPower = gamepad1.left_trigger;  // Retracting slides
+            double extendPower = gamepad2.left_trigger;  // Extending slides
+            double retractPower = gamepad2.right_trigger;  // Retracting slides
 
             // Calculate motor power
             double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
@@ -166,6 +168,8 @@ public class DeepTeleop extends LinearOpMode{
 
             telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
             telemetry.addData("Slide Power", slidePower);
+            telemetry.addData("Right Servo", robot.servoright.getPosition());
+            telemetry.addData("Left Servo", robot.servoleft.getPosition());
             telemetry.update();
 
 //            if (gamepad1.a) {
@@ -183,16 +187,13 @@ public class DeepTeleop extends LinearOpMode{
             if (gamepad2.dpad_up) {
                 robot.armTargetPosition = high_basket;  // Increment target position
             } else if (gamepad2.dpad_down) {
-                robot.armTargetPosition = pickup_assist;    // Decrement target position
-            }
-
-            if (gamepad2.right_bumper) {
-                robot.armTargetPosition = clipper;  // Set specific position
+                robot.armTargetPosition = pickup;    // Decrement target position
             }
 
             if (gamepad2.dpad_right) {
-                robot.armTargetPosition = pickup; // Set to maximum position
+                robot.armTargetPosition = clipper;  // Set specific position
             }
+
 
 
             robot.updatePIDFCoefficients();
