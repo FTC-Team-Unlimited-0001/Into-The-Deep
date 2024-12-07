@@ -24,16 +24,21 @@ public class RightBlueFull extends LinearOpMode {
         // Instantiate the SampleMecanumDrive (machine)
         robot = new machine(hardwareMap);
 
-        Pose2d initialPose = new Pose2d(-52, -52, Math.toRadians(90));
+
+        Pose2d initialPose = new Pose2d(-24, -63, Math.toRadians(0));
         PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
+
 
         waitForStart();
 
 
         Actions.runBlocking(
                 drive.actionBuilder(initialPose)
-                        .lineToY(52)
-                        .turn(Math.toRadians(90))
+
+                        .lineToX(-55)
+                        .turnTo(.8)
+                        .strafeTo(new Vector2d(-59,-59))
+
                         .build());
 
     }

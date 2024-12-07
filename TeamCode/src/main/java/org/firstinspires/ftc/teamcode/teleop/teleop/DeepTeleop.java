@@ -29,6 +29,9 @@ public class DeepTeleop extends LinearOpMode{
     public machine robot;
     public double orientationToPos;
 
+    double MAX_POSITION = 3140;
+    double MIN_POSITION = 0;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -45,8 +48,7 @@ public class DeepTeleop extends LinearOpMode{
         double close = 0;
 
         //Spools
-        double MAX_POSITION = 3140;
-        double MIN_POSITION = 0;
+
 
         double big = 1;
 
@@ -146,31 +148,7 @@ public class DeepTeleop extends LinearOpMode{
 
             // Handle spool power for lifting mechanism
 
-            // Get the trigger values
-            double extendPower = gamepad2.left_trigger;  // Extending slides
-            double retractPower = gamepad2.right_trigger;  // Retracting slides
 
-            // Calculate motor power
-            double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
-
-            // Set power to the slide motor
-            robot.spoolleft.setPower(slidePower);
-            robot.spoolright.setPower(slidePower);
-
-            if (robot.spoolright.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
-                slidePower = 0;  // Prevent extending further
-            } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
-                slidePower = 0;  // Prevent retracting further
-            }
-
-            robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-            telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
-            telemetry.addData("Slide Power", slidePower);
-            telemetry.addData("Right Servo", robot.servoright.getPosition());
-            telemetry.addData("Left Servo", robot.servoleft.getPosition());
-            telemetry.update();
 
 //            if (gamepad1.a) {
 //                robot.spoolleft.setPower(1);
@@ -189,7 +167,6 @@ public class DeepTeleop extends LinearOpMode{
             } else if (gamepad2.dpad_down) {
                 robot.armTargetPosition = pickup;    // Decrement target position
             }
-
             if (gamepad2.dpad_right) {
                 robot.armTargetPosition = clipper;  // Set specific position
             }
@@ -198,6 +175,7 @@ public class DeepTeleop extends LinearOpMode{
 
             robot.updatePIDFCoefficients();
             controlArmsWithPIDF();
+            slidecontrol();
 //            double angle = limelight.getOrientation();
 //
 //            orientationToPos = angle/355;
@@ -208,7 +186,7 @@ public class DeepTeleop extends LinearOpMode{
     }
 
         // Method to control the arms using PIDF controller
-        private void controlArmsWithPIDF() {
+        public void controlArmsWithPIDF() {
 
         // Get the current position of both arms (average)
             double currentPosition = (robot.anglerright.getCurrentPosition());
@@ -231,6 +209,35 @@ public class DeepTeleop extends LinearOpMode{
 
 
         }
+
+    public void slidecontrol () {
+        // Get the trigger values
+        double extendPower = gamepad2.left_trigger;  // Extending slides
+        double retractPower = gamepad2.right_trigger;  // Retracting slides
+
+        // Calculate motor power
+        double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
+
+        // Set power to the slide motor
+        robot.spoolleft.setPower(slidePower);
+        robot.spoolright.setPower(slidePower);
+
+        if (robot.spoolright.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
+            slidePower = 0;  // Prevent extending further
+        } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
+            slidePower = 0;  // Prevent retracting further
+        }
+
+        robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+        telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
+        telemetry.addData("Slide Power", slidePower);
+        telemetry.addData("Right Servo", robot.servoright.getPosition());
+        telemetry.addData("Left Servo", robot.servoleft.getPosition());
+        telemetry.update();
+    }
 
 
 
