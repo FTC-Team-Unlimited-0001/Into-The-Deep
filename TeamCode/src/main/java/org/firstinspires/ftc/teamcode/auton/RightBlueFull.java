@@ -36,9 +36,9 @@ public class RightBlueFull extends LinearOpMode {
                 drive.actionBuilder(initialPose)
 
                         .lineToX(-55)
-                        .turnTo(.8)
+//                        .turnTo(.8)
                         .strafeTo(new Vector2d(-59,-59))
-
+                        .turnTo(.8)
                         .build());
 
     }
