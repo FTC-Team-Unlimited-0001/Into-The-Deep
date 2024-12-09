@@ -4,6 +4,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.Time;
+import com.acmerobotics.roadrunner.Twist2dDual;
 import com.acmerobotics.roadrunner.ftc.FlightRecorder;
 import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriver;
 import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
@@ -94,6 +96,8 @@ public class PinpointDrive extends MecanumDrive {
     }
     @Override
     public PoseVelocity2d updatePoseEstimate() {
+        Twist2dDual<Time> twist = localizer.update();
+
         if (lastPinpointPose != pose) {
             // RR localizer note:
             // Something else is modifying our pose (likely for relocalization),
@@ -106,6 +110,7 @@ public class PinpointDrive extends MecanumDrive {
         }
         pinpoint.update();
         pose = pinpoint.getPositionRR();
+//        pose = new Pose2d(pose.position.x, pose.position.y, twist.value().angle);
         lastPinpointPose = pose;
 
         // RR standard

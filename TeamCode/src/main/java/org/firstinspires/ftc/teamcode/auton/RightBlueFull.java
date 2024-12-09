@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.auton;
 
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.ParallelAction;
-import com.acmerobotics.roadrunner.PathBuilder;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Trajectory;
 import com.acmerobotics.roadrunner.Pose2d;
@@ -12,28 +10,19 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.checkerframework.checker.units.qual.A;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
-import org.firstinspires.ftc.teamcode.util.AllFunc;
 import org.firstinspires.ftc.teamcode.util.machine;
 
 @Autonomous(name = "RightBlueFull", group = "Autonomous")
 public class RightBlueFull extends LinearOpMode {
-    public machine robot; // Hardware reference
-    private AllFunc allFunc; // Reference to AllFunc
 
+    public machine robot;
 
-    private  final int slideUpPosition = 3140; // Adjust as needed
-    private  final int slideDownPosition = 0;  // Retracted position
-    private final int motorpower =1;
-    private final int slidePickUpPosition =0;
     @Override
     public void runOpMode() throws InterruptedException {
         // Instantiate the SampleMecanumDrive (machine)
         robot = new machine(hardwareMap);
-        allFunc = new AllFunc(robot);
-
 
 
         Pose2d initialPose = new Pose2d(-24, -63, Math.toRadians(0));
@@ -42,39 +31,15 @@ public class RightBlueFull extends LinearOpMode {
 
         waitForStart();
 
-    // runblocking used for sequantal actions
+
         Actions.runBlocking(
                 drive.actionBuilder(initialPose)
+
                         .lineToX(-55)
-                        .turnTo(.8)
+//                        .turnTo(.8)
                         .strafeTo(new Vector2d(-59,-59))
+                        .turnTo(.8)
                         .build());
 
-
-       sleep(1000);
-        allFunc.angledown();
-        sleep(1000);
-
-        allFunc.moveSlidesToPosition(slidePickUpPosition,motorpower);
-        sleep(1000);
-
-        allFunc.diffpick();
-        sleep(1000);
-
-        allFunc.clawclose();
-        sleep(1000);
-
-        allFunc.angleup();
-        sleep(1000);
-
-        allFunc.moveSlidesToPosition(slideUpPosition,motorpower);
-        sleep(1000);
-
-        allFunc.diffput();
-        sleep(1000);
-
-        allFunc.moveSlidesToPosition(slideDownPosition, motorpower);
-
-             
     }
 }

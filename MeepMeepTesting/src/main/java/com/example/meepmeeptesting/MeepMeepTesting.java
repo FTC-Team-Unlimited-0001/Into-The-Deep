@@ -20,7 +20,7 @@ public class MeepMeepTesting {
 
 
                 .lineToX(-55)
-                .turnTo(.8)
+//                .turnTo(.8)
                 .strafeTo(new Vector2d(-59,-59))
                 .build());
 
