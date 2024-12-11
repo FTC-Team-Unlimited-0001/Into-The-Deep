@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.LLresults;
 import org.firstinspires.ftc.teamcode.util.machine;
 
@@ -231,11 +232,14 @@ public class DeepTeleop extends LinearOpMode{
         robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        telemetry.addData("encoder position" , robot.spoolright.getCurrentPosition());
+
 
         telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
         telemetry.addData("Slide Power", slidePower);
         telemetry.addData("Right Servo", robot.servoright.getPosition());
         telemetry.addData("Left Servo", robot.servoleft.getPosition());
+
         telemetry.update();
     }
 
