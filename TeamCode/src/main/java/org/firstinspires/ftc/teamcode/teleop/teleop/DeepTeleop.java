@@ -232,6 +232,8 @@ public class DeepTeleop extends LinearOpMode{
         robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        telemetry.addData("encoder position" , robot.spoolright.getCurrentPosition());
+
 
         telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
         telemetry.addData("Slide Power", slidePower);
