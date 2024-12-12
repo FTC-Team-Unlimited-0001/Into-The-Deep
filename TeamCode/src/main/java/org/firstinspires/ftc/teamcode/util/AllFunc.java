@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.util;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.acmerobotics.roadrunner.Action;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.actions.AngleSlides;
 import org.firstinspires.ftc.teamcode.actions.CloseClawAction;
+import org.firstinspires.ftc.teamcode.actions.MoveDiff;
+import org.firstinspires.ftc.teamcode.actions.ExtendSlides;
 import org.firstinspires.ftc.teamcode.actions.OpenClawAction;
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
 
@@ -19,10 +19,8 @@ public class AllFunc {
     }
 
 
-    public void angleup(){
-        robot.anglerright.setTargetPosition(250);
-        robot.anglerleft.setTargetPosition(250);
-        teleop.controlArmsWithPIDF();
+    public Action angleup(){
+        return new AngleSlides(teleop);
     }
     public void angledown(){
         robot.anglerright.setTargetPosition(950);
@@ -35,44 +33,19 @@ public class AllFunc {
     public Action clawclose(){
         return new CloseClawAction(teleop);
     }
-    public void diffpick(){
-        robot.servoleft.setPosition(0);
-        robot.servoright.setPosition(0);
+    public Action diffpick(){
+        return new MoveDiff(teleop,0);
     }
-    public void diffput(){
-        robot.servoleft.setPosition(.63);
-        robot.servoright.setPosition(.63);
+    public Action diffput(){
+        return new MoveDiff(teleop, .63);
+    }
+    public Action extendSlides(){
+        return new ExtendSlides(teleop,-3000);
+    }
+    public Action retractSlides(){
+        return new ExtendSlides(teleop,-0);
     }
 
-    public void moveSlidesToPosition(int targetPosition, double power) {
-        // Set the target position
-        robot.spoolleft.setTargetPosition(targetPosition);
-        robot.spoolright.setTargetPosition(targetPosition);
-
-        // Set the motors to run to the target position
-        robot.spoolleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.spoolright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        // Apply power to the motors
-        robot.spoolleft.setPower(power);
-        robot.spoolright.setPower(power);
-
-        // Wait for the motors to reach the target position
-        while (robot.spoolleft.isBusy() && robot.spoolright.isBusy()) {
-            // You can add telemetry here to monitor the positions
-            telemetry.addData("Left Slide Position", robot.spoolleft.getCurrentPosition());
-            telemetry.addData("Right Slide Position", robot.spoolright.getCurrentPosition());
-            telemetry.update();
-        }
-
-        // Stop the motors once the target is reached
-        robot.spoolleft.setPower(0);
-        robot.spoolright.setPower(0);
-
-        // Set the motors back to normal mode
-        robot.spoolleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.spoolright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
     }
 
 

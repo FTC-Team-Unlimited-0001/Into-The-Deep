@@ -22,7 +22,8 @@ import org.firstinspires.ftc.teamcode.util.machine;
 
 @Autonomous(name = "RightBlueFull", group = "Autonomous")
 public class RightBlueFull extends DeepTeleop {
-    private AllFunc allFunc; // Reference to AllFunc
+    private AllFunc allFunc;
+    // Reference to AllFunc
 
 
     private final int slideUpPosition = 3140; // Adjust as needed
@@ -37,27 +38,29 @@ public class RightBlueFull extends DeepTeleop {
         allFunc = new AllFunc(this);
 
 
-        Pose2d initialPose = new Pose2d(-24, -63, Math.toRadians(0));
+        Pose2d initialPose = new Pose2d(-42, -63, Math.toRadians(0));
         PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
 
 
         waitForStart();
 
-        // runblocking used for sequantal actions
-//        Actions.runBlocking(
-//                drive.actionBuilder(initialPose)
-//                        .lineToX(-55)
-//                        .turnTo(.8)
-//                        .strafeTo(new Vector2d(-59,-59))
-//                        .build());
 
         Actions.runBlocking(new ParallelRaceAction(
-                allFunc.clawopen(),
-                drive.actionBuilder(initialPose)
-                        .lineToX(-55)
-                        .turnTo(.8)
-                        .strafeTo(new Vector2d(-59,-59))
-                        .build()
+                new SequentialAction(
+                        drive.actionBuilder(initialPose)
+                                //.lineToX(-55)
+                                .strafeTo(new Vector2d(-63, -54))
+                                .turnTo(.8)
+                                .build(),
+                        allFunc.extendSlides(),
+                        allFunc.diffput(),
+                        allFunc.clawopen(),
+                        allFunc.clawclose(),
+                        allFunc.diffpick(),
+                        allFunc.retractSlides()
+               ),
+
+                allFunc.angleup()
                 )
         );
     }

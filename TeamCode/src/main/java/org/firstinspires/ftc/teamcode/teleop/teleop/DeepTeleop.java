@@ -174,9 +174,11 @@ public class DeepTeleop extends LinearOpMode{
 
 
 
-            robot.updatePIDFCoefficients();
+
             controlArmsWithPIDF();
             slidecontrol();
+           controlSlidesWithPIDF();
+//            controlSlidesWithPIDF();
 //            double angle = limelight.getOrientation();
 //
 //            orientationToPos = angle/355;
@@ -210,6 +212,30 @@ public class DeepTeleop extends LinearOpMode{
 
 
         }
+
+    public void controlSlidesWithPIDF() {
+        robot.updatePIDFsCoeffecients();
+        //DELETE Later
+
+
+        // Get the current position of both arms (average)
+        double currentPosition = (robot.spoolleft.getCurrentPosition());
+
+        // Calculate PID output
+        double slideOutput = robot.slidesPIDFController.calculate(currentPosition, robot.slidesTargetPosition);
+
+        // Apply the output to both motors
+        robot.spoolright.setPower(slideOutput);
+        robot.spoolleft.setPower(slideOutput);
+
+        // Telemetry to display information on the driver station
+        telemetry.addData("slides Target", robot.slidesTargetPosition);
+        telemetry.addData("slides Position", currentPosition);
+
+        telemetry.update();
+
+
+    }
 
     public void slidecontrol () {
         // Get the trigger values
