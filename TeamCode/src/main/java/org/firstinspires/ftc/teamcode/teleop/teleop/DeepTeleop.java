@@ -32,7 +32,8 @@ public class DeepTeleop extends LinearOpMode{
 
     double MAX_POSITION = 3140;
     double MIN_POSITION = 0;
-
+    double slidelimit = 1337;
+    double slidelimitretract = -144;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -126,8 +127,8 @@ public class DeepTeleop extends LinearOpMode{
             if (timer.milliseconds() > 500) {
                 // Handle servo positions
                 if (gamepad2.x) {
-                    robot.servoright.setPosition(big);// Example: fully open position
-                    robot.servoleft.setPosition(big);
+                    robot.servoright.setPosition(3.15);// Example: fully open position
+                    robot.servoleft.setPosition(1.44);
                     timer.reset();
                 }
                 if (gamepad2.left_bumper) {
@@ -140,6 +141,11 @@ public class DeepTeleop extends LinearOpMode{
                     robot.servoright.setPosition(.63);
                     timer.reset();
                 }
+
+               if (gamepad2.b){
+                  robot.servoleft.setPosition(1.26);
+                   robot.servoright.setPosition(.22);
+               }
             }
             if (gamepad2.y) {
                 robot.servopinch.setPosition(open);  // Example: partially open position
@@ -177,7 +183,7 @@ public class DeepTeleop extends LinearOpMode{
 
             controlArmsWithPIDF();
             slidecontrol();
-           controlSlidesWithPIDF();
+           //controlSlidesWithPIDF();
 //            controlSlidesWithPIDF();
 //            double angle = limelight.getOrientation();
 //
@@ -223,7 +229,11 @@ public class DeepTeleop extends LinearOpMode{
 
         // Calculate PID output
         double slideOutput = robot.slidesPIDFController.calculate(currentPosition, robot.slidesTargetPosition);
-
+//  software limits
+//        if ((currentPosition >= slidelimit && slideOutput > 0) ||
+//                (currentPosition <= MIN_POSITION && slideOutput < 0)) {
+//            slideOutput = 0;  // Prevent further movement
+//        }
         // Apply the output to both motors
         robot.spoolright.setPower(slideOutput);
         robot.spoolleft.setPower(slideOutput);
@@ -239,24 +249,33 @@ public class DeepTeleop extends LinearOpMode{
 
     public void slidecontrol () {
         // Get the trigger values
-        double extendPower = gamepad2.left_trigger;  // Extending slides
-        double retractPower = gamepad2.right_trigger;  // Retracting slides
+        double extendPower = gamepad1.left_trigger;  // Extending slides
+        double retractPower = gamepad1.right_trigger;  // Retracting slides
 
         // Calculate motor power
         double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
+        // Enforce software limits only if the arm is angled down
+
+        if (robot.anglerright.getCurrentPosition() >= 940) {
+            if (robot.spoolright.getCurrentPosition() >= slidelimit && extendPower > 0) {
+
+                extendPower = 0;
+            } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && retractPower > 0) {
+                retractPower = 0;
+            }
+        }
+        if (robot.spoolright.getCurrentPosition() >= slidelimit && extendPower > 0) {
+            telemetry.addData("Debug", "Extension Block Triggered");
+        }
 
         // Set power to the slide motor
         robot.spoolleft.setPower(slidePower);
         robot.spoolright.setPower(slidePower);
 
-        if (robot.spoolright.getCurrentPosition() >= MAX_POSITION && slidePower > 0) {
-            slidePower = 0;  // Prevent extending further
-        } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && slidePower < 0) {
-            slidePower = 0;  // Prevent retracting further
-        }
 
-        robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+
 
         telemetry.addData("encoder position" , robot.spoolright.getCurrentPosition());
 

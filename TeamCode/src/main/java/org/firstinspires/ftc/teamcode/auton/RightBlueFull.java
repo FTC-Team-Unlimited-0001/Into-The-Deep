@@ -28,8 +28,7 @@ public class RightBlueFull extends DeepTeleop {
 
     private final int slideUpPosition = 3140; // Adjust as needed
     private final int slideDownPosition = 0;  // Retracted position
-    private final int motorpower = 1;
-    private final int slidePickUpPosition = 0;
+
 
     @Override
     public void runOpMode() throws InterruptedException {

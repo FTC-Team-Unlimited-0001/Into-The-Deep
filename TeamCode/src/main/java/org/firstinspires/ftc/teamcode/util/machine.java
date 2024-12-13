@@ -101,6 +101,7 @@ public class machine {
 
 
         servoleft.setDirection(Servo.Direction.REVERSE);
+        //servo right reverse after
 
 
         // Initialize the PID controller for the arms
