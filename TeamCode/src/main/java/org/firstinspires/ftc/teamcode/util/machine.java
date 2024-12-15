@@ -83,7 +83,7 @@ public class machine {
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
-        anglerright.setDirection(DcMotor.Direction.REVERSE);
+        //anglerright.setDirection(DcMotor.Direction.REVERSE);
 
 
 
