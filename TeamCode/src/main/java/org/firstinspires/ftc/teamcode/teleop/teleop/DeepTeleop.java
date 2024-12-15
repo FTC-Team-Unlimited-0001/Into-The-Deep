@@ -32,7 +32,7 @@ public class DeepTeleop extends LinearOpMode{
 
     double MAX_POSITION = 3140;
     double MIN_POSITION = 0;
-    double slidelimit = 1337;
+    double slidelimit = -1337;
     double slidelimitretract = -144;
 
     @Override
@@ -198,7 +198,7 @@ public class DeepTeleop extends LinearOpMode{
         public void controlArmsWithPIDF() {
 
         // Get the current position of both arms (average)
-            double currentPosition = (robot.anglerright.getCurrentPosition());
+            double currentPosition = (robot.anglerleft.getCurrentPosition());
 
             // Calculate PID output
             double armOutput = robot.armPIDFController.calculate(currentPosition, robot.armTargetPosition);
@@ -256,12 +256,10 @@ public class DeepTeleop extends LinearOpMode{
         double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
         // Enforce software limits only if the arm is angled down
 
-        if (robot.anglerright.getCurrentPosition() >= 940) {
-            if (robot.spoolright.getCurrentPosition() >= slidelimit && extendPower > 0) {
+        if (robot.anglerleft.getCurrentPosition() >= 925) {
+            if (robot.spoolleft.getCurrentPosition() <= slidelimit && slidePower < 0) {
 
-                extendPower = 0;
-            } else if (robot.spoolright.getCurrentPosition() <= MIN_POSITION && retractPower > 0) {
-                retractPower = 0;
+                slidePower = 0;
             }
         }
         if (robot.spoolright.getCurrentPosition() >= slidelimit && extendPower > 0) {
