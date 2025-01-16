@@ -23,8 +23,8 @@ public class AllFunc {
         return new AngleSlides(teleop);
     }
     public void angledown(){
-        robot.anglerright.setTargetPosition(950);
-        robot.anglerleft.setTargetPosition(950);
+       // robot.anglerright.setTargetPosition(950);
+       // robot.anglerleft.setTargetPosition(950);
         teleop.controlArmsWithPIDF();
     }
     public Action clawopen(){

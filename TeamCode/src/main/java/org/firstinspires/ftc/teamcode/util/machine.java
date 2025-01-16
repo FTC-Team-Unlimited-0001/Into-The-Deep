@@ -24,15 +24,17 @@ public class machine {
     public DcMotor backLeft;
 
     public DcMotor spoolleft;
-    public  DcMotor spoolright;
+    public DcMotor spoolright;
 
-    public DcMotor anglerright;
-    public DcMotor anglerleft;
+    public DcMotor hangrright;
+    public DcMotor hangleft;
 
-
+    public  Limelight3A limelight;
     public Servo servoright;
     public Servo servoleft;
     public Servo servopinch;
+   // public Servo servoAngularRight;
+    // public Servo servoAngularLeft;
 
     public PIDFController armPIDFController;
     public PIDFController slidesPIDFController;
@@ -60,6 +62,7 @@ public class machine {
 
     private void initialize(HardwareMap hwMap) {
         hardwareMap = hwMap;
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
         //Connect Motors
         frontRight = hardwareMap.get(DcMotor.class, "rightFront");
@@ -67,8 +70,8 @@ public class machine {
         backRight = hardwareMap.get(DcMotor.class, "rightBack");
         backLeft = hardwareMap.get(DcMotor.class, "leftBack");
 
-        anglerright = hardwareMap.get(DcMotor.class, "anglerright");
-        anglerleft = hardwareMap.get(DcMotor.class, "anglerleft");
+        hangrright = hardwareMap.get(DcMotor.class, "hangright");
+        hangleft = hardwareMap.get(DcMotor.class, "hangleft");
 
         spoolleft = hardwareMap.get(DcMotor.class, "spoolleft");
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
@@ -76,6 +79,9 @@ public class machine {
         servoleft = hardwareMap.get(Servo.class, "servoleft");
         servoright = hardwareMap.get(Servo.class, "servoright");
         servopinch = hardwareMap.get(Servo.class, "servopinch");
+        //servoAngularRight = hardwareMap.get(Servo.class, "servoAngularRight");
+      //  servoAngularLeft = hardwareMap.get(Servo.class, "servoAngularLeft");
+
 
 
         //Set motor direction
@@ -83,22 +89,24 @@ public class machine {
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
+        hangleft.setDirection(DcMotorSimple.Direction.REVERSE);
+        hangrright.setDirection(DcMotorSimple.Direction.FORWARD);
         //anglerright.setDirection(DcMotor.Direction.REVERSE);
 
 
-
-        anglerright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        anglerright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        anglerleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        anglerleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        anglerright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        anglerright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        anglerleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        anglerleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         spoolleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         spoolleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         spoolright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         spoolright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        spoolleft.setDirection(DcMotor.Direction.REVERSE);
 
         servoleft.setDirection(Servo.Direction.REVERSE);
         //servo right reverse after

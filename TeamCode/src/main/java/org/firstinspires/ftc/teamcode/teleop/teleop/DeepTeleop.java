@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PController;
 import com.arcrobotics.ftclib.controller.PIDController;
+import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -16,6 +17,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Vision.Limelight;
 import org.firstinspires.ftc.teamcode.util.LLresults;
 import org.firstinspires.ftc.teamcode.util.machine;
 
@@ -30,20 +32,20 @@ public class DeepTeleop extends LinearOpMode{
     public machine robot;
     public double orientationToPos;
 
-    double MAX_POSITION = 3140;
-    double MIN_POSITION = 0;
+
     double slidelimit = -1337;
-    double slidelimitretract = -144;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         robot = new machine(hardwareMap);
+        Limelight limelight = new Limelight(robot.limelight, telemetry);
 
         int high_basket = 250;
         int pickup = 950;
         int clipper = 450;
-        int pickup_assist = 900;
+
 
         //Claw presets
         double open = 0.35;
@@ -52,7 +54,7 @@ public class DeepTeleop extends LinearOpMode{
         //Spools
 
 
-        double big = 1;
+
 
 
         //Telem stuff
@@ -70,8 +72,6 @@ public class DeepTeleop extends LinearOpMode{
         imu.initialize(parameters);
 
 
-        LLresults limelight = new LLresults();
-        limelight.init(hardwareMap);
 
 
 
@@ -136,6 +136,18 @@ public class DeepTeleop extends LinearOpMode{
                     robot.servoright.setPosition(0);
                     timer.reset();
                 }
+//
+//                if (gamepad2.dpad_up){
+//                    robot.servoAngularLeft.setPosition(0);
+//                    robot.servoAngularRight.setPosition(0);
+//
+//                }
+//
+//                if(gamepad2.dpad_down){
+//                    robot.servoAngularRight.setPosition(.7);
+//                    robot.servoAngularLeft.setPosition(.7);
+//                }
+
                 if(gamepad2.right_bumper){
                     robot.servoleft.setPosition(.63);
                     robot.servoright.setPosition(.63);
@@ -157,39 +169,20 @@ public class DeepTeleop extends LinearOpMode{
 
 
 
-//            if (gamepad1.a) {
-//                robot.spoolleft.setPower(1);
-//                robot.spoolright.setPower(1);  // Spool moving up
-//            } else if (gamepad1.x) {
-//                robot.spoolleft.setPower(-1);
-//                robot.spoolright.setPower(-1); // Spool moving down
-//            } else {
-//                robot.spoolleft.setPower(0);
-//                robot.spoolright.setPower(0);  // Stop spool
-//            }
 
-            // Handle arm target position adjustments
-            if (gamepad2.dpad_up) {
-                robot.armTargetPosition = high_basket;  // Increment target position
-            } else if (gamepad2.dpad_down) {
-                robot.armTargetPosition = pickup;    // Decrement target position
-            }
-            if (gamepad2.dpad_right) {
-                robot.armTargetPosition = clipper;  // Set specific position
-            }
+//limelight.getPythonOutput();
+
+           limelight.getAdjustedLateralDistance();
+
+limelight.getDistanceToTarget();
 
 
 
-
-            controlArmsWithPIDF();
+           // controlArmsWithPIDF();
             slidecontrol();
-           //controlSlidesWithPIDF();
-//            controlSlidesWithPIDF();
-//            double angle = limelight.getOrientation();
-//
-//            orientationToPos = angle/355;
-//
-//            telemetry.addData("Sample Orientation", angle);
+         //   controlSlidesWithPIDF();
+
+            // Retrieve results from the pipeline
 
         }
     }
@@ -198,32 +191,29 @@ public class DeepTeleop extends LinearOpMode{
         public void controlArmsWithPIDF() {
 
         // Get the current position of both arms (average)
-            double currentPosition = (robot.anglerleft.getCurrentPosition());
+         //   double currentPosition = (robot.anglerleft.getCurrentPosition());
 
             // Calculate PID output
-            double armOutput = robot.armPIDFController.calculate(currentPosition, robot.armTargetPosition);
+         //   double armOutput = robot.armPIDFController.calculate(currentPosition, robot.armTargetPosition);
 
             // Apply the output to both motors
-            robot.anglerleft.setPower(armOutput);
-            robot.anglerright.setPower(armOutput);
+//            robot.anglerleft.setPower(armOutput);
+//            robot.anglerright.setPower(armOutput);
 
             // Telemetry to display information on the driver station
-            telemetry.addData("Arm Target", robot.armTargetPosition);
-            telemetry.addData("Arm Position", currentPosition);
-            telemetry.addData("PIDF Output", armOutput);
-            telemetry.addData("Left Arm Encoder", robot.anglerleft.getCurrentPosition());
-            telemetry.addData("Right Arm Encoder", robot.anglerright.getCurrentPosition());
-            telemetry.addData("right spool pos",robot.spoolright.getCurrentPosition());
-            telemetry.update();
+         //   telemetry.addData("Arm Target", robot.armTargetPosition);
+//            telemetry.addData("Arm Position", currentPosition);
+//            telemetry.addData("PIDF Output", armOutput);
+//            telemetry.addData("Left Arm Encoder", robot.anglerleft.getCurrentPosition());
+//            telemetry.addData("Right Arm Encoder", robot.anglerright.getCurrentPosition());
+          //  telemetry.addData("right spool pos",robot.spoolright.getCurrentPosition());
+          //  telemetry.update();
 
 
         }
 
     public void controlSlidesWithPIDF() {
         robot.updatePIDFsCoeffecients();
-        //DELETE Later
-
-
         // Get the current position of both arms (average)
         double currentPosition = (robot.spoolleft.getCurrentPosition());
 
@@ -242,7 +232,6 @@ public class DeepTeleop extends LinearOpMode{
         telemetry.addData("slides Target", robot.slidesTargetPosition);
         telemetry.addData("slides Position", currentPosition);
 
-        telemetry.update();
 
 
     }
@@ -254,40 +243,32 @@ public class DeepTeleop extends LinearOpMode{
 
         // Calculate motor power
         double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
-        // Enforce software limits only if the arm is angled down
 
-        if (robot.anglerleft.getCurrentPosition() >= 925) {
-            if (robot.spoolleft.getCurrentPosition() <= slidelimit && slidePower < 0) {
-
-                slidePower = 0;
-            }
-        }
-        if (robot.spoolright.getCurrentPosition() >= slidelimit && extendPower > 0) {
-            telemetry.addData("Debug", "Extension Block Triggered");
-        }
 
         // Set power to the slide motor
         robot.spoolleft.setPower(slidePower);
         robot.spoolright.setPower(slidePower);
+        robot.hangrright.setPower(slidePower);
+        robot.hangleft.setPower(slidePower);
 
 
 
 
-
-
-        telemetry.addData("encoder position" , robot.spoolright.getCurrentPosition());
-
-
-        telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
-        telemetry.addData("Slide Power", slidePower);
-        telemetry.addData("Right Servo", robot.servoright.getPosition());
-        telemetry.addData("Left Servo", robot.servoleft.getPosition());
+//
+//
+//        telemetry.addData("encoder position" , robot.spoolright.getCurrentPosition());
+//
+//
+//        telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
+//        telemetry.addData("Slide Power", slidePower);
+//        telemetry.addData("Right Servo", robot.servoright.getPosition());
+//        telemetry.addData("Left Servo", robot.servoleft.getPosition());
 
         telemetry.update();
+
     }
 
 
 
-// pid issue , use 1
 
 }
