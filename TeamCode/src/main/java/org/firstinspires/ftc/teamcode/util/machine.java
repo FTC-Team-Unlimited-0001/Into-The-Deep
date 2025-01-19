@@ -33,8 +33,8 @@ public class machine {
     public Servo servoright;
     public Servo servoleft;
     public Servo servopinch;
-   // public Servo servoAngularRight;
-    // public Servo servoAngularLeft;
+   public Servo servoAngularRight;
+    public Servo servoAngularLeft;
 
     public PIDFController armPIDFController;
     public PIDFController slidesPIDFController;
@@ -79,8 +79,8 @@ public class machine {
         servoleft = hardwareMap.get(Servo.class, "servoleft");
         servoright = hardwareMap.get(Servo.class, "servoright");
         servopinch = hardwareMap.get(Servo.class, "servopinch");
-        //servoAngularRight = hardwareMap.get(Servo.class, "servoAngularRight");
-      //  servoAngularLeft = hardwareMap.get(Servo.class, "servoAngularLeft");
+        servoAngularRight = hardwareMap.get(Servo.class, "servoAngularRight");
+       servoAngularLeft = hardwareMap.get(Servo.class, "servoAngularLeft");
 
 
 
@@ -91,23 +91,16 @@ public class machine {
         backLeft.setDirection(DcMotor.Direction.FORWARD);
         hangleft.setDirection(DcMotorSimple.Direction.REVERSE);
         hangrright.setDirection(DcMotorSimple.Direction.FORWARD);
-        //anglerright.setDirection(DcMotor.Direction.REVERSE);
 
-
-//
-//        anglerright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        anglerright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
-//        anglerleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        anglerleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        hangleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        hangrright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         spoolleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         spoolleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         spoolright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         spoolright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         spoolleft.setDirection(DcMotor.Direction.REVERSE);
-
         servoleft.setDirection(Servo.Direction.REVERSE);
         //servo right reverse after
 
