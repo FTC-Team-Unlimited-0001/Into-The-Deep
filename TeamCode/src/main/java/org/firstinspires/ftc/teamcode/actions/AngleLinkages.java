@@ -4,23 +4,27 @@ import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
 
-public class AngleSlides implements Action {
+public class AngleLinkages implements Action {
     private DeepTeleop teleop;
+    public double servopos;
 
-    public AngleSlides(DeepTeleop teleop) {
+    public AngleLinkages(DeepTeleop teleop, double servopos) {
         this.teleop = teleop;
+        this.servopos=servopos;
     }
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
 
-       teleop.robot.armTargetPosition = 250;
+       teleop.robot.servoAngularRight.setPosition(servopos);
+       teleop.robot.servoAngularLeft.setPosition(servopos);
 
-        teleop.controlArmsWithPIDF();
+
+
+
         return true;
 
     }

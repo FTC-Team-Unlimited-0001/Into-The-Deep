@@ -18,13 +18,14 @@ public class MeepMeepTesting {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-42, -63, Math.toRadians(0)))
 
-              // .lineToX(-55)
-               .turnTo(-5.5)
-                .strafeTo(new Vector2d(-59,-59))
-
+            //   .lineToX(-55)
+       //        .turnTo(-5.5)
+         //       .strafeTo(new Vector2d(-59,-59))
+                        .lineToXSplineHeading(52,Math.toRadians(-90))
+               .strafeTo(new Vector2d(0, -28))
                 .build());
 
-        meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
+        meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)

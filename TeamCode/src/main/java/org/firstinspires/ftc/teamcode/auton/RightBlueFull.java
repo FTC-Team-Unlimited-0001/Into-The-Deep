@@ -51,15 +51,17 @@ public class RightBlueFull extends DeepTeleop {
                                 .strafeTo(new Vector2d(-63, -54))
                                 .turnTo(.8)
                                 .build(),
+                        allFunc.Angleup(),
                         allFunc.extendSlides(),
                         allFunc.diffput(),
                         allFunc.clawopen(),
                         allFunc.clawclose(),
                         allFunc.diffpick(),
                         allFunc.retractSlides()
-               ),
 
-                allFunc.angleup()
+               )
+
+
                 )
         );
     }

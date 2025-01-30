@@ -25,7 +25,7 @@ import org.firstinspires.ftc.teamcode.util.machine;
 @Config
 @TeleOp
 
-public class DeepTeleop extends LinearOpMode{
+public class DeepTeleop extends LinearOpMode {
 
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
 
@@ -54,9 +54,6 @@ public class DeepTeleop extends LinearOpMode{
         //Spools
 
 
-
-
-
         //Telem stuff
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
         telemetry.addData("status", "initalized");
@@ -70,9 +67,6 @@ public class DeepTeleop extends LinearOpMode{
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
 // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
         imu.initialize(parameters);
-
-
-
 
 
         ElapsedTime timer = new ElapsedTime();
@@ -103,7 +97,7 @@ public class DeepTeleop extends LinearOpMode{
             robot.backLeft.setZeroPowerBehavior(brake);
             robot.backRight.setZeroPowerBehavior(brake);
 
-           robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             robot.frontLeft.setZeroPowerBehavior(brake);
             robot.backRight.setZeroPowerBehavior(brake);
@@ -124,11 +118,7 @@ public class DeepTeleop extends LinearOpMode{
             }
 
 
-
-
             //Preset variables:
-
-
 
 
             if (timer.milliseconds() > 500) {
@@ -144,28 +134,28 @@ public class DeepTeleop extends LinearOpMode{
                     timer.reset();
                 }
 
-                if (gamepad2.dpad_up){
+                if (gamepad2.dpad_up) {
                     robot.servoAngularLeft.setPosition(0);
                     robot.servoAngularRight.setPosition(0);
 
                 }
 
-                if(gamepad2.dpad_down){
-                    robot.servoAngularRight.setPosition(.35);
-                    robot.servoAngularLeft.setPosition(.35);
+                if (gamepad2.dpad_down) {
+                    robot.servoAngularRight.setPosition(Math.toRadians(45));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(45));
                 }
 
 
-                if(gamepad2.right_bumper){
+                if (gamepad2.right_bumper) {
                     robot.servoleft.setPosition(.63);
                     robot.servoright.setPosition(.63);
                     timer.reset();
                 }
 
-               if (gamepad2.b){
-                  robot.servoleft.setPosition(1.26);
-                   robot.servoright.setPosition(.22);
-               }
+                if (gamepad2.b) {
+                    robot.servoleft.setPosition(1.26);
+                    robot.servoright.setPosition(.22);
+                }
             }
             if (gamepad2.y) {
                 robot.servopinch.setPosition(open);  // Example: partially open position
@@ -176,49 +166,46 @@ public class DeepTeleop extends LinearOpMode{
             // Handle spool power for lifting mechanism
 
 
-
-
 //limelight.getPythonOutput();
 
-           limelight.getAdjustedLateralDistance();
+            limelight.getAdjustedLateralDistance();
 
-limelight.getDistanceToTarget();
+            limelight.getDistanceToTarget();
 
 
-
-           // controlArmsWithPIDF();
+            // controlArmsWithPIDF();
             slidecontrol();
-         //   controlSlidesWithPIDF();
+            //   controlSlidesWithPIDF();
 
             // Retrieve results from the pipeline
 
         }
     }
 
-        // Method to control the arms using PIDF controller
-        public void controlArmsWithPIDF() {
+    // Method to control the arms using PIDF controller
+    public void controlArmsWithPIDF() {
 
         // Get the current position of both arms (average)
-         //   double currentPosition = (robot.anglerleft.getCurrentPosition());
+        //   double currentPosition = (robot.anglerleft.getCurrentPosition());
 
-            // Calculate PID output
-         //   double armOutput = robot.armPIDFController.calculate(currentPosition, robot.armTargetPosition);
+        // Calculate PID output
+        //   double armOutput = robot.armPIDFController.calculate(currentPosition, robot.armTargetPosition);
 
-            // Apply the output to both motors
+        // Apply the output to both motors
 //            robot.anglerleft.setPower(armOutput);
 //            robot.anglerright.setPower(armOutput);
 
-            // Telemetry to display information on the driver station
-         //   telemetry.addData("Arm Target", robot.armTargetPosition);
+        // Telemetry to display information on the driver station
+        //   telemetry.addData("Arm Target", robot.armTargetPosition);
 //            telemetry.addData("Arm Position", currentPosition);
 //            telemetry.addData("PIDF Output", armOutput);
 //            telemetry.addData("Left Arm Encoder", robot.anglerleft.getCurrentPosition());
 //            telemetry.addData("Right Arm Encoder", robot.anglerright.getCurrentPosition());
-          //  telemetry.addData("right spool pos",robot.spoolright.getCurrentPosition());
-          //  telemetry.update();
+        //  telemetry.addData("right spool pos",robot.spoolright.getCurrentPosition());
+        //  telemetry.update();
 
 
-        }
+    }
 
     public void controlSlidesWithPIDF() {
         robot.updatePIDFsCoeffecients();
@@ -235,22 +222,33 @@ limelight.getDistanceToTarget();
         // Apply the output to both motors
         robot.spoolright.setPower(slideOutput);
         robot.spoolleft.setPower(slideOutput);
-
+        robot.hangrright.setPower(slideOutput);
+        robot.hangleft.setPower(slideOutput);
         // Telemetry to display information on the driver station
         telemetry.addData("slides Target", robot.slidesTargetPosition);
         telemetry.addData("slides Position", currentPosition);
 
 
-
     }
 
-    public void slidecontrol () {
+    public void slidecontrol() {
         // Get the trigger values
-        double extendPower = gamepad1.left_trigger;  // Extending slides
-        double retractPower = gamepad1.right_trigger;  // Retracting slides
+        double extendPower = gamepad1.right_trigger;  // Extending slides
+        double retractPower = gamepad1.left_trigger;  // Retracting slides
 
-        // Calculate motor power
-        double slidePower = extendPower - retractPower;  // Combine triggers for bidirectional control
+        // Limit
+        double slidePower = extendPower - retractPower;
+        boolean isanglesDown = robot.servoAngularLeft.getPosition() <= Math.toRadians(45) && robot.servoAngularRight.getPosition() <= Math.toRadians(45);
+        if ((robot.spoolleft.getCurrentPosition() >= 510 && slidePower > 0 && isanglesDown) ||
+                (robot.spoolleft.getCurrentPosition() <= 0 && slidePower < 0)) {
+            slidePower = 0;  // Prevent further movement
+        }
+
+
+
+
+
+
 
 
         // Set power to the slide motor
@@ -267,7 +265,7 @@ limelight.getDistanceToTarget();
 //        telemetry.addData("encoder position" , robot.spoolright.getCurrentPosition());
 //
 //
-//        telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
+        telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
 //        telemetry.addData("Slide Power", slidePower);
 //        telemetry.addData("Right Servo", robot.servoright.getPosition());
 //        telemetry.addData("Left Servo", robot.servoleft.getPosition());

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.util;
 
 import com.acmerobotics.roadrunner.Action;
 
-import org.firstinspires.ftc.teamcode.actions.AngleSlides;
+import org.firstinspires.ftc.teamcode.actions.AngleLinkages;
 import org.firstinspires.ftc.teamcode.actions.CloseClawAction;
 import org.firstinspires.ftc.teamcode.actions.MoveDiff;
 import org.firstinspires.ftc.teamcode.actions.ExtendSlides;
@@ -17,16 +17,10 @@ public class AllFunc {
         this.teleop = teleop;
         this.robot = this.teleop.robot;
     }
+    public Action Angleup(){return new AngleLinkages(teleop, 0);}
+    public Action AngleDown(){return new AngleLinkages(teleop, .35);}
 
 
-    public Action angleup(){
-        return new AngleSlides(teleop);
-    }
-    public void angledown(){
-       // robot.anglerright.setTargetPosition(950);
-       // robot.anglerleft.setTargetPosition(950);
-        teleop.controlArmsWithPIDF();
-    }
     public Action clawopen(){
         return new OpenClawAction(teleop);
     }
