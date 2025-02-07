@@ -16,16 +16,40 @@ public class MeepMeepTesting {
                 .build();
 
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-42, -63, Math.toRadians(0)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11, -69, Math.toRadians(90)))
+                //dispence preload:
+                                .splineToConstantHeading(new Vector2d(11,-39),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(36,-33),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(36,-10),Math.toRadians(-90))
+                       .splineToConstantHeading(new Vector2d(44,-10),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(44,-56),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(53,-10),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(52,-56),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(62,-10),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(62,-56),Math.toRadians(-90))
+                .setReversed(true)
+                .splineTo(new Vector2d(47, -63), Math.toRadians(-270))
+                .splineTo(new Vector2d(12, -36), Math.toRadians(-90))
+                .splineTo(new Vector2d(47, -63), Math.toRadians(-270))
 
-            //   .lineToX(-55)
-       //        .turnTo(-5.5)
-         //       .strafeTo(new Vector2d(-59,-59))
-                        .lineToXSplineHeading(52,Math.toRadians(-90))
-               .strafeTo(new Vector2d(0, -28))
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
                 .build());
 
-        meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
+        meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)
