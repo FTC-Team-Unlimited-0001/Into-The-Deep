@@ -141,8 +141,8 @@ public class DeepTeleop extends LinearOpMode {
                 }
 
                 if (gamepad2.dpad_down) {
-                    robot.servoAngularRight.setPosition(Math.toRadians(45));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(45));
+                    robot.servoAngularRight.setPosition(Math.toRadians(47));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(47));
                 }
 
 
@@ -238,11 +238,11 @@ public class DeepTeleop extends LinearOpMode {
 
         // Limit
         double slidePower = extendPower - retractPower;
-        boolean isanglesDown = robot.servoAngularLeft.getPosition() <= Math.toRadians(45) && robot.servoAngularRight.getPosition() <= Math.toRadians(45);
-        if ((robot.spoolleft.getCurrentPosition() >= 510 && slidePower > 0 && isanglesDown) ||
-                (robot.spoolleft.getCurrentPosition() <= 0 && slidePower < 0)) {
-            slidePower = 0;  // Prevent further movement
-        }
+//        boolean isanglesDown = robot.servoAngularLeft.getPosition() <= Math.toRadians(45) && robot.servoAngularRight.getPosition() <= Math.toRadians(45);
+//        if ((robot.spoolleft.getCurrentPosition() >= 510 && slidePower > 0 && isanglesDown) ||
+//                (robot.spoolleft.getCurrentPosition() <= 0 && slidePower < 0)) {
+//            slidePower = 0;  // Prevent further movement
+//        }
 
 
 
