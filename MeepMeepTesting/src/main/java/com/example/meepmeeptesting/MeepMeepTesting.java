@@ -17,7 +17,6 @@ public class MeepMeepTesting {
 
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11, -67, Math.toRadians(90)))
-
                 .strafeTo(new Vector2d(11, -42))
                 .waitSeconds(1)
 
@@ -43,82 +42,16 @@ public class MeepMeepTesting {
 //                        ))
 
                 .splineToConstantHeading(new Vector2d(40, -10), Math.toRadians(-90))
+
                 .lineToY(-56)
-//                .strafeTo(new Vector2d(44, -56))
+                .strafeTo(new Vector2d(44, -11))
 
-//                        .afterDisp(115, new ParallelAction(
-//                                allFunc.specimanPickUpAngle(),
-//                                allFunc.clawopen()
-//                        ))
+                .splineToConstantHeading(new Vector2d(50, -12) ,Math.toRadians(90))
+                                .lineToY(-55)
 
-                .strafeTo(new Vector2d(51, -10) )
-                .strafeTo(new Vector2d(54, -55) )
                 .strafeTo(new Vector2d(60, -11) )
-                     //   .splineToConstantHeading(new Vector2d(44, -10), Math.toRadians(-90))
-                       // .splineToConstantHeading(new Vector2d(44, -56), Math.toRadians(-90))
-//                        .afterDisp(115, new ParallelAction(
-//                                allFunc.specimanPickUpAngle(),
-//                                allFunc.clawopen()
-//                        ))
-
-//                        .splineToConstantHeading(new Vector2d(53, -10), Math.toRadians(-90))
-//                        .splineToConstantHeading(new Vector2d(52, -56), Math.toRadians(-90))
-//                        .splineToConstantHeading(new Vector2d(62, -10), Math.toRadians(-90))
-//                        .splineToConstantHeading(new Vector2d(62, -56), Math.toRadians(-90))
+                .strafeTo(new Vector2d(60, -55) )
 //
-//                        .setReversed(true)
-//                        .splineTo(new Vector2d(47, -61), Math.toRadians(-270))
-//                        .waitSeconds(1)
-
-//                        .afterDisp(140, new ParallelAction(
-//                                allFunc.specimanPickUpAngle(),
-//                                allFunc.clawopen()
-//                        ))
-//
-//                        .splineTo(new Vector2d(12, -36), Math.toRadians(90))
-//                        .waitSeconds(1)
-
-//                        .afterDisp(165, new ParallelAction(
-//                                allFunc.specimanAngle(),
-//                                allFunc.specimanExtendSlides(),
-//                                allFunc.retractSlides(),
-//                                allFunc.clawopen()
-//                        ))
-
-//                        .splineTo(new Vector2d(47, -61), Math.toRadians(270))
-//                        .waitSeconds(1)
-
-//                        .afterDisp(190, new ParallelAction(
-//                                allFunc.specimanPickUpAngle(),
-//                                allFunc.clawopen()
-//                        ))
-
-//                        .splineTo(new Vector2d(12, -36), Math.toRadians(90))
-//                        .waitSeconds(1)
-
-//                        .afterDisp(215, new ParallelAction(
-//                                allFunc.specimanAngle(),
-//                                allFunc.specimanExtendSlides(),
-//                                allFunc.retractSlides(),
-//                                allFunc.clawopen()
-//                        ))
-
-//                        .splineTo(new Vector2d(47, -61), Math.toRadians(270))
-
-//                        .afterDisp(240, new ParallelAction(
-//                                allFunc.specimanPickUpAngle(),
-//                                allFunc.clawopen()
-//                        ))
-
-                     //   .splineTo(new Vector2d(12, -36), Math.toRadians(90))
-
-//                        .afterDisp(265, new ParallelAction(
-//                                allFunc.specimanAngle(),
-//                                allFunc.specimanExtendSlides(),
-//                                allFunc.retractSlides(),
-//                                allFunc.clawopen()
-//                        ))
-
 
                       //  .splineTo(new Vector2d(41, -60), Math.toRadians(90))
                         .build());

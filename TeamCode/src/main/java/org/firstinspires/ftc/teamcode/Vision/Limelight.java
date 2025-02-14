@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode.Vision;
+package org.firstinspires.ftc.teamcode.Vision;//package org.firstinspires.ftc.teamcode.Vision;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.math.*;
+import java.util.List;
 
 
 @Config
@@ -161,7 +163,7 @@ public class Limelight {
         if (result != null && result.isValid()) {
             // Get PythonOutput from SnapScript
             double[] pythonOutput = result.getPythonOutput();
-                                                                    
+
             if (pythonOutput.length > 0) {
                 telemetry.addData("Python Output", java.util.Arrays.toString(pythonOutput));
 
@@ -177,9 +179,47 @@ public class Limelight {
         telemetry.update();
         return null;
     }
+    public double getCorners(Telemetry telemetry) {
+        LLResult result = limelight.getLatestResult();
+        if (result != null && result.isValid()) {
+            List<LLResultTypes.ColorResult> colorResults = result.getColorResults();
+            if (!colorResults.isEmpty()) {
+                LLResultTypes.ColorResult target = colorResults.get(0);
+                limelight.pipelineSwitch(4);
+                List<LLResultTypes.DetectorResult> corners = result.getDetectorResults();
 
+                if (corners.size() >= 4) {
+                    LLResultTypes.DetectorResult bottomLeft = corners.get(2);
+                    LLResultTypes.DetectorResult bottomRight = corners.get(3);
+                    LLResultTypes.DetectorResult topLeft = corners.get(0);
+                    LLResultTypes.DetectorResult topRight = corners.get(1);
 
+                    double low = Math.sqrt(Math.pow(bottomRight.getTargetXPixels() - bottomLeft.getTargetXPixels(), 2) +
+                            Math.pow(bottomRight.getTargetYPixels() - bottomLeft.getTargetYPixels(), 2));
 
+                    double high = Math.sqrt(Math.pow(topLeft.getTargetXPixels() - bottomLeft.getTargetXPixels(), 2) +
+                            Math.pow(topLeft.getTargetYPixels() - bottomLeft.getTargetYPixels(), 2));
+
+                    double resultValue = low + high;
+
+                    // Add telemetry for debugging
+                    telemetry.addData("Low (Bottom Edge)", low);
+                    telemetry.addData("High (Left Edge)", high);
+                    telemetry.addData("Result (Low + High)", resultValue);
+                    telemetry.update();
+
+                    return resultValue;
+                }
+            }
+        }
+
+        // Return -1 if detection fails and log it in telemetry
+        telemetry.addData("Limelight Detection", "No valid corners detected");
+        telemetry.update();
+        return -1;
+    }
 }
+
+
 
 

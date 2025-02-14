@@ -18,7 +18,7 @@ public class AllFunc {
         this.robot = this.teleop.robot;
     }
     public Action bucketAngleUp(){return new AngleLinkages(teleop, 0);}
-    public Action angleDown(){return new AngleLinkages(teleop, .35);}
+    public Action angleDown(){return new AngleLinkages(teleop, Math.toRadians(47));}
     public Action specimanAngle(){return new AngleLinkages(teleop,0.1);}
     public Action specimanPickUpAngle(){return new AngleLinkages(teleop,0.1);}
 

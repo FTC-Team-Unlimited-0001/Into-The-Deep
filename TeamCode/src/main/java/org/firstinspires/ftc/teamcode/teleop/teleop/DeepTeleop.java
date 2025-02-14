@@ -141,14 +141,31 @@ public class DeepTeleop extends LinearOpMode {
                 }
 
                 if (gamepad2.dpad_down) {
-                    robot.servoAngularRight.setPosition(Math.toRadians(47));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(47));
+                    robot.servoAngularRight.setPosition(Math.toRadians(46));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(46));
+
+                }
+                if (gamepad2.dpad_left) {
+                    robot.servoAngularRight.setPosition(Math.toRadians(.7));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(.7));
+
+                }
+
+
+                if (gamepad2.dpad_right){
+                    robot.servoAngularRight.setPosition(Math.toRadians(35));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(35));
                 }
 
 
                 if (gamepad2.right_bumper) {
                     robot.servoleft.setPosition(.63);
                     robot.servoright.setPosition(.63);
+                    timer.reset();
+                }
+                if (gamepad2.start) {
+                    robot.servoleft.setPosition(.3);
+                    robot.servoright.setPosition(.3);
                     timer.reset();
                 }
 
@@ -162,16 +179,25 @@ public class DeepTeleop extends LinearOpMode {
             } else if (gamepad2.a) {
                 robot.servopinch.setPosition(close);   // Fully closed position
             }
+            //VERY USEFUL FOR FINDING SERVO POSTION DONT DELTE
+//           if (gamepad2.back){for (double pos = 0.0; pos <= 1.0; pos += 0.1) {  // Adjust max range if needed
+//                robot.servoleft.setPosition(pos);
+//                robot.servoright.setPosition(pos);
+//                telemetry.addData("Servo Position", pos);
+//                telemetry.update();
+//                sleep(500); } // Wait to observe}
+//            }
 
             // Handle spool power for lifting mechanism
 
 
 //limelight.getPythonOutput();
 
-            limelight.getAdjustedLateralDistance();
+       //     limelight.getAdjustedLateralDistance();
 
-            limelight.getDistanceToTarget();
+          //  limelight.getDistanceToTarget();
 
+            limelight.getCorners(telemetry);
 
             // controlArmsWithPIDF();
             slidecontrol();
@@ -270,7 +296,6 @@ public class DeepTeleop extends LinearOpMode {
 //        telemetry.addData("Right Servo", robot.servoright.getPosition());
 //        telemetry.addData("Left Servo", robot.servoleft.getPosition());
 
-        telemetry.update();
 
     }
 
