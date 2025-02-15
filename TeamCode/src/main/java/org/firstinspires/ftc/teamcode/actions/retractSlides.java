@@ -6,13 +6,13 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
-public class ExtendSlides implements Action {
+public class retractSlides implements Action {
     private DeepTeleop teleop;
     private double target;
-    private static boolean isExtending = false;
+    private static boolean isRetracting = false;
     private static boolean isSlidesMoving = false; // Prevents conflicts
 
-    public ExtendSlides(DeepTeleop teleop, double target) {
+    public retractSlides(DeepTeleop teleop, double target) {
         this.teleop = teleop;
         this.target = target;
     }
@@ -20,7 +20,7 @@ public class ExtendSlides implements Action {
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
         if (isSlidesMoving) return false;
-        isExtending = true;
+        isRetracting = true;
         isSlidesMoving = true;
 
         teleop.robot.slidesTargetPosition = target;
@@ -30,7 +30,7 @@ public class ExtendSlides implements Action {
 
 
         if (done) {
-            isExtending = false;
+            isRetracting = false;
             isSlidesMoving = false;
         }
 
