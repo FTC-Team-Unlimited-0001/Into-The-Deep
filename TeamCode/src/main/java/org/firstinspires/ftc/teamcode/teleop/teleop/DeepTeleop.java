@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.teleop.teleop;
 
 
+import static org.firstinspires.ftc.teamcode.util.machine.slidesTargetPosition;
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -146,8 +148,8 @@ public class DeepTeleop extends LinearOpMode {
 
                 }
                 if (gamepad2.dpad_left) {
-                    robot.servoAngularRight.setPosition(Math.toRadians(.7));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(.7));
+                    robot.servoAngularRight.setPosition(Math.toRadians(3));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(3));
 
                 }
 
@@ -200,8 +202,8 @@ public class DeepTeleop extends LinearOpMode {
             limelight.getCorners(telemetry);
 
             // controlArmsWithPIDF();
-            slidecontrol();
-            //   controlSlidesWithPIDF();
+            //slidecontrol();
+               controlSlidesWithPIDF();
 
             // Retrieve results from the pipeline
 
@@ -240,7 +242,12 @@ public class DeepTeleop extends LinearOpMode {
 
         // Calculate PID output
         double slideOutput = robot.slidesPIDFController.calculate(currentPosition, robot.slidesTargetPosition);
+
+        if(Math.abs(currentPosition-slidesTargetPosition) < 25){
+            slideOutput = 0;
+        };
 //  software limits
+
 //        if ((currentPosition >= slidelimit && slideOutput > 0) ||
 //                (currentPosition <= MIN_POSITION && slideOutput < 0)) {
 //            slideOutput = 0;  // Prevent further movement

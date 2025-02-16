@@ -46,10 +46,10 @@ public class machine {
     public static double kI = 0;
     public static double kD = 0.00001;
     public static double kF = 0;
-    public static double kPs = 0.003;
+    public static double kPs = 0.007;
     public static double kIs = 0;
     public static double kDs = 0;
-    public static double kFs = 0;
+    public static double kFs = 0.0006;
 //f is for predicting the power before something has happened.
 
 
