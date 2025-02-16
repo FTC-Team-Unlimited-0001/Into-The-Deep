@@ -46,48 +46,48 @@ public class RightBlueFull extends DeepTeleop {
 
         Actions.runBlocking(new ParallelAction(
                 drive.actionBuilder(initialPose)
-                        .strafeTo(new Vector2d(11, -42))
-                        .waitSeconds(1)
-
-
-
-                        .strafeToConstantHeading(new Vector2d(34, -40))
-
-
-                        .strafeToConstantHeading(new Vector2d(34, -10) )
-
-
-                        .splineToConstantHeading(new Vector2d(40, -10), Math.toRadians(-90))
-
-                        .lineToY(-56)
-                        .strafeTo(new Vector2d(44, -11))
-
-                        .splineToConstantHeading(new Vector2d(50, -55) ,Math.toRadians(90))
-
-
-                        .splineTo(new Vector2d(60, -11),Math.toRadians(90))
-                        .strafeTo(new Vector2d(60, -55) )
-                        .turnTo(Math.toRadians(-90))
-                        .setReversed(true)
-                        .strafeTo(new Vector2d(7,-33))
-                        .setReversed(false)
-                        .strafeTo(new Vector2d (46,-56))
-                        .setReversed(true)
-                        .strafeTo(new Vector2d(7,-33))
-                        .setReversed(false)
-                        .strafeTo(new Vector2d (46,-56))
-                        .setReversed(true)
-                        .strafeTo(new Vector2d(7,-33))
-                        .setReversed(false)
-                        .strafeTo(new Vector2d (46,-56))
 //                        .strafeTo(new Vector2d(11, -42))
 //                        .waitSeconds(1)
-//                        .afterDisp(58, new ParallelAction(
-//                                allFunc.specimanAngle(),
-//                                allFunc.specimanExtendSlides(),
-//                                allFunc.retractSlides(),
+//
+//
+//
+//                        .strafeToConstantHeading(new Vector2d(34, -40))
+//
+//
+//                        .strafeToConstantHeading(new Vector2d(34, -10) )
+//
+//
+//                        .splineToConstantHeading(new Vector2d(42, -10), Math.toRadians(-90))
+//
+//                        .lineToY(-56)
+//                        .strafeTo(new Vector2d(43, -11))
+//
+//                        .splineToConstantHeading(new Vector2d(50, -55) ,Math.toRadians(90))
+//
+//
+//                        .splineTo(new Vector2d(60, -11),Math.toRadians(90))
+//                        .strafeTo(new Vector2d(60, -55) )
+//                        .turnTo(Math.toRadians(-90))
+//                        .setReversed(true)
+//                        .strafeTo(new Vector2d(7,-33))
+//                        .setReversed(false)
+//                        .strafeTo(new Vector2d (42,-56))
+//                        .setReversed(true)
+//                        .strafeTo(new Vector2d(7,-33))
+//                        .setReversed(false)
+//                        .strafeTo(new Vector2d (42,-56))
+//                        .setReversed(true)
+//                        .strafeTo(new Vector2d(7,-33))
+//                        .setReversed(false)
+//                        .strafeTo(new Vector2d (42,-56))
+//                        .strafeTo(new Vector2d(11, -42))
+//                        .waitSeconds(1)
+                        .afterTime(1, new ParallelAction(
+                                new SequentialAction(allFunc.bucketExtendSlides(),allFunc.retractSlides()),
+                                allFunc.clawopen()
+
 //                                allFunc.clawopen()
-//                        ))
+                        ))
 //
 //                       .strafeToConstantHeading(new Vector2d(34, -40))
 ////                        .afterDisp(84, new ParallelAction(

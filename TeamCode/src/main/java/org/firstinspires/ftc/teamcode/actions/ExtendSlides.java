@@ -6,11 +6,12 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
+
 public class ExtendSlides implements Action {
     private DeepTeleop teleop;
     private double target;
-    private static boolean isExtending = false;
-    private static boolean isSlidesMoving = false; // Prevents conflicts
+    private boolean isExtending = false;
+    private boolean isSlidesMoving = false; // No longer static
 
     public ExtendSlides(DeepTeleop teleop, double target) {
         this.teleop = teleop;
@@ -26,8 +27,7 @@ public class ExtendSlides implements Action {
         teleop.robot.slidesTargetPosition = target;
         teleop.controlSlidesWithPIDF();
 
-        boolean done= Math.abs(teleop.robot.spoolleft.getCurrentPosition() - teleop.robot.slidesTargetPosition) > 50;
-
+        boolean done = Math.abs(teleop.robot.spoolleft.getCurrentPosition() - teleop.robot.slidesTargetPosition) < 50;
 
         if (done) {
             isExtending = false;

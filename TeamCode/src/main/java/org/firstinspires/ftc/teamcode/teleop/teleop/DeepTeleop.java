@@ -244,8 +244,9 @@ public class DeepTeleop extends LinearOpMode {
         double slideOutput = robot.slidesPIDFController.calculate(currentPosition, robot.slidesTargetPosition);
 
         if(Math.abs(currentPosition-slidesTargetPosition) < 25){
+
             slideOutput = 0;
-        };
+        }
 //  software limits
 
 //        if ((currentPosition >= slidelimit && slideOutput > 0) ||
