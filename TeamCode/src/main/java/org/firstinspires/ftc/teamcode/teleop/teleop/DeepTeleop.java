@@ -32,7 +32,7 @@ public class DeepTeleop extends LinearOpMode {
     public machine robot;
     public double orientationToPos;
 
-    int c = 4;
+
     double slidelimit = -1337;
 
 
@@ -200,8 +200,8 @@ public class DeepTeleop extends LinearOpMode {
             limelight.getCorners(telemetry);
 
             // controlArmsWithPIDF();
-//            slidecontrol();
-               controlSlidesWithPIDF();
+            slidecontrol();
+            //   controlSlidesWithPIDF();
 
             // Retrieve results from the pipeline
 
