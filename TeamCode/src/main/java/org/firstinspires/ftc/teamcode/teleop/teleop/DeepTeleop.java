@@ -202,8 +202,8 @@ public class DeepTeleop extends LinearOpMode {
             limelight.getCorners(telemetry);
 
             // controlArmsWithPIDF();
-            //slidecontrol();
-               controlSlidesWithPIDF();
+            slidecontrol();
+               //controlSlidesWithPIDF();
 
             // Retrieve results from the pipeline
 
@@ -271,12 +271,12 @@ public class DeepTeleop extends LinearOpMode {
         double retractPower = gamepad1.left_trigger;  // Retracting slides
 
         // Limit
-        double slidePower = extendPower - retractPower;
-//        boolean isanglesDown = robot.servoAngularLeft.getPosition() <= Math.toRadians(45) && robot.servoAngularRight.getPosition() <= Math.toRadians(45);
-//        if ((robot.spoolleft.getCurrentPosition() >= 510 && slidePower > 0 && isanglesDown) ||
-//                (robot.spoolleft.getCurrentPosition() <= 0 && slidePower < 0)) {
-//            slidePower = 0;  // Prevent further movement
-//        }
+        double slidePower = -(extendPower - retractPower);
+        boolean isanglesDown = robot.servoAngularLeft.getPosition() >= Math.toRadians(40) && robot.servoAngularRight.getPosition() >= Math.toRadians(40);
+        if ((robot.spoolleft.getCurrentPosition() <= -360 && slidePower < 0 && isanglesDown) ||
+                (robot.spoolleft.getCurrentPosition() >= 0 && slidePower > 0)) {
+            slidePower = 0;  // Prevent further movement
+        }
 
 
 
@@ -300,7 +300,7 @@ public class DeepTeleop extends LinearOpMode {
 //
 //
         telemetry.addData("Slide Pos", robot.spoolleft.getCurrentPosition());
-//        telemetry.addData("Slide Power", slidePower);
+        telemetry.addData("Slide Power", slidePower);
 //        telemetry.addData("Right Servo", robot.servoright.getPosition());
 //        telemetry.addData("Left Servo", robot.servoleft.getPosition());
 

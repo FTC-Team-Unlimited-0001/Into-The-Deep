@@ -39,10 +39,10 @@ public class AllFunc {
         return new MoveDiff(teleop, .63);
     }
     public Action bucketExtendSlides(){
-        return new ExtendSlides(teleop,-100);
+        return new ExtendSlides(teleop,-500);
     }
-    public Action specimanExtendSlides(){return new ExtendSlides(teleop,0);}
-    public Action retractSlides(){return new retractSlides(teleop,-500);}}
+    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-360);}
+    public Action retractSlides(){return new retractSlides(teleop,0);}}
 
 
 
