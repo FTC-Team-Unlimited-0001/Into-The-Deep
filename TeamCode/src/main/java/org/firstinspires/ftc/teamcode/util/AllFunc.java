@@ -42,14 +42,7 @@ public class AllFunc {
         return new ExtendSlides(teleop,-100);
     }
     public Action specimanExtendSlides(){return new ExtendSlides(teleop,0);}
-    public Action retractSlides(){
-        return new retractSlides(teleop,-500);}
-
-    }
+    public Action retractSlides(){return new retractSlides(teleop,-500);}}
 
 
 
-//angle up/down
-//openclaw/closeclaw
-//spin diff back/forward
-//extend Retract***************
