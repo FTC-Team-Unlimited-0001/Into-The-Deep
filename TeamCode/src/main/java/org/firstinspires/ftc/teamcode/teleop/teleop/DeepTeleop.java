@@ -108,10 +108,10 @@ public class DeepTeleop extends LinearOpMode {
 
 
             if (gamepad1.left_bumper) {
-                robot.frontLeft.setPower(frontLeftPower / 3);
-                robot.backLeft.setPower(backLeftPower / 3);
-                robot.frontRight.setPower(frontRightPower / 3);
-                robot.backRight.setPower(backRightPower / 3);
+                robot.frontLeft.setPower(frontLeftPower / 2);
+                robot.backLeft.setPower(backLeftPower / 2);
+                robot.frontRight.setPower(frontRightPower / 2);
+                robot.backRight.setPower(backRightPower / 2);
             } else {
                 robot.frontLeft.setPower(frontLeftPower);
                 robot.backLeft.setPower(backLeftPower);
@@ -143,20 +143,20 @@ public class DeepTeleop extends LinearOpMode {
                 }
 
                 if (gamepad2.dpad_down) {
-                    robot.servoAngularRight.setPosition(Math.toRadians(46));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(46));
+                    robot.servoAngularRight.setPosition(Math.toRadians(47));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(47));
 
                 }
-                if (gamepad2.dpad_left) {
+                if (gamepad2.dpad_right) {
                     robot.servoAngularRight.setPosition(Math.toRadians(3));
                     robot.servoAngularLeft.setPosition(Math.toRadians(3));
 
                 }
 
 
-                if (gamepad2.dpad_right){
-                    robot.servoAngularRight.setPosition(Math.toRadians(35));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(35));
+                if (gamepad2.dpad_left){
+                    robot.servoAngularRight.setPosition(Math.toRadians(37));
+                    robot.servoAngularLeft.setPosition(Math.toRadians(37));
                 }
 
 

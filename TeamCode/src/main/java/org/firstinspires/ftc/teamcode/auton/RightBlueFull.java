@@ -49,7 +49,7 @@ public class RightBlueFull extends DeepTeleop {
         Actions.runBlocking(new ParallelAction(
                         drive.actionBuilder(initialPose)
 
-                                .strafeTo(new Vector2d(1, -31))
+                                .strafeTo(new Vector2d(1, -32))
 
                                 .afterDisp(31.625, new SequentialAction(
                                                 new ParallelAction(
@@ -62,9 +62,54 @@ public class RightBlueFull extends DeepTeleop {
                                         )
                                 )
 
+                                .waitSeconds(2.5)
 
-                                //.strafeToConstantHeading(new Vector2d(34, -40))
-//               // .afterDisp(84, new ParallelAction(
+                                .strafeToConstantHeading(new Vector2d(34, -40))
+                                .strafeToConstantHeading(new Vector2d(34, -10))
+                                .splineToConstantHeading(new Vector2d(47, -10), Math.toRadians(-90))
+                                .strafeToConstantHeading(new Vector2d(47, -50))
+                                .strafeToConstantHeading(new Vector2d(47, -10))
+                                .splineToConstantHeading(new Vector2d(57, -10), Math.toRadians(-90))
+                                .strafeToConstantHeading(new Vector2d(57, -49.5))
+
+                                .afterDisp(40, new SequentialAction(
+                                            new ParallelAction(
+                                                allFunc.specimanPickUpAngle(),
+                                                allFunc.specimanDiffPickup(),
+                                                allFunc.clawopen()
+                                            ),
+                                        allFunc.clawclose()
+                                        )
+                                )
+
+                                .waitSeconds(2)
+
+                                .afterDisp(0, new SequentialAction(
+                                        allFunc.diffpick(),
+                                        allFunc.specimanAngle()
+                                        )
+                                )
+
+                                .strafeToConstantHeading(new Vector2d(57, -40))
+                                .strafeTo(new Vector2d(3, -40))
+                                .strafeTo(new Vector2d(3, -32))
+
+                                .afterDisp(8, new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides()
+                                        )
+                                )
+
+                                .waitSeconds(2)
+
+
+
+
+
+
+//                .afterDisp(84, new ParallelAction(
 ////                        allFunc.specimanAngle(),
 ////                        allFunc.clawopen()))
 //

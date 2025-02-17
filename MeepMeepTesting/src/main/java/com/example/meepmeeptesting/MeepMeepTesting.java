@@ -21,7 +21,23 @@ public class MeepMeepTesting {
 
                         .strafeTo(new Vector2d(1,-33))
 
-//                .strafeToConstantHeading(new Vector2d(34, -40))
+                .strafeToConstantHeading(new Vector2d(34, -40))
+                .strafeToConstantHeading(new Vector2d(34, -10))
+                .splineToConstantHeading(new Vector2d(47, -10), Math.toRadians(-90))
+                .strafeToConstantHeading(new Vector2d(47, -50))
+                .strafeToConstantHeading(new Vector2d(47, -10))
+                .splineToConstantHeading(new Vector2d(57, -10), Math.toRadians(-90))
+                .strafeToConstantHeading(new Vector2d(57, -50))
+
+
+
+                .waitSeconds(0.8)
+                .strafeToConstantHeading(new Vector2d(57, -40))
+
+
+                .strafeToConstantHeading(new Vector2d(57, -40))
+                .strafeTo(new Vector2d(1, -40))
+
 ////               // .afterDisp(84, new ParallelAction(
 //////                        allFunc.specimanAngle(),
 //////                        allFunc.clawopen()))

@@ -20,8 +20,8 @@ public class AllFunc {
     }
     public Action bucketAngleUp(){return new AngleLinkages(teleop, 0);}
     public Action angleDown(){return new AngleLinkages(teleop, Math.toRadians(47));}
-    public Action specimanAngle(){return new AngleLinkages(teleop,Math.toRadians(3));}
-    public Action specimanPickUpAngle(){return new AngleLinkages(teleop,Math.toRadians(35));}
+    public Action specimanAngle(){return new AngleLinkages(teleop,Math.toRadians(4));}
+    public Action specimanPickUpAngle(){return new AngleLinkages(teleop,Math.toRadians(33));}
     public Action specimanDiffPickup() {return new MoveDiff(teleop,.3);}
 
 
@@ -41,7 +41,7 @@ public class AllFunc {
     public Action bucketExtendSlides(){
         return new ExtendSlides(teleop,-500);
     }
-    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-360);}
+    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-350);}
     public Action retractSlides(){return new retractSlides(teleop,0);}}
 
 
