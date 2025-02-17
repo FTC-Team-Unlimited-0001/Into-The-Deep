@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.actions.MoveDiff;
 import org.firstinspires.ftc.teamcode.actions.ExtendSlides;
 import org.firstinspires.ftc.teamcode.actions.OpenClawAction;
 import org.firstinspires.ftc.teamcode.actions.retractSlides;
+import org.firstinspires.ftc.teamcode.actions.stopSlides;
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
 
 public class AllFunc {
@@ -20,7 +21,7 @@ public class AllFunc {
     }
     public Action bucketAngleUp(){return new AngleLinkages(teleop, 0);}
     public Action angleDown(){return new AngleLinkages(teleop, Math.toRadians(47));}
-    public Action specimanAngle(){return new AngleLinkages(teleop,Math.toRadians(4));}
+    public Action specimanAngle(){return new AngleLinkages(teleop,Math.toRadians(3));}
     public Action specimanPickUpAngle(){return new AngleLinkages(teleop,Math.toRadians(33));}
     public Action specimanDiffPickup() {return new MoveDiff(teleop,.3);}
 
@@ -38,10 +39,12 @@ public class AllFunc {
     public Action diffput(){
         return new MoveDiff(teleop, .63);
     }
+    public Action stopSlides(){return new stopSlides(teleop);}
     public Action bucketExtendSlides(){
         return new ExtendSlides(teleop,-500);
     }
-    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-350);}
+    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-390);}
+    public Action speciman2ExtendSlides(){return new ExtendSlides(teleop, -390);}
     public Action retractSlides(){return new retractSlides(teleop,0);}}
 
 

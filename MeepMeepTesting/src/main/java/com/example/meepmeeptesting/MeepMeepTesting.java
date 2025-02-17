@@ -32,11 +32,15 @@ public class MeepMeepTesting {
 
 
                 .waitSeconds(0.8)
-                .strafeToConstantHeading(new Vector2d(57, -40))
+            //    .strafeToConstantHeading(new Vector2d(57, -40))
 
 
-                .strafeToConstantHeading(new Vector2d(57, -40))
-                .strafeTo(new Vector2d(1, -40))
+
+                        .strafeTo(new Vector2d(3,-32))
+                .strafeTo(new Vector2d(46,-52))
+
+
+                //.splineToConstantHeading(new Vector2d(3, -32),Math.toRadians(-90))
 
 ////               // .afterDisp(84, new ParallelAction(
 //////                        allFunc.specimanAngle(),
