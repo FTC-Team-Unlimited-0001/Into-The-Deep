@@ -42,6 +42,8 @@ public class RightBlueFull extends DeepTeleop {
         Pose2d initialPose = new Pose2d(1, -62.625, Math.toRadians(270));
         PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
         allFunc.clawclose().run(new TelemetryPacket());
+        allFunc.diffpick().run(new TelemetryPacket());
+        allFunc.specimanAngle().run(new TelemetryPacket());
 
 
         waitForStart();
@@ -52,44 +54,45 @@ public class RightBlueFull extends DeepTeleop {
 
                                 .strafeTo(new Vector2d(1, -32))
 
-//                                .afterDisp(31.625, new SequentialAction(
-//                                                new ParallelAction(
-//                                                        allFunc.diffpick(),
-//                                                        allFunc.specimanAngle()
-//                                                ),
-//
-//                                                allFunc.specimanExtendSlides(),
-//                                                allFunc.stopSlides(),
-//
-//                                                allFunc.clawopen(),
-//                                                allFunc.retractSlides()
-//                                        )
-//)
+                                .afterDisp(30.625, new SequentialAction(
+
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides()
+                                        )
+)
                                 //NUMBER 1 IS DONE
 
                                 .waitSeconds(2)
 
-                                .strafeToConstantHeading(new Vector2d(34, -40))
-                                .splineToConstantHeading(new Vector2d(34, -17),Math.toRadians(-90))
+                                .strafeToConstantHeading(new Vector2d(28, -40))
+                                .splineToConstantHeading(new Vector2d(28, -17),Math.toRadians(-90))
                                 .splineToConstantHeading(new Vector2d(45, -17), Math.toRadians(-90))
                                 .strafeToConstantHeading(new Vector2d(45, -50))
                                 .strafeToConstantHeading(new Vector2d(45, -17))
+                                .afterDisp(33, new ParallelAction(
+                                                allFunc.specimanPickUpAngle(),
+
+                                                allFunc.clawopen()
+                                        )
+                                )
                                 .splineToConstantHeading(new Vector2d(56, -17), Math.toRadians(-90))
-                                .strafeToConstantHeading(new Vector2d(56, -49.4))
+                                .strafeToConstantHeading(new Vector2d(56, -48.5))
+                                .waitSeconds(1.5)
+
+                                .afterDisp(31.5,new SequentialAction(
+                                        allFunc.specimanDiffPickup(),
+                                        allFunc.clawclose()
+                                    )
+                                )
+
+
+
+
                                 .strafeTo(new Vector2d(4,-33) )
-
-//                                .afterDisp(55.48, new SequentialAction(
-//                                            new ParallelAction(
-//                                                allFunc.specimanPickUpAngle(),
-//                                                allFunc.specimanDiffPickup(),
-//                                                allFunc.clawopen()
-//                                            ),
-//                                        allFunc.clawclose()
-//                                        )
-//                                )
-
-                                .waitSeconds(1)
-
 
 //
 //                                .afterDisp(0, new SequentialAction(

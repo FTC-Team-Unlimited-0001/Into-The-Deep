@@ -26,6 +26,6 @@ public class OpenClawAction implements Action {
             ranOnce = true;
         }
         teleop.robot.servopinch.setPosition(0.35);
-        return timer.milliseconds() < 1000;
+        return timer.milliseconds() < 200;
     }
 }
