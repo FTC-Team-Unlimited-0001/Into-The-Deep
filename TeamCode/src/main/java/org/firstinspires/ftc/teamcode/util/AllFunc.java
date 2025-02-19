@@ -21,8 +21,8 @@ public class AllFunc {
     }
     public Action bucketAngleUp(){return new AngleLinkages(teleop, 0);}
     public Action angleDown(){return new AngleLinkages(teleop, Math.toRadians(47));}
-    public Action specimanAngle(){return new AngleLinkages(teleop,Math.toRadians(3));}
-    public Action specimanPickUpAngle(){return new AngleLinkages(teleop,Math.toRadians(33));}
+    public Action specimanAngle(){return new AngleLinkages(teleop,.24);}
+    public Action specimanPickUpAngle(){return new AngleLinkages(teleop,.75);}
     public Action specimanDiffPickup() {return new MoveDiff(teleop,.3);}
 
 

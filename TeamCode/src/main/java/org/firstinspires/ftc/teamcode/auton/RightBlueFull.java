@@ -85,72 +85,70 @@ public class RightBlueFull extends DeepTeleop {
                                         )
                                 )
                                 .splineToConstantHeading(new Vector2d(56, -17), Math.toRadians(-90))
-                                .afterDisp(0,new SequentialAction(
+                                .afterDisp(5,new SequentialAction(
                                                 allFunc.specimanDiffPickup(),
                                                 allFunc.clawclose()
                                         )
                                 )
-
-                                .strafeToConstantHeading(new Vector2d(56, -48.5))
-
+                                .strafeToConstantHeading(new Vector2d(56, -49.4))
 
 
 
-                                .strafeTo(new Vector2d(4,-33) )
 
-//
-//                                .afterDisp(0, new SequentialAction(
-//                                        allFunc.diffpick(),
-//                                        allFunc.specimanAngle()
-//                                        )
-//                                )
+                                .afterDisp(0, new ParallelAction(
+                                                allFunc.diffpick(),
+                                                allFunc.specimanAngle()
+                                        )
+                                )
 
 
+                                .strafeTo(new Vector2d(4,-30) )
 
-//                                .afterDisp(3  , new SequentialAction(
-//
-//                                                allFunc.speciman2ExtendSlides(),
-//                                                allFunc.stopSlides(),
-//                                                allFunc.clawopen(),
-//                                                allFunc.retractSlides()
-//                                        )
-//                                )
+
+
+                                .afterDisp( 54.52  , new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides()
+                                        )
+                                )
                                 //NUMBER 2 IS DONE
 
                                 .waitSeconds(2)
 
-                                .strafeTo(new Vector2d(46,-52))
-//
-//                                .afterDisp(47.41, new SequentialAction(
-//                                                new ParallelAction(
-//                                                        allFunc.specimanPickUpAngle(),
-//                                                        allFunc.specimanDiffPickup(),
-//                                                        allFunc.clawopen()
-//                                                ),
-//                                                allFunc.clawclose()
-//                                        )
-//                                )
+                                .strafeTo(new Vector2d(46,-50.5))
+                                .afterDisp(0,new ParallelAction(
+                                        allFunc.clawopen(),
+                                        allFunc.specimanPickUpAngle(),
+                                        allFunc.specimanDiffPickup()
+                                ))
+
+                                .afterDisp(44, new SequentialAction(
+                                                allFunc.clawclose()
+                                        )
+                                )
 
                                 .waitSeconds(1.5)
 
-//                                .afterDisp(0, new SequentialAction(
-//                                                allFunc.diffpick(),
-//                                                allFunc.specimanAngle()
-//                                        )
-//                                )
-//                                .waitSeconds(.5)
+                                .afterDisp(0, new ParallelAction(
+                                                allFunc.diffpick(),
+                                                allFunc.specimanAngle()
+                                        )
+                                )
 
-                                .splineTo(new Vector2d(-1,-33),Math.toRadians(-90))
+                                .strafeTo(new Vector2d(-3,-32.5))
 
 
-//                                .afterDisp(50.70   , new SequentialAction(
-//
-//                                                allFunc.speciman2ExtendSlides(),
-//                                                allFunc.stopSlides(),
-//                                                allFunc.clawopen(),
-//                                                allFunc.retractSlides()
-//                                        )
-//                                )
+                                .afterDisp(50.70   , new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides()
+                                        )
+                                )
                                 .waitSeconds(1)
                                 //NUMBER 3 DONE
 

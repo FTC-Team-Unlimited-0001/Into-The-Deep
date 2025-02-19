@@ -19,7 +19,7 @@ public class MeepMeepTesting {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
 
-                .strafeTo(new Vector2d(1, -32))
+                .strafeTo(new Vector2d(1, -33))
 
 //                                .afterDisp(31.625, new SequentialAction(
 //                                                new ParallelAction(
@@ -38,8 +38,8 @@ public class MeepMeepTesting {
 
                 .waitSeconds(2)
 
-                .strafeToConstantHeading(new Vector2d(30, -40))
-                .splineToConstantHeading(new Vector2d(30, -17),Math.toRadians(-90))
+                .strafeToConstantHeading(new Vector2d(28, -40))
+                .splineToConstantHeading(new Vector2d(28, -17),Math.toRadians(-90))
                 .splineToConstantHeading(new Vector2d(45, -17), Math.toRadians(-90))
                 .strafeToConstantHeading(new Vector2d(45, -50))
                 .strafeToConstantHeading(new Vector2d(45, -17))
@@ -102,7 +102,7 @@ public class MeepMeepTesting {
 //                                )
 //                                .waitSeconds(.5)
 
-                .splineTo(new Vector2d(-1,-33),Math.toRadians(-90))
+                .strafeTo(new Vector2d(4,-33) )
 
 
 

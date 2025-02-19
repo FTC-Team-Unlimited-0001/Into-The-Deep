@@ -170,6 +170,12 @@ public class DeepTeleop extends LinearOpMode {
                     robot.servoright.setPosition(.3);
                     timer.reset();
                 }
+                if (gamepad2.right_stick_button){
+                    robot.servoAngularRight.setPosition(0);
+                    robot.servoAngularLeft.setPosition(0);
+
+
+                }
 
                 if (gamepad2.b) {
                     robot.servoleft.setPosition(1.26);
