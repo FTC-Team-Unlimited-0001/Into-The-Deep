@@ -137,26 +137,26 @@ public class DeepTeleop extends LinearOpMode {
                 }
 
                 if (gamepad2.dpad_up) {
-                    robot.servoAngularLeft.setPosition(0);
-                    robot.servoAngularRight.setPosition(0);
+                    robot.servoAngularLeft.setPosition(.26);
+                    robot.servoAngularRight.setPosition(.26);
 
                 }
 
                 if (gamepad2.dpad_down) {
-                    robot.servoAngularRight.setPosition(Math.toRadians(47));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(47));
+                    robot.servoAngularRight.setPosition(1);
+                    robot.servoAngularLeft.setPosition(1);
 
                 }
                 if (gamepad2.dpad_right) {
-                    robot.servoAngularRight.setPosition(Math.toRadians(3));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(3));
+                    robot.servoAngularRight.setPosition(.25);
+                    robot.servoAngularLeft.setPosition(.25);
 
                 }
 
 
                 if (gamepad2.dpad_left){
-                    robot.servoAngularRight.setPosition(Math.toRadians(37));
-                    robot.servoAngularLeft.setPosition(Math.toRadians(37));
+                    robot.servoAngularRight.setPosition(.75);
+                    robot.servoAngularLeft.setPosition(.75);
                 }
 
 
@@ -182,13 +182,14 @@ public class DeepTeleop extends LinearOpMode {
                 robot.servopinch.setPosition(close);   // Fully closed position
             }
             //VERY USEFUL FOR FINDING SERVO POSTION DONT DELTE
-//           if (gamepad2.back){for (double pos = 0.0; pos <= 1.0; pos += 0.1) {  // Adjust max range if needed
-//                robot.servoleft.setPosition(pos);
-//                robot.servoright.setPosition(pos);
-//                telemetry.addData("Servo Position", pos);
-//                telemetry.update();
-//                sleep(500); } // Wait to observe}
-//            }
+            if (gamepad2.back){for (double pos = 0.0; pos <= 1.0; pos += 0.05) {  // Adjust max range if needed
+                robot.servoAngularLeft.setPosition(pos);
+                robot.servoAngularRight.setPosition(pos);
+                telemetry.addData("Servo Position", pos);
+                telemetry.update();
+                sleep(1000); } // Wait to observe}
+            }
+
 
             // Handle spool power for lifting mechanism
 

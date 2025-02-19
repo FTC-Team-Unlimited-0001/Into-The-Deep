@@ -56,6 +56,11 @@ public class RightBlueFull extends DeepTeleop {
 
                                 .afterDisp(30.625, new SequentialAction(
 
+                                        new ParallelAction(
+                                                allFunc.clawclose(),
+                                                allFunc.diffpick(),
+                                                allFunc.specimanAngle()
+                                        ),
 
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
@@ -66,7 +71,7 @@ public class RightBlueFull extends DeepTeleop {
 )
                                 //NUMBER 1 IS DONE
 
-                                .waitSeconds(2)
+                                .waitSeconds(1.5)
 
                                 .strafeToConstantHeading(new Vector2d(28, -40))
                                 .splineToConstantHeading(new Vector2d(28, -17),Math.toRadians(-90))
@@ -80,14 +85,13 @@ public class RightBlueFull extends DeepTeleop {
                                         )
                                 )
                                 .splineToConstantHeading(new Vector2d(56, -17), Math.toRadians(-90))
-                                .strafeToConstantHeading(new Vector2d(56, -48.5))
-                                .waitSeconds(1.5)
-
-                                .afterDisp(31.5,new SequentialAction(
-                                        allFunc.specimanDiffPickup(),
-                                        allFunc.clawclose()
-                                    )
+                                .afterDisp(0,new SequentialAction(
+                                                allFunc.specimanDiffPickup(),
+                                                allFunc.clawclose()
+                                        )
                                 )
+
+                                .strafeToConstantHeading(new Vector2d(56, -48.5))
 
 
 

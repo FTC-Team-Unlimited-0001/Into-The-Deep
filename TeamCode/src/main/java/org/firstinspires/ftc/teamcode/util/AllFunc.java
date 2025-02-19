@@ -44,7 +44,6 @@ public class AllFunc {
         return new ExtendSlides(teleop,-500);
     }
     public Action specimanExtendSlides(){return new ExtendSlides(teleop,-390);}
-    public Action speciman2ExtendSlides(){return new ExtendSlides(teleop, -390);}
     public Action retractSlides(){return new retractSlides(teleop,0);}}
 
 
