@@ -57,34 +57,34 @@ public class specAuto extends DeepTeleop {
                                                 allFunc.stopSlides(),
 
                                                 allFunc.clawopen(),
-                                                allFunc.retractSlides()
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides()
                                         )
 )
                                 //NUMBER 1 IS DONE
 
                                 .waitSeconds(1.3)
 
-                                .strafeToConstantHeading(new Vector2d(28, -40))
-                                .splineToConstantHeading(new Vector2d(28, -17),Math.toRadians(-90))
+                                .strafeToConstantHeading(new Vector2d(27, -42))
+                                .splineToConstantHeading(new Vector2d(27, -17),Math.toRadians(-90))
                                 .splineToConstantHeading(new Vector2d(45, -17), Math.toRadians(-90))
                                 .strafeToConstantHeading(new Vector2d(45, -50))
                                 .strafeToConstantHeading(new Vector2d(45, -17))
                                 .afterDisp(33, new ParallelAction(
                                                 allFunc.specimanPickUpAngle(),
-                                                allFunc.specimanDiffPickup(),
-                                                allFunc.clawopen()
+                                                allFunc.specimanDiffPickup()
+
                                         )
                                 )
-                                .splineToConstantHeading(new Vector2d(56, -17), Math.toRadians(-90))
-                                .afterDisp(5,new SequentialAction(
+                                .splineToConstantHeading(new Vector2d(56, -16), Math.toRadians(-90))
+
+//                                .waitSeconds(0.2)
+                                .strafeToConstantHeading(new Vector2d(56, -46.3))
+                                .afterDisp(0,new SequentialAction(
                                                 allFunc.clawclose()
                                         )
                                 )
-//                                .waitSeconds(1)
-                                .strafeToConstantHeading(new Vector2d(56, -49.4))
-
-
-
+                                .waitSeconds(1)
 
                                 .afterDisp(0, new ParallelAction(
                                                 allFunc.diffpick(),
@@ -102,7 +102,8 @@ public class specAuto extends DeepTeleop {
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
                                                 allFunc.clawopen(),
-                                                allFunc.retractSlides()
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides()
                                         )
                                 )
                                 //NUMBER 2 IS DONE
@@ -138,7 +139,8 @@ public class specAuto extends DeepTeleop {
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
                                                 allFunc.clawopen(),
-                                                allFunc.retractSlides()
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides()
                                         )
                                 )
                                 .waitSeconds(1)
