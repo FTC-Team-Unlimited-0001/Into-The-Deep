@@ -81,7 +81,7 @@ public class specAuto extends DeepTeleop {
 //                                .waitSeconds(0.2)
                                 .strafeToConstantHeading(new Vector2d(56, -30))
                                 .waitSeconds(0.1)
-                                .strafeToConstantHeading(new Vector2d(56,-51))
+                                .strafeToConstantHeading(new Vector2d(56,-51.2))
                                 .afterDisp(0,new SequentialAction(
                                                 allFunc.clawclose()
                                         )
@@ -170,7 +170,7 @@ public class specAuto extends DeepTeleop {
                                         )
                                 )
 
-                                .strafeTo(new Vector2d(-1,-30.5))
+                                .strafeTo(new Vector2d(-6.5,-30.5))
 
 
                                 .afterDisp(43.07  , new SequentialAction(
