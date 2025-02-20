@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.actions.CloseClawAction;
 import org.firstinspires.ftc.teamcode.actions.MoveDiff;
 import org.firstinspires.ftc.teamcode.actions.ExtendSlides;
 import org.firstinspires.ftc.teamcode.actions.OpenClawAction;
+import org.firstinspires.ftc.teamcode.actions.StopOnDime;
 import org.firstinspires.ftc.teamcode.actions.retractSlides;
 import org.firstinspires.ftc.teamcode.actions.stopSlides;
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
@@ -44,7 +45,9 @@ public class AllFunc {
         return new ExtendSlides(teleop,-500);
     }
     public Action specimanExtendSlides(){return new ExtendSlides(teleop,-405);}
-    public Action retractSlides(){return new retractSlides(teleop,0);}}
+    public Action retractSlides(){return new retractSlides(teleop,0);}
+    public Action stopOnDime(){return new StopOnDime(teleop);}
+    }
 
 
 

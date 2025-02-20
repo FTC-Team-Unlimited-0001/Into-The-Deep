@@ -32,9 +32,9 @@ public class specAuto extends DeepTeleop {
 
         Pose2d initialPose = new Pose2d(1, -62.625, Math.toRadians(270));
         PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
-        allFunc.clawclose().run(new TelemetryPacket());
-        allFunc.diffpick().run(new TelemetryPacket());
-        allFunc.specimanAngle().run(new TelemetryPacket());
+//        allFunc.clawclose().run(new TelemetryPacket());
+//        allFunc.diffpick().run(new TelemetryPacket());
+//        allFunc.specimanAngle().run(new TelemetryPacket());
 
 
         waitForStart();
@@ -42,16 +42,16 @@ public class specAuto extends DeepTeleop {
 
         Actions.runBlocking(new ParallelAction(
                         drive.actionBuilder(initialPose)
+                                .afterDisp(0,new ParallelAction(
+                                        allFunc.clawclose(),
+                                        allFunc.diffpick(),
+                                        allFunc.specimanAngle()
+                                ))
 
                                 .strafeTo(new Vector2d(1, -32))
 
                                 .afterDisp(30.625, new SequentialAction(
 
-                                        new ParallelAction(
-                                                allFunc.clawclose(),
-                                                allFunc.diffpick(),
-                                                allFunc.specimanAngle()
-                                        ),
 
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
@@ -65,11 +65,11 @@ public class specAuto extends DeepTeleop {
 
                                 .waitSeconds(1.3)
 
-                                .strafeToConstantHeading(new Vector2d(27, -42))
-                                .splineToConstantHeading(new Vector2d(27, -17),Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(45, -17), Math.toRadians(-90))
-                                .strafeToConstantHeading(new Vector2d(45, -50))
-                                .strafeToConstantHeading(new Vector2d(45, -17))
+                                .strafeToConstantHeading(new Vector2d(29, -44))
+                                .splineToConstantHeading(new Vector2d(29, -17),Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(43, -17), Math.toRadians(-90))
+                                .strafeToConstantHeading(new Vector2d(43, -50))
+                                .strafeToConstantHeading(new Vector2d(43, -17))
                                 .afterDisp(33, new ParallelAction(
                                                 allFunc.specimanPickUpAngle(),
                                                 allFunc.specimanDiffPickup()
@@ -79,12 +79,14 @@ public class specAuto extends DeepTeleop {
                                 .splineToConstantHeading(new Vector2d(56, -16), Math.toRadians(-90))
 
 //                                .waitSeconds(0.2)
-                                .strafeToConstantHeading(new Vector2d(56, -46.3))
+                                .strafeToConstantHeading(new Vector2d(56, -30))
+                                .waitSeconds(0.1)
+                                .strafeToConstantHeading(new Vector2d(56,-51))
                                 .afterDisp(0,new SequentialAction(
                                                 allFunc.clawclose()
                                         )
                                 )
-                                .waitSeconds(1)
+                                .waitSeconds(0.3)
 
                                 .afterDisp(0, new ParallelAction(
                                                 allFunc.diffpick(),
@@ -93,7 +95,8 @@ public class specAuto extends DeepTeleop {
                                 )
 
 
-                                .strafeTo(new Vector2d(4,-30) )
+                                .strafeToConstantHeading(new Vector2d(56,-46))
+                                .strafeTo(new Vector2d(4,-30))
 
 
 
@@ -115,7 +118,7 @@ public class specAuto extends DeepTeleop {
                                         allFunc.specimanPickUpAngle(),
                                         allFunc.specimanDiffPickup()
                                 ))
-                                .strafeTo(new Vector2d(46,-53))
+                                .strafeTo(new Vector2d(38,-53))
 
 
                                 .afterDisp(0, new SequentialAction(
@@ -123,7 +126,7 @@ public class specAuto extends DeepTeleop {
                                         )
                                 )
 
-                                .waitSeconds(1)
+                                .waitSeconds(0.2)
 
                                 .afterDisp(0, new ParallelAction(
                                                 allFunc.diffpick(),
@@ -134,7 +137,7 @@ public class specAuto extends DeepTeleop {
                                 .strafeTo(new Vector2d(-3,-30.5))
 
 
-                                .afterDisp(52.7  , new SequentialAction(
+                                .afterDisp(43.07  , new SequentialAction(
 
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
@@ -145,6 +148,43 @@ public class specAuto extends DeepTeleop {
                                 )
                                 .waitSeconds(1)
                                 //NUMBER 3 DONE
+
+                                .afterDisp(0,new ParallelAction(
+                                        allFunc.clawopen(),
+                                        allFunc.specimanPickUpAngle(),
+                                        allFunc.specimanDiffPickup()
+                                ))
+                                .strafeTo(new Vector2d(38,-53.3))
+
+
+                                .afterDisp(0, new SequentialAction(
+                                                allFunc.clawclose()
+                                        )
+                                )
+
+                                .waitSeconds(0.2)
+
+                                .afterDisp(0, new ParallelAction(
+                                                allFunc.diffpick(),
+                                                allFunc.specimanAngle()
+                                        )
+                                )
+
+                                .strafeTo(new Vector2d(-1,-30.5))
+
+
+                                .afterDisp(43.07  , new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides()
+                                        )
+                                )
+                                .waitSeconds(1)
+
+
 
 
 
