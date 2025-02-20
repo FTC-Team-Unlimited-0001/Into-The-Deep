@@ -97,14 +97,16 @@ public class DeepTeleop extends LinearOpMode {
             robot.frontLeft.setZeroPowerBehavior(brake);
             robot.backRight.setZeroPowerBehavior(brake);
             robot.backLeft.setZeroPowerBehavior(brake);
-            robot.backRight.setZeroPowerBehavior(brake);
+            robot.frontRight.setZeroPowerBehavior(brake);
 
             robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.hangleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.hangrright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            robot.frontLeft.setZeroPowerBehavior(brake);
-            robot.backRight.setZeroPowerBehavior(brake);
-            robot.backLeft.setZeroPowerBehavior(brake);
-            robot.backRight.setZeroPowerBehavior(brake);
+
+
+
 
 
             if (gamepad1.left_bumper) {
@@ -174,8 +176,9 @@ public class DeepTeleop extends LinearOpMode {
                     robot.servoAngularRight.setPosition(0);
                     robot.servoAngularLeft.setPosition(0);
 
-
                 }
+
+
 
                 if (gamepad2.b) {
                     robot.servoleft.setPosition(1.26);
