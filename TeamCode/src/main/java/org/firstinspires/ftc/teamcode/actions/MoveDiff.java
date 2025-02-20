@@ -32,6 +32,6 @@ public class MoveDiff implements Action {
         }
         teleop.robot.servoleft.setPosition(target);
         teleop.robot.servoright.setPosition(target);
-        return timer.milliseconds() < 1000;
+        return timer.milliseconds() < 200;
     }
 }

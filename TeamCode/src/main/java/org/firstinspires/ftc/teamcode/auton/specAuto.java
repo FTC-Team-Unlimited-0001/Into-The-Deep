@@ -1,29 +1,20 @@
 package org.firstinspires.ftc.teamcode.auton;
 
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
-import com.acmerobotics.roadrunner.PathBuilder;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.Trajectory;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
-import com.arcrobotics.ftclib.command.WaitCommand;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.checkerframework.checker.units.qual.A;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
-import org.firstinspires.ftc.teamcode.actions.ParallelRaceAction;
 import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
 import org.firstinspires.ftc.teamcode.util.AllFunc;
 import org.firstinspires.ftc.teamcode.util.machine;
 
 @Autonomous(name = "RightBlueFull", group = "Autonomous")
-public class RightBlueFull extends DeepTeleop {
+public class specAuto extends DeepTeleop {
     private AllFunc allFunc;
     // Reference to AllFunc
 
@@ -71,7 +62,7 @@ public class RightBlueFull extends DeepTeleop {
 )
                                 //NUMBER 1 IS DONE
 
-                                .waitSeconds(1.5)
+                                .waitSeconds(1.3)
 
                                 .strafeToConstantHeading(new Vector2d(28, -40))
                                 .splineToConstantHeading(new Vector2d(28, -17),Math.toRadians(-90))
@@ -80,16 +71,16 @@ public class RightBlueFull extends DeepTeleop {
                                 .strafeToConstantHeading(new Vector2d(45, -17))
                                 .afterDisp(33, new ParallelAction(
                                                 allFunc.specimanPickUpAngle(),
-
+                                                allFunc.specimanDiffPickup(),
                                                 allFunc.clawopen()
                                         )
                                 )
                                 .splineToConstantHeading(new Vector2d(56, -17), Math.toRadians(-90))
                                 .afterDisp(5,new SequentialAction(
-                                                allFunc.specimanDiffPickup(),
                                                 allFunc.clawclose()
                                         )
                                 )
+//                                .waitSeconds(1)
                                 .strafeToConstantHeading(new Vector2d(56, -49.4))
 
 
@@ -116,21 +107,22 @@ public class RightBlueFull extends DeepTeleop {
                                 )
                                 //NUMBER 2 IS DONE
 
-                                .waitSeconds(2)
+                                .waitSeconds(1)
 
-                                .strafeTo(new Vector2d(46,-50.5))
                                 .afterDisp(0,new ParallelAction(
                                         allFunc.clawopen(),
                                         allFunc.specimanPickUpAngle(),
                                         allFunc.specimanDiffPickup()
                                 ))
+                                .strafeTo(new Vector2d(46,-53))
 
-                                .afterDisp(44, new SequentialAction(
+
+                                .afterDisp(0, new SequentialAction(
                                                 allFunc.clawclose()
                                         )
                                 )
 
-                                .waitSeconds(1.5)
+                                .waitSeconds(1)
 
                                 .afterDisp(0, new ParallelAction(
                                                 allFunc.diffpick(),
@@ -138,10 +130,10 @@ public class RightBlueFull extends DeepTeleop {
                                         )
                                 )
 
-                                .strafeTo(new Vector2d(-3,-32.5))
+                                .strafeTo(new Vector2d(-3,-30.5))
 
 
-                                .afterDisp(50.70   , new SequentialAction(
+                                .afterDisp(52.7  , new SequentialAction(
 
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),

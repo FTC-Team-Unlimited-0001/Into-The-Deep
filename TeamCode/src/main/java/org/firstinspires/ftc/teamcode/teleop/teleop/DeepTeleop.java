@@ -137,26 +137,26 @@ public class DeepTeleop extends LinearOpMode {
                 }
 
                 if (gamepad2.dpad_up) {
-                    robot.servoAngularLeft.setPosition(.26);
-                    robot.servoAngularRight.setPosition(.26);
+                    robot.servoAngularLeft.setPosition(.7);
+                    robot.servoAngularRight.setPosition(.7);
 
                 }
 
                 if (gamepad2.dpad_down) {
-                    robot.servoAngularRight.setPosition(1);
-                    robot.servoAngularLeft.setPosition(1);
+                    robot.servoAngularRight.setPosition(0);
+                    robot.servoAngularLeft.setPosition(0);
 
                 }
                 if (gamepad2.dpad_right) {
-                    robot.servoAngularRight.setPosition(.25);
-                    robot.servoAngularLeft.setPosition(.25);
+                    robot.servoAngularRight.setPosition(.83);
+                    robot.servoAngularLeft.setPosition(.83);
 
                 }
 
 
                 if (gamepad2.dpad_left){
-                    robot.servoAngularRight.setPosition(.75);
-                    robot.servoAngularLeft.setPosition(.75);
+                    robot.servoAngularRight.setPosition(.25);
+                    robot.servoAngularLeft.setPosition(.25);
                 }
 
 
@@ -171,8 +171,8 @@ public class DeepTeleop extends LinearOpMode {
                     timer.reset();
                 }
                 if (gamepad2.right_stick_button){
-                    robot.servoAngularRight.setPosition(0);
-                    robot.servoAngularLeft.setPosition(0);
+                    robot.servoAngularRight.setPosition(1);
+                    robot.servoAngularLeft.setPosition(1);
 
 
                 }
