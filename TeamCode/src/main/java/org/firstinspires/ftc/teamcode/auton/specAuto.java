@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.teleop.teleop.DeepTeleop;
 import org.firstinspires.ftc.teamcode.util.AllFunc;
 import org.firstinspires.ftc.teamcode.util.machine;
 
-@Autonomous(name = "RightBlueFull", group = "Autonomous")
+@Autonomous(name = "Speciman Auto", group = "Autonomous")
 public class specAuto extends DeepTeleop {
     private AllFunc allFunc;
     // Reference to AllFunc
@@ -44,7 +44,7 @@ public class specAuto extends DeepTeleop {
                         drive.actionBuilder(initialPose)
                                 .afterDisp(0,new ParallelAction(
                                         allFunc.clawclose(),
-                                        allFunc.diffpick(),
+                                        allFunc.diffdeposit(),
                                         allFunc.specimanAngle()
                                 ))
 
@@ -89,7 +89,7 @@ public class specAuto extends DeepTeleop {
                                 .waitSeconds(0.3)
 
                                 .afterDisp(0, new ParallelAction(
-                                                allFunc.diffpick(),
+                                                allFunc.diffdeposit(),
                                                 allFunc.specimanAngle()
                                         )
                                 )
@@ -129,7 +129,7 @@ public class specAuto extends DeepTeleop {
                                 .waitSeconds(0.2)
 
                                 .afterDisp(0, new ParallelAction(
-                                                allFunc.diffpick(),
+                                                allFunc.diffdeposit(),
                                                 allFunc.specimanAngle()
                                         )
                                 )
@@ -165,7 +165,7 @@ public class specAuto extends DeepTeleop {
                                 .waitSeconds(0.2)
 
                                 .afterDisp(0, new ParallelAction(
-                                                allFunc.diffpick(),
+                                                allFunc.diffdeposit(),
                                                 allFunc.specimanAngle()
                                         )
                                 )
@@ -178,8 +178,11 @@ public class specAuto extends DeepTeleop {
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
                                                 allFunc.clawopen(),
+                                                new ParallelAction(
                                                 allFunc.retractSlides(),
-                                                allFunc.stopSlides()
+                                                allFunc.stopSlides(),
+                                                allFunc.diffput()
+                                                )
                                         )
                                 )
                                 .waitSeconds(1)

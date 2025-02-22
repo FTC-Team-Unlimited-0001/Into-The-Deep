@@ -17,9 +17,14 @@ public class MeepMeepTesting {
                 .build();
 
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(45, 70, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(45, 35))
-                                .strafeToConstantHeading(new Vector2d(55,50))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(45, 70, Math.toRadians(180)))
+                .strafeTo(new Vector2d(50, 70))
+                .strafeToLinearHeading(new Vector2d(50, 38), Math.toRadians(-100))
+                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+                .strafeToLinearHeading(new Vector2d(57, 38), Math.toRadians(-85))
+                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+
+
 
 
 ////                                .afterDisp(31.625, new SequentialAction(

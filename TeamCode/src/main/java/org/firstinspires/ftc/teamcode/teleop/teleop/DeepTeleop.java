@@ -124,8 +124,23 @@ public class DeepTeleop extends LinearOpMode {
 
             //Preset variables:
 
+            if (gamepad1.left_bumper) {
+                robot.frontLeft.setPower(frontLeftPower / 2);
+                robot.backLeft.setPower(backLeftPower / 2);
+                robot.frontRight.setPower(frontRightPower / 2);
+                robot.backRight.setPower(backRightPower / 2);
+            } else {
+                robot.frontLeft.setPower(frontLeftPower);
+                robot.backLeft.setPower(backLeftPower);
+                robot.frontRight.setPower(frontRightPower);
+                robot.backRight.setPower(backRightPower);
+            }
 
-            if (timer.milliseconds() > 500) {
+
+            //Preset variables:
+
+
+            if (timer.milliseconds() > 100) {
                 // Handle servo positions
                 if (gamepad2.x) {
                     robot.servoright.setPosition(3.15);// Example: fully open position
@@ -175,10 +190,7 @@ public class DeepTeleop extends LinearOpMode {
                 if (gamepad2.right_stick_button){
                     robot.servoAngularRight.setPosition(0);
                     robot.servoAngularLeft.setPosition(0);
-
                 }
-
-
 
                 if (gamepad2.b) {
                     robot.servoleft.setPosition(1.26);
