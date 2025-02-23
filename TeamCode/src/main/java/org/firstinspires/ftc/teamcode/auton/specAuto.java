@@ -170,10 +170,10 @@ public class specAuto extends DeepTeleop {
                                         )
                                 )
 
-                                .strafeTo(new Vector2d(-6.5,-30.5))
+                                .strafeTo(new Vector2d(-1,-30.5))
 
 
-                                .afterDisp(43.07  , new SequentialAction(
+                                .afterDisp(45.18   , new SequentialAction(
 
                                                 allFunc.specimanExtendSlides(),
                                                 allFunc.stopSlides(),
