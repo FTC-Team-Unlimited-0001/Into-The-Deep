@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.ttquckstart.base.visualdisplay;
 
 
+import org.firstinspires.ftc.teamcode.ttquckstart.base.CloseableSubsytem;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.display.Color;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.display.DisplayRegion;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.display.DisplayView;
+
 import java.util.HashMap;
 
-import team.techtigers.base.CloseableSubsytem;
-import team.techtigers.core.display.Color;
-import team.techtigers.core.display.DisplayRegion;
-import team.techtigers.core.display.DisplayView;
 
 /**
  * Output subsystem that controls the visual feedback display

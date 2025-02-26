@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.ttquckstart.core.paths.routeplanning;
 
 
-import team.techtigers.core.paths.geometry.Rectangle;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.geometry.Rectangle;
 
 /**
  * A node that represents a tile on the field

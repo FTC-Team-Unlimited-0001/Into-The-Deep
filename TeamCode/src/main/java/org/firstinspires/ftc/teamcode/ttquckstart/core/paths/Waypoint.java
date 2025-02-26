@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.ttquckstart.core.paths;
 
-import team.techtigers.core.paths.geometry.Point;
 
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.geometry.Point;
 
 /**
  * Represents a waypoint in a trajectory. A waypoint is a point in a trajectory that the robot must

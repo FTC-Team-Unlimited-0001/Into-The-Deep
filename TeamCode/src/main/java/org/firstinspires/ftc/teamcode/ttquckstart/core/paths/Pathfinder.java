@@ -1,14 +1,16 @@
 package org.firstinspires.ftc.teamcode.ttquckstart.core.paths;
 
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.geometry.Point;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.routeplanning.Dijkstra;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.routeplanning.FieldGraph;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.routeplanning.FieldNode;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.routeplanning.GraphBuilder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import team.techtigers.core.paths.geometry.Point;
-import team.techtigers.core.paths.routeplanning.Dijkstra;
-import team.techtigers.core.paths.routeplanning.FieldGraph;
-import team.techtigers.core.paths.routeplanning.FieldNode;
-import team.techtigers.core.paths.routeplanning.GraphBuilder;
+
 
 
 /**

@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.ttquckstart.core.paths.routeplanning;
 
 
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.geometry.Point;
+import org.firstinspires.ftc.teamcode.ttquckstart.core.paths.geometry.Rectangle;
+
 import java.util.HashMap;
 
-import team.techtigers.core.paths.geometry.Point;
-import team.techtigers.core.paths.geometry.Rectangle;
 
 /**
  * The class used to create graphs representing the game field
