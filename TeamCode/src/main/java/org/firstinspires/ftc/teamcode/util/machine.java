@@ -117,6 +117,32 @@ public class machine {
         slidesPIDFController.setPIDF(kPs, kIs, kDs, kFs);
     }
 
+    public void controlSlidesWithPIDF() {
+        updatePIDFsCoeffecients();
+        // Get the current position of both arms (average)
+        double currentPosition = (spoolleft.getCurrentPosition());
+
+        // Calculate PID output
+        double slideOutput = slidesPIDFController.calculate(currentPosition, slidesTargetPosition);
+
+        if(Math.abs(currentPosition-slidesTargetPosition) < 25){
+
+            slideOutput = 0;
+        }
+//  software limits
+
+//        if ((currentPosition >= slidelimit && slideOutput > 0) ||
+//                (currentPosition <= MIN_POSITION && slideOutput < 0)) {
+//            slideOutput = 0;  // Prevent further movement
+//        }
+        // Apply the output to both motors
+        spoolright.setPower(slideOutput);
+        spoolleft.setPower(slideOutput);
+        hangrright.setPower(slideOutput);
+        hangleft.setPower(slideOutput);
+
+    }
+
 }
 
 //Back up Straight
