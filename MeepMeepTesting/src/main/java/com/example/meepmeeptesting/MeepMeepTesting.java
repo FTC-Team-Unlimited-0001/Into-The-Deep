@@ -2,6 +2,7 @@ package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
@@ -17,102 +18,83 @@ public class MeepMeepTesting {
                 .build();
 
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(45, 70, Math.toRadians(180)))
-                .strafeTo(new Vector2d(50, 70))
-                .strafeToLinearHeading(new Vector2d(50, 38), Math.toRadians(-100))
-                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
-                .strafeToLinearHeading(new Vector2d(57, 38), Math.toRadians(-85))
-                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
+
+                .strafeTo(new Vector2d(1, -33))
+
+
+
+                .waitSeconds(1.3)
+
+                .strafeToConstantHeading(new Vector2d(29, -44))
+
+                .splineToConstantHeading(new Vector2d(39, -15), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(45, -15), Math.toRadians(-90))
+
+                .splineToConstantHeading(new Vector2d(45, -50), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(43, -17), Math.toRadians(-90))
+
+                .splineToConstantHeading(new Vector2d(55, -16), Math.toRadians(-90))
+
+//                                .waitSeconds(0.2)
+
+                .strafeToConstantHeading(new Vector2d(55,-51.2))
+
+                //   .waitSeconds(0.3)
+
+
+//                .strafeToConstantHeading(new Vector2d(54,-46))  //second is pushed into human zone
+                .splineToConstantHeading(new Vector2d(57, -15),Math.toRadians(-90) )
+                .splineToConstantHeading(new Vector2d(63, -15),Math.toRadians(-90) )
+
+                .strafeTo(new Vector2d(63, -51.2))  //3rd is pushed
+
+                .strafeTo(new Vector2d(1, -31.5))
+
+
+                .strafeTo(new Vector2d(45, -50))
+                .strafeTo(new Vector2d(4,-30) )
+
+
+
+                //NUMBER 2 IS DONE
+
+                .waitSeconds(1)
+
+
+                .strafeTo(new Vector2d(38,-53))
 
 
 
 
-////                                .afterDisp(31.625, new SequentialAction(
-////                                                new ParallelAction(
-////                                                        allFunc.diffpick(),
-////                                                        allFunc.specimanAngle()
-////                                                ),
-////
-////                                                allFunc.specimanExtendSlides(),
-////                                                allFunc.stopSlides(),
-////
-////                                                allFunc.clawopen(),
-////                                                allFunc.retractSlides()
-////                                        )
-////)
-//                //NUMBER 1 IS DONE
-//
-//                .waitSeconds(2)
-//
-//                .strafeToConstantHeading(new Vector2d(28, -40))
-//                .splineToConstantHeading(new Vector2d(28, -17),Math.toRadians(-90))
-//                .splineToConstantHeading(new Vector2d(45, -17), Math.toRadians(-90))
-//                .strafeToConstantHeading(new Vector2d(45, -50))
-//                .strafeToConstantHeading(new Vector2d(45, -17))
-//                .splineToConstantHeading(new Vector2d(56, -17), Math.toRadians(-90))
-//                .strafeToConstantHeading(new Vector2d(56, -49.4))
-//                .strafeTo(new Vector2d(4,-33) )
-//
-////                                .afterDisp(55.48, new SequentialAction(
-////                                            new ParallelAction(
-////                                                allFunc.specimanPickUpAngle(),
-////                                                allFunc.specimanDiffPickup(),
-////                                                allFunc.clawopen()
-////                                            ),
-////                                        allFunc.clawclose()
-////                                        )
-////                                )
-//
-//                .waitSeconds(1)
-//
-//
-////
-////                                .afterDisp(0, new SequentialAction(
-////                                        allFunc.diffpick(),
-////                                        allFunc.specimanAngle()
-////                                        )
-////                                )
-//
-//
-//
-////                                .afterDisp(3  , new SequentialAction(
-////
-////                                                allFunc.speciman2ExtendSlides(),
-////                                                allFunc.stopSlides(),
-////                                                allFunc.clawopen(),
-////                                                allFunc.retractSlides()
-////                                        )
-////                                )
-//                //NUMBER 2 IS DONE
-//
-//                .waitSeconds(2)
-//
-//                .strafeTo(new Vector2d(46,-52))
-////
-////                                .afterDisp(47.41, new SequentialAction(
-////                                                new ParallelAction(
-////                                                        allFunc.specimanPickUpAngle(),
-////                                                        allFunc.specimanDiffPickup(),
-////                                                        allFunc.clawopen()
-////                                                ),
-////                                                allFunc.clawclose()
-////                                        )
-////                                )
-//
-//                .waitSeconds(1.5)
-//
-////                                .afterDisp(0, new SequentialAction(
-////                                                allFunc.diffpick(),
-////                                                allFunc.specimanAngle()
-////                                        )
-////                                )
-////                                .waitSeconds(.5)
-//
-//                .strafeTo(new Vector2d(4,-33) )
+                .waitSeconds(0.2)
 
 
 
-                        .build());
+                .strafeTo(new Vector2d(-3,-30.5))
+
+
+
+                .waitSeconds(1)
+                //NUMBER 3 DONE
+
+                .strafeTo(new Vector2d(38,-53.3))
+
+
+
+
+                .waitSeconds(0.2)
+
+
+
+                .splineToConstantHeading(new Vector2d(-1,-32),Math.toRadians(-90))
+                .strafeTo(new Vector2d(-1,-31.5))
+
+
+
+
+
+                .build());
 
 
 
