@@ -41,15 +41,16 @@ public class specAutotesting extends DeepTeleop {
 
         Actions.runBlocking(new ParallelAction(
                         drive.actionBuilder(initialPose)
-                                .afterDisp(0,new ParallelAction(
-                                        allFunc.clawclose(),
+                                .afterDisp(0,new SequentialAction(
+                                       new ParallelAction( allFunc.clawclose(),
                                         allFunc.diffdeposit(),
-                                        allFunc.specimanAngle()
+                                        allFunc.specimanAngle()),
+                                        allFunc.halfExtendSlides()
                                 ))
 
-                                .strafeTo(new Vector2d(1, -32))
+                                .strafeTo(new Vector2d(1, -33))
 
-                                .afterDisp(30.625, new SequentialAction(
+                                .afterDisp(29.625, new SequentialAction(
 
 
                                                 allFunc.specimanExtendSlides(),

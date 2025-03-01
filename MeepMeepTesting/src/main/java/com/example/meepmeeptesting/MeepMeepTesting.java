@@ -45,6 +45,7 @@ public class MeepMeepTesting {
 
 //                .strafeToConstantHeading(new Vector2d(54,-46))  //second is pushed into human zone
                 .splineToConstantHeading(new Vector2d(57, -15),Math.toRadians(-90) )
+
                 .splineToConstantHeading(new Vector2d(63, -15),Math.toRadians(-90) )
 
                 .strafeTo(new Vector2d(63, -51.2))  //3rd is pushed
