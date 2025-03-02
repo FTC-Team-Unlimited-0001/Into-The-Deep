@@ -20,80 +20,89 @@ public class MeepMeepTesting {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
 
-                .strafeTo(new Vector2d(1, -33))
 
+                .strafeTo(new Vector2d(1, -32))
 
+                //NUMBER 1 IS DONE
 
-                .waitSeconds(1.3)
+                .waitSeconds(.1)
 
                 .strafeToConstantHeading(new Vector2d(29, -44))
 
-                .splineToConstantHeading(new Vector2d(39, -15), Math.toRadians(-90))
-                .splineToConstantHeading(new Vector2d(45, -15), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(32, -15), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(43.5, -15), Math.toRadians(-90))
 
-                .splineToConstantHeading(new Vector2d(45, -50), Math.toRadians(-90))
-                .splineToConstantHeading(new Vector2d(43, -17), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(45, -51), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(43, -15), Math.toRadians(-90))
 
-                .splineToConstantHeading(new Vector2d(55, -16), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(52.5, -16), Math.toRadians(-90))
 
 //                                .waitSeconds(0.2)
 
-                .strafeToConstantHeading(new Vector2d(55,-51.2))
-
-                //   .waitSeconds(0.3)
+                .strafeToConstantHeading(new Vector2d(52.5,-51.2))
 
 
-//                .strafeToConstantHeading(new Vector2d(54,-46))  //second is pushed into human zone
-                .splineToConstantHeading(new Vector2d(57, -15),Math.toRadians(-90) )
-
+                .splineToConstantHeading(new Vector2d(55, -15),Math.toRadians(-90) )
                 .splineToConstantHeading(new Vector2d(63, -15),Math.toRadians(-90) )
 
-                .strafeTo(new Vector2d(63, -51.2))  //3rd is pushed
-
-                .strafeTo(new Vector2d(1, -31.5))
-
-                        .strafeTo(new Vector2d(1,-40))
-                .splineToConstantHeading(new Vector2d(45, -51),Math.toRadians(-90))
-                     //   .strafeTo(new Vector2d(45,-50))
-                .strafeTo(new Vector2d(4,-30) )
+                .strafeTo(new Vector2d(59, -51.5))
 
 
-
-                //NUMBER 2 IS DONE
-
-                .waitSeconds(1)
+                .waitSeconds(.1)
+                .strafeTo(new Vector2d(59, -51.2))
 
 
-                .strafeTo(new Vector2d(38,-53))
+                .waitSeconds(.1)
+                .strafeTo(new Vector2d(2.9, -31.5))
+
+
+//2 is done
+                .strafeTo(new Vector2d(2.9, -31.5))
+                .waitSeconds(.1)
+
+
+                .strafeTo(new Vector2d(39, -53.2))
 
 
 
 
-                .waitSeconds(0.2)
 
+
+
+
+                .strafeTo(new Vector2d(39, -53))
+                .waitSeconds(0.1)
 
 
                 .strafeTo(new Vector2d(-3,-30.5))
 
 
 
-                .waitSeconds(1)
-                //NUMBER 3 DONE
-
-                .strafeTo(new Vector2d(38,-53.3))
-
+                //3  is done
+                .strafeTo(new Vector2d(-3, -31.5))
+                .waitSeconds(.1)
 
 
-
-                .waitSeconds(0.2)
+                .strafeTo(new Vector2d(39, -53.2))
 
 
 
-                .splineToConstantHeading(new Vector2d(-1,-32),Math.toRadians(-90))
-                .strafeTo(new Vector2d(-1,-31.5))
+                .strafeTo(new Vector2d(39, -53))
 
 
+                .strafeTo(new Vector2d(4.1 ,-30.5))
 
+                //4 is done
+                .strafeTo(new Vector2d(4.1, -30.5))
+                .waitSeconds(.1)
+
+                .strafeTo(new Vector2d(39, -53))
+
+
+                .strafeTo(new Vector2d(39, -53))
+
+
+                .strafeTo(new Vector2d(5.6,-30))
 
 
                 .build());
