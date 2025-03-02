@@ -52,8 +52,9 @@ public class MeepMeepTesting {
 
                 .strafeTo(new Vector2d(1, -31.5))
 
-
-                .strafeTo(new Vector2d(45, -50))
+                        .strafeTo(new Vector2d(1,-40))
+                .splineToConstantHeading(new Vector2d(45, -51),Math.toRadians(-90))
+                     //   .strafeTo(new Vector2d(45,-50))
                 .strafeTo(new Vector2d(4,-30) )
 
 

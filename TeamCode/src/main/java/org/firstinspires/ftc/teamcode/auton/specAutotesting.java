@@ -41,16 +41,20 @@ public class specAutotesting extends DeepTeleop {
 
         Actions.runBlocking(new ParallelAction(
                         drive.actionBuilder(initialPose)
+
                                 .afterDisp(0,new SequentialAction(
                                        new ParallelAction( allFunc.clawclose(),
                                         allFunc.diffdeposit(),
                                         allFunc.specimanAngle()),
-                                        allFunc.halfExtendSlides()
+
+                                        allFunc.halfExtendSlides(),
+                                        allFunc.stopSlides()
+
                                 ))
 
-                                .strafeTo(new Vector2d(1, -33))
+                                .strafeTo(new Vector2d(1, -32))
 
-                                .afterDisp(29.625, new SequentialAction(
+                                .afterDisp(30.625, new SequentialAction(
 
 
                                                 allFunc.specimanExtendSlides(),
@@ -63,21 +67,21 @@ public class specAutotesting extends DeepTeleop {
 )
                                 //NUMBER 1 IS DONE
 
-                                .waitSeconds(1.3)
+                                .waitSeconds(.1)
 
                                 .strafeToConstantHeading(new Vector2d(29, -44))
 
-                                .splineToConstantHeading(new Vector2d(38, -15), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(45, -15), Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(35, -15), Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(43.5, -15), Math.toRadians(-90))
 
-                                .splineToConstantHeading(new Vector2d(45, -50), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(43, -17), Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(45, -51), Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(43, -15), Math.toRadians(-90))
 
-                                .splineToConstantHeading(new Vector2d(55, -16), Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(52.5, -16), Math.toRadians(-90))
 
 //                                .waitSeconds(0.2)
 
-                                .strafeToConstantHeading(new Vector2d(55,-51.2))
+                                .strafeToConstantHeading(new Vector2d(52.5,-51.2))
 
                                 .afterDisp(35.2, new ParallelAction(
                                                 allFunc.specimanPickUpAngle(),
@@ -88,23 +92,27 @@ public class specAutotesting extends DeepTeleop {
                                 .splineToConstantHeading(new Vector2d(57, -15),Math.toRadians(-90) )
                                 .splineToConstantHeading(new Vector2d(63, -15),Math.toRadians(-90) )
 
-                                .strafeTo(new Vector2d(63, -51.2))
+                                .strafeTo(new Vector2d(63, -51.5))
 
                                  .afterDisp(0,new ParallelAction(
                                                 allFunc.clawclose()
                                         )
                                 )
                                   .waitSeconds(.1)
-                                .strafeTo(new Vector2d(63, -51.2))
+                                .strafeTo(new Vector2d(64, -51.2))
 
                                 .afterDisp(0, new ParallelAction(
                                                 allFunc.diffdeposit(),
-                                                allFunc.specimanAngle()
+                                                allFunc.specimanAngle(),
+                                        new SequentialAction(
+                                        allFunc.halfExtendSlides(),
+                                        allFunc.stopSlides()
+                                        )
                                         )
                                 )
 
-                                .waitSeconds(1.1)
-                                .strafeTo(new Vector2d(2, -31.5))
+                                .waitSeconds(.1)
+                                .strafeTo(new Vector2d(2.9, -31.5))
 
                                 .afterDisp( 0  , new SequentialAction(
 
@@ -115,46 +123,138 @@ public class specAutotesting extends DeepTeleop {
                                                 allFunc.stopSlides()
                                         )
                                 )
-                                .strafeTo(new Vector2d(45, -50))
-
-                                //NUMBER 2 IS DONE
+//2 is done
+                                .strafeTo(new Vector2d(2.9, -31.5))
+                                .waitSeconds(.1)
                                 .afterDisp(0,new ParallelAction(
                                         allFunc.clawopen(),
                                         allFunc.specimanPickUpAngle(),
                                         allFunc.specimanDiffPickup()
                                 ))
+
+                               .strafeTo(new Vector2d(39, -53.2))
+
+
+
+
+
 //
              //
 
 
 
 
-//                                .afterDisp(46.81, new SequentialAction(
-//                                                allFunc.clawclose()
-//                                        )
-//                                )
+                               .afterDisp(0, new SequentialAction(
+                                                allFunc.clawclose()
+                                        )
+                                )
 
-//                                .waitSeconds(0.2)
-//
-//                                .afterDisp(0, new ParallelAction(
-//                                                allFunc.diffdeposit(),
-//                                                allFunc.specimanAngle()
-//                                        )
-//                                )
-//
-//                                .strafeTo(new Vector2d(-3,-30.5))
-//
-//
-//                                .afterDisp(43.07  , new SequentialAction(
-//
-//                                                allFunc.specimanExtendSlides(),
-//                                                allFunc.stopSlides(),
-//                                                allFunc.clawopen(),
-//                                                allFunc.retractSlides(),
-//                                                allFunc.stopSlides()
-//                                        )
-//                                )
-//                                .waitSeconds(1)
+                            .strafeTo(new Vector2d(39, -53))
+                                .waitSeconds(0.1)
+                                .afterDisp(0, new ParallelAction(
+                                                allFunc.diffdeposit(),
+                                                allFunc.specimanAngle(),
+                                 new SequentialAction(
+                                 allFunc.halfExtendSlides(),
+                                allFunc.stopSlides()
+        )
+
+                                        )
+                                )
+
+                                .strafeTo(new Vector2d(-3,-30.5))
+
+
+                                .afterDisp( 0 , new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides()
+                                        )
+                                )
+                                //3  is done
+                                .strafeTo(new Vector2d(-3,-30.5))
+                                .waitSeconds(.4)
+                                .afterDisp(0,new ParallelAction(
+                                        allFunc.clawopen(),
+                                        allFunc.specimanPickUpAngle(),
+                                        allFunc.specimanDiffPickup()
+                                ))
+                                .strafeTo(new Vector2d(39, -53))
+                                .waitSeconds(.4 )
+
+
+
+
+                                .afterDisp(0, new SequentialAction(
+                                                allFunc.clawclose()
+                                        )
+                                )
+
+                                 .strafeTo(new Vector2d(39, -53))
+                                .afterDisp(2, new ParallelAction(
+                                                allFunc.diffdeposit(),
+                                                allFunc.specimanAngle(),
+                                                new SequentialAction(
+                                                        allFunc.halfExtendSlides(),
+                                                        allFunc.stopSlides()
+                                                )
+                                        )
+                                )
+
+                             .strafeTo(new Vector2d(4.1 ,-30.5))
+                                .afterDisp( 0 , new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides()
+                                        )
+                                )
+                                .strafeTo(new Vector2d(39, -53))
+
+
+                                .afterDisp(0,new ParallelAction(
+                                        allFunc.clawopen(),
+                                        allFunc.specimanPickUpAngle(),
+                                        allFunc.specimanDiffPickup()
+                                ))
+                                .strafeTo(new Vector2d(39, -52.8))
+
+                                .waitSeconds(.2)
+
+
+                                .afterDisp(0, new SequentialAction(
+                                                allFunc.clawclose()
+                                        )
+                                )
+                                .strafeTo(new Vector2d(39, -53))
+                                .afterDisp(.5, new ParallelAction(
+                                                allFunc.diffdeposit(),
+                                                allFunc.specimanAngle(),
+                                                new SequentialAction(
+                                                        allFunc.halfExtendSlides(),
+                                                        allFunc.stopSlides()
+                                                )
+                                        )
+                                )
+
+                                .strafeTo(new Vector2d(5.6,-30))
+                                .afterDisp( 0 , new SequentialAction(
+
+                                                allFunc.specimanExtendSlides(),
+                                                allFunc.stopSlides(),
+                                                allFunc.clawopen(),
+                                                allFunc.retractSlides(),
+                                                allFunc.stopSlides(),
+                                        allFunc.specimanDiffPickup()
+                                        )
+                                )
+
+ //                                .waitSeconds(1)
 //                                //NUMBER 3 DONE
 //
 //                                .afterDisp(0,new ParallelAction(
@@ -200,80 +300,80 @@ public class specAutotesting extends DeepTeleop {
 
 
 
-                                .strafeTo(new Vector2d(1, -33))
-
-
-
-                                .waitSeconds(1.3)
-
-                                .strafeToConstantHeading(new Vector2d(29, -44))
-
-                                .splineToConstantHeading(new Vector2d(39, -15), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(45, -15), Math.toRadians(-90))
-
-                                .splineToConstantHeading(new Vector2d(45, -50), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(43, -17), Math.toRadians(-90))
-
-                                .splineToConstantHeading(new Vector2d(55, -16), Math.toRadians(-90))
-
+//                                .strafeTo(new Vector2d(1, -33))
+//
+//
+//
+//                                .waitSeconds(1.3)
+//
+//                                .strafeToConstantHeading(new Vector2d(29, -44))
+//
+//                                .splineToConstantHeading(new Vector2d(39, -15), Math.toRadians(-90))
+//                                .splineToConstantHeading(new Vector2d(45, -15), Math.toRadians(-90))
+//
+//                                .splineToConstantHeading(new Vector2d(45, -50), Math.toRadians(-90))
+//                                .splineToConstantHeading(new Vector2d(43, -17), Math.toRadians(-90))
+//
+//                                .splineToConstantHeading(new Vector2d(55, -16), Math.toRadians(-90))
+//
+////                                .waitSeconds(0.2)
+//
+//                                .strafeToConstantHeading(new Vector2d(55,-51.2))
+//
+//                             //   .waitSeconds(0.3)
+//
+//
+////                .strafeToConstantHeading(new Vector2d(54,-46))  //second is pushed into human zone
+//                                .splineToConstantHeading(new Vector2d(57, -15),Math.toRadians(-90) )
+//                                .splineToConstantHeading(new Vector2d(63, -15),Math.toRadians(-90) )
+//
+//                                .strafeTo(new Vector2d(63, -51.2))  //3rd is pushed
+//                              //  .splineToConstantHeading(new Vector2d(1, -40),Math.toRadians(-90) )
+//
+//                                .strafeTo(new Vector2d(1, -31.5))
+//
+//
+//
+//                                .strafeTo(new Vector2d(45, -50))
+//                                .splineToConstantHeading(new Vector2d(4,-30),Math.toRadians(-90))
+//
+//
+//
+//                                //NUMBER 2 IS DONE
+//
+//                                .waitSeconds(1)
+//
+//
+//                                .strafeTo(new Vector2d(38,-53))
+//
+//
+//
+//
 //                                .waitSeconds(0.2)
-
-                                .strafeToConstantHeading(new Vector2d(55,-51.2))
-
-                             //   .waitSeconds(0.3)
-
-
-//                .strafeToConstantHeading(new Vector2d(54,-46))  //second is pushed into human zone
-                                .splineToConstantHeading(new Vector2d(57, -15),Math.toRadians(-90) )
-                                .splineToConstantHeading(new Vector2d(63, -15),Math.toRadians(-90) )
-
-                                .strafeTo(new Vector2d(63, -51.2))  //3rd is pushed
-                              //  .splineToConstantHeading(new Vector2d(1, -40),Math.toRadians(-90) )
-
-                                .strafeTo(new Vector2d(1, -31.5))
-
-
-
-                                .strafeTo(new Vector2d(45, -50))
-                                .splineToConstantHeading(new Vector2d(4,-30),Math.toRadians(-90))
-
-
-
-                                //NUMBER 2 IS DONE
-
-                                .waitSeconds(1)
-
-
-                                .strafeTo(new Vector2d(38,-53))
-
-
-
-
-                                .waitSeconds(0.2)
-
-
-
-                                .strafeTo(new Vector2d(-3,-30.5))
-
-
-
-                                .waitSeconds(1)
-                                //NUMBER 3 DONE
-
-                                .strafeTo(new Vector2d(38,-53.3))
-
-
-
-
-                                .waitSeconds(0.2)
-
-
-
-                                .splineToConstantHeading(new Vector2d(-1,-32),Math.toRadians(-90))
-                                .strafeTo(new Vector2d(-1,-31.5))
-
-
-
+//
+//
+//
+//                                .strafeTo(new Vector2d(-3,-30.5))
+//
+//
+//
+//                                .waitSeconds(1)
+//                                //NUMBER 3 DONE
+//
+//                                .strafeTo(new Vector2d(38,-53.3))
+//
+//
+//
+//
+//                                .waitSeconds(0.2)
+//
+//
+//
+//                                .splineToConstantHeading(new Vector2d(-1,-32),Math.toRadians(-90))
+//                                .strafeTo(new Vector2d(-1,-31.5))
+//
+//
+//
 
 
 
