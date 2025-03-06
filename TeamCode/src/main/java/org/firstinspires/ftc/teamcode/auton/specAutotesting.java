@@ -70,13 +70,14 @@ public class specAutotesting extends DeepTeleop {
                                 .waitSeconds(.1)
 
 
-                                .strafeToConstantHeading(new Vector2d(15, -40))
-                                .splineToConstantHeading(new Vector2d(40, -17), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(40, -51), Math.toRadians(-90))
-                                .strafeTo(new Vector2d(52.5, -15) )
+                                .strafeToConstantHeading(new Vector2d(22, -40))
+                                .splineToConstantHeading(new Vector2d(38, -14), Math.toRadians(-90))
+                                .strafeTo(new Vector2d(43, -16) )
+                                 .strafeTo(new Vector2d(43, -51) )
+                                .splineToConstantHeading(new Vector2d(52.5, -15),Math.toRadians(-90) )
+                                  .splineToConstantHeading(new Vector2d(52.5,-51.2),Math.toRadians(-90))
 
 
-                                 .splineToConstantHeading(new Vector2d(52.5,-51.2),Math.toRadians(-90))
 
                                 .afterDisp(35.2, new ParallelAction(
                                                 allFunc.specimanPickUpAngle(),
@@ -85,7 +86,7 @@ public class specAutotesting extends DeepTeleop {
                                         )
                                 )
                                 .strafeTo(new Vector2d(63, -15) )
-                                 .splineToConstantHeading(new Vector2d(63, -49.8),Math.toRadians(-90))
+                                 .splineToConstantHeading(new Vector2d(63, -51),Math.toRadians(-90))
 
                                  .afterDisp(0,new ParallelAction(
                                                 allFunc.clawclose()
