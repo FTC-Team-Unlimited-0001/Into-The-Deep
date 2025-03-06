@@ -69,19 +69,14 @@ public class specAutotesting extends DeepTeleop {
 
                                 .waitSeconds(.1)
 
-                                .strafeToConstantHeading(new Vector2d(29, -44))
 
-                                .splineToConstantHeading(new Vector2d(32, -15), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(43.5, -15), Math.toRadians(-90))
+                                .strafeToConstantHeading(new Vector2d(15, -40))
+                                .splineToConstantHeading(new Vector2d(40, -17), Math.toRadians(-90))
+                                .splineToConstantHeading(new Vector2d(40, -51), Math.toRadians(-90))
+                                .strafeTo(new Vector2d(52.5, -15) )
 
-                                .splineToConstantHeading(new Vector2d(45, -51), Math.toRadians(-90))
-                                .splineToConstantHeading(new Vector2d(43, -15), Math.toRadians(-90))
 
-                                .splineToConstantHeading(new Vector2d(52.5, -16), Math.toRadians(-90))
-
-//                                .waitSeconds(0.2)
-
-                                .strafeToConstantHeading(new Vector2d(52.5,-51.2))
+                                 .splineToConstantHeading(new Vector2d(52.5,-51.2),Math.toRadians(-90))
 
                                 .afterDisp(35.2, new ParallelAction(
                                                 allFunc.specimanPickUpAngle(),
@@ -89,30 +84,29 @@ public class specAutotesting extends DeepTeleop {
 
                                         )
                                 )
-                                .splineToConstantHeading(new Vector2d(55, -15),Math.toRadians(-90) )
-                                .splineToConstantHeading(new Vector2d(59, -15),Math.toRadians(-90) )
-
-                                .strafeTo(new Vector2d(59, -51.5))
+                                .strafeTo(new Vector2d(63, -15) )
+                                 .splineToConstantHeading(new Vector2d(63, -49.8),Math.toRadians(-90))
 
                                  .afterDisp(0,new ParallelAction(
                                                 allFunc.clawclose()
                                         )
                                 )
                                   .waitSeconds(.1)
-                                .strafeTo(new Vector2d(64, -51.2))
+                                .strafeTo(new Vector2d(63,-52))
 
-                                .afterDisp(0, new ParallelAction(
+                                .afterDisp(.1, new ParallelAction(
                                                 allFunc.diffdeposit(),
                                                 allFunc.specimanAngle(),
                                         new SequentialAction(
                                         allFunc.halfExtendSlides(),
                                         allFunc.stopSlides()
-                                        )
-                                        )
+                                        ))
+
                                 )
 
+                                .waitSeconds(.5)
+                                .strafeTo(new Vector2d(3.4, -31))
                                 .waitSeconds(.1)
-                                .strafeTo(new Vector2d(2.9, -31.5))
 
                                 .afterDisp( 0  , new SequentialAction(
 
@@ -124,9 +118,9 @@ public class specAutotesting extends DeepTeleop {
                                         )
                                 )
 //2 is done
-                                .strafeTo(new Vector2d(2.9, -31.5))
+                                .strafeTo(new Vector2d(3.4, -31))
                                 .waitSeconds(.1)
-                                .afterDisp(0,new ParallelAction(
+                                .afterDisp(1,new ParallelAction(
                                         allFunc.clawopen(),
                                         allFunc.specimanPickUpAngle(),
                                         allFunc.specimanDiffPickup()
@@ -150,9 +144,9 @@ public class specAutotesting extends DeepTeleop {
                                 )
 
                             .strafeTo(new Vector2d(39, -53))
-                                .waitSeconds(0.1)
+                                .waitSeconds(0.3)
                                 .afterDisp(0, new ParallelAction(
-                                                allFunc.diffdeposit(),
+                                        allFunc.diffdeposit(),
                                                 allFunc.specimanAngle(),
                                  new SequentialAction(
                                  allFunc.halfExtendSlides(),
@@ -162,7 +156,7 @@ public class specAutotesting extends DeepTeleop {
                                         )
                                 )
 
-                                .strafeTo(new Vector2d(-3,-30.5))
+                                .strafeTo(new Vector2d(.6,-31))
 
 
                                 .afterDisp( 0 , new SequentialAction(
@@ -174,10 +168,11 @@ public class specAutotesting extends DeepTeleop {
                                                 allFunc.stopSlides()
                                         )
                                 )
-                                //3  is done
-                                .strafeTo(new Vector2d(-3, -31.5))
+             //3  is done
+                                .strafeTo(new Vector2d(.6, -31))
                                 .waitSeconds(.1)
-                                .afterDisp(0,new ParallelAction(
+
+                                .afterDisp(1,new ParallelAction(
                                         allFunc.clawopen(),
                                         allFunc.specimanPickUpAngle(),
                                         allFunc.specimanDiffPickup()
@@ -193,17 +188,16 @@ public class specAutotesting extends DeepTeleop {
                                 )
 
                                  .strafeTo(new Vector2d(39, -53))
-                                .afterDisp(2, new ParallelAction(
+                                .afterDisp(.5, new ParallelAction(
                                                 allFunc.diffdeposit(),
                                                 allFunc.specimanAngle(),
                                                 new SequentialAction(
                                                         allFunc.halfExtendSlides(),
                                                         allFunc.stopSlides()
-                                                )
-                                        )
+                                                ))
                                 )
 
-                             .strafeTo(new Vector2d(4.1 ,-30.5))
+                             .strafeTo(new Vector2d(4.8 ,-30))
                                 .afterDisp( 0 , new SequentialAction(
 
                                                 allFunc.specimanExtendSlides(),
@@ -214,8 +208,8 @@ public class specAutotesting extends DeepTeleop {
                                         )
                                 )
                                 //4 is done
-                                .strafeTo(new Vector2d(4.1, -30.5))
-                                .waitSeconds(.1)
+                                .strafeTo(new Vector2d(4.8, -30))
+                                .waitSeconds(.2)
                                 .afterDisp(0,new ParallelAction(
                                         allFunc.clawopen(),
                                         allFunc.specimanPickUpAngle(),
@@ -240,7 +234,7 @@ public class specAutotesting extends DeepTeleop {
                                         )
                                 )
 
-                                .strafeTo(new Vector2d(5.6,-30))
+                                .strafeTo(new Vector2d(6.3,-30))
                                 .afterDisp( 0 , new SequentialAction(
 
                                                 allFunc.specimanExtendSlides(),
@@ -248,10 +242,11 @@ public class specAutotesting extends DeepTeleop {
                                                 allFunc.clawopen(),
                                                 allFunc.retractSlides(),
                                                 allFunc.stopSlides(),
-                                        allFunc.specimanDiffPickup()
+                                        allFunc.diffput()
                                         )
                                 )
 
+                                .strafeTo(new Vector2d(44,-50) )
                                 //5 is done
 
  //                                .waitSeconds(1)

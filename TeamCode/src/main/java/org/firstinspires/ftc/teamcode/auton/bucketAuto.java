@@ -42,9 +42,8 @@ public class bucketAuto extends DeepTeleop {
                                         allFunc.clawclose(),
                                         allFunc.specimanAngle()
                                 ))
-                                .strafeTo(new Vector2d(50, 70))
-                                .waitSeconds(1)
-                                .afterDisp(0, new SequentialAction(
+                                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+                                .afterDisp(18.36, new SequentialAction(
                                         allFunc.bucketExtendSlides(),
                                         allFunc.stopSlides(),
                                         allFunc.diffdeposit(),
@@ -53,7 +52,6 @@ public class bucketAuto extends DeepTeleop {
                                         allFunc.retractSlides(),
                                         allFunc.stopSlides()
                                 ))
-                                .waitSeconds(2)
 //                                .strafeToLinearHeading(new Vector2d(50, 38), Math.toRadians(-100))
 //                                .afterDisp(32, new SequentialAction(
 //                                        allFunc.angleDown(),

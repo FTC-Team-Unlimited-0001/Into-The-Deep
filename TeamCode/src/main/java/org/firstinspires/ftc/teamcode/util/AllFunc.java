@@ -22,7 +22,7 @@ public class AllFunc {
     }
     public Action bucketAngleUp(){return new AngleLinkages(teleop, 0);}
     public Action angleDown(){return new AngleLinkages(teleop, 1);}
-    public Action specimanAngle(){return new AngleLinkages(teleop,.19);}
+    public Action specimanAngle(){return new AngleLinkages(teleop,.17);}
     public Action specimanPickUpAngle(){return new AngleLinkages(teleop,.75);}
     public Action specimanDiffPickup() {return new MoveDiff(teleop,.3);}
 
@@ -39,9 +39,9 @@ public class AllFunc {
         return new MoveDiff(teleop, .63);
     }
     public Action stopSlides(){return new stopSlides(teleop);}
-    public Action bucketExtendSlides(){return new ExtendSlides(teleop,-900);
+    public Action bucketExtendSlides(){return new ExtendSlides(teleop,-950);
     }
-    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-405);}
+    public Action specimanExtendSlides(){return new ExtendSlides(teleop,-420);}
     public Action halfExtendSlides(){return new ExtendSlides(teleop,-250);}
 
     public Action retractSlides(){return new retractSlides(teleop,0);}
