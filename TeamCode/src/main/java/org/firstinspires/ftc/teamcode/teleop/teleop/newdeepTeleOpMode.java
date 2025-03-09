@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.teleop.teleop;
 
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
@@ -13,6 +15,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Vision.Limelight;
 import org.firstinspires.ftc.teamcode.commands.BucketDropCommandGroup;
+import org.firstinspires.ftc.teamcode.commands.DiffMoveCommandGroup;
 import org.firstinspires.ftc.teamcode.ttquckstart.base.BaseOpMode;
 import org.firstinspires.ftc.teamcode.util.machine;
 
@@ -54,9 +57,10 @@ public class newdeepTeleOpMode extends BaseOpMode {
         robot = new machine(hardwareMap);
         GamepadEx driverGamepad = new GamepadEx(gamepad1);
         GamepadEx manipulatorGamepad = new GamepadEx(gamepad2);
-
+        DiffMoveCommandGroup diffMoveCommandGroup = new DiffMoveCommandGroup(robot);
+        manipulatorGamepad.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON).whenPressed(diffMoveCommandGroup);
         BucketDropCommandGroup example = new BucketDropCommandGroup(robot);
-        driverGamepad.getGamepadButton(GamepadKeys.Button.A).whenPressed(example);
+      //  driverGamepad.getGamepadButton(GamepadKeys.Button.A).whenPressed(example);
     }
 
     @Override
@@ -91,44 +95,53 @@ public class newdeepTeleOpMode extends BaseOpMode {
         robot.hangrright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        if (gamepad1.left_bumper) {
-            robot.frontLeft.setPower(frontLeftPower / 2);
-            robot.backLeft.setPower(backLeftPower / 2);
-            robot.frontRight.setPower(frontRightPower / 2);
-            robot.backRight.setPower(backRightPower / 2);
-        } else {
-            robot.frontLeft.setPower(frontLeftPower);
-            robot.backLeft.setPower(backLeftPower);
-            robot.frontRight.setPower(frontRightPower);
-            robot.backRight.setPower(backRightPower);
-        }
-
-
-        //Preset variables:
-
-        if (gamepad1.left_bumper) {
-            robot.frontLeft.setPower(frontLeftPower / 2);
-            robot.backLeft.setPower(backLeftPower / 2);
-            robot.frontRight.setPower(frontRightPower / 2);
-            robot.backRight.setPower(backRightPower / 2);
-        } else {
-            robot.frontLeft.setPower(frontLeftPower);
-            robot.backLeft.setPower(backLeftPower);
-            robot.frontRight.setPower(frontRightPower);
-            robot.backRight.setPower(backRightPower);
-        }
-
-
-        //Preset variables:
-
         double open = 0.35;
         double close = 0;
+
+
+
+
+        if (gamepad1.left_bumper) {
+            robot.frontLeft.setPower(frontLeftPower / 2);
+            robot.backLeft.setPower(backLeftPower / 2);
+            robot.frontRight.setPower(frontRightPower / 2);
+            robot.backRight.setPower(backRightPower / 2);
+        } else {
+            robot.frontLeft.setPower(frontLeftPower);
+            robot.backLeft.setPower(backLeftPower);
+            robot.frontRight.setPower(frontRightPower);
+            robot.backRight.setPower(backRightPower);
+        }
+
+
+        //Preset variables:
+
+        if (gamepad1.left_bumper) {
+            robot.frontLeft.setPower(frontLeftPower / 2);
+            robot.backLeft.setPower(backLeftPower / 2);
+            robot.frontRight.setPower(frontRightPower / 2);
+            robot.backRight.setPower(backRightPower / 2);
+        } else {
+            robot.frontLeft.setPower(frontLeftPower);
+            robot.backLeft.setPower(backLeftPower);
+            robot.frontRight.setPower(frontRightPower);
+            robot.backRight.setPower(backRightPower);
+        }
+
+
+        //Preset variables:
+
 
         if (timer.milliseconds() > 100) {
             // Handle servo positions
             if (gamepad2.x) {
                 robot.servoright.setPosition(3.15);// Example: fully open position
                 robot.servoleft.setPosition(1.44);
+                timer.reset();
+            }
+            if (gamepad2.ps) {
+                robot.servoAngularRight.setPosition(.4);// Example: fully open position
+                robot.servoAngularLeft.setPosition(.4);
                 timer.reset();
             }
             if (gamepad2.left_bumper) {
@@ -149,8 +162,8 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
             }
             if (gamepad2.dpad_right) {
-                robot.servoAngularRight.setPosition(.19);
-                robot.servoAngularLeft.setPosition(.19);
+                robot.servoAngularRight.setPosition(.18);
+                robot.servoAngularLeft.setPosition(.18);
 
             }
 
@@ -180,30 +193,53 @@ public class newdeepTeleOpMode extends BaseOpMode {
                 robot.servoleft.setPosition(1.26);
                 robot.servoright.setPosition(.22);
             }
+            if (gamepad2.a) {
+                robot.servopinch.setPosition(open);
+
+            }
+            if (gamepad2.y) {
+                robot.servopinch.setPosition(close);
+                 ;
+            }
         }
-        if (gamepad2.y) {
-            robot.servopinch.setPosition(open);  // Example: partially open position
-        } else if (gamepad2.a) {
-            robot.servopinch.setPosition(close);   // Fully closed position
-        }
+
         //VERY USEFUL FOR FINDING SERVO POSTION DONT DELTE
-        if (gamepad2.back) {
+        if (gamepad2.back){for (double pos = 0.0; pos <= 1.0; pos += 0.05) {  // Adjust max range if needed
+            robot.servoAngularLeft.setPosition(pos);
+            robot.servoAngularRight.setPosition(pos);
+            telemetry.addData("Servo Position", pos);
+            telemetry.update();
+            sleep(1000); } // Wait to observe}
+        }
+        if (gamepad1.ps) {
             for (double pos = 0.0; pos <= 1.0; pos += 0.05) {  // Adjust max range if needed
-                robot.servoAngularLeft.setPosition(pos);
-                robot.servoAngularRight.setPosition(pos);
-                telemetry.addData("Servo Position", pos);
+                robot.servoleft.setPosition(pos);         // Left servo moves from 0 to 1
+                robot.servoright.setPosition(1.0 - pos);  // Right servo moves from 1 to 0
+
+                telemetry.addData("Left Servo Position", pos);
+                telemetry.addData("Right Servo Position", 1.0 - pos);
                 telemetry.update();
-                sleep(1000);
-            } // Wait to observe}
+
+                sleep(1000); // Wait to observe
+            }
         }
 
 
-      //  slidecontrol();
 
-        // Retrieve results from the pipeline
+        // Handle spool power for lifting mechanism
+
+
+//limelight.getPythonOutput();
+
+        //     limelight.getAdjustedLateralDistance();
+
+        //  limelight.getDistanceToTarget();
+
+slidecontrol();
+        // controlArmsWithPIDF();
+
 
     }
-
     public void slidecontrol() {
         // Get the trigger values
         double extendPower = gamepad1.right_trigger;  // Extending slides
@@ -239,8 +275,7 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
 
 
-
-
+        // Retrieve results from the pipeline
 
 
 

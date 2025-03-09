@@ -147,6 +147,11 @@ public class DeepTeleop extends LinearOpMode {
                     robot.servoleft.setPosition(1.44);
                     timer.reset();
                 }
+                if (gamepad2.ps) {
+                    robot.servoAngularRight.setPosition(.4);// Example: fully open position
+                    robot.servoAngularLeft.setPosition(.4);
+                    timer.reset();
+                }
                 if (gamepad2.left_bumper) {
                     robot.servoleft.setPosition(0);
                     robot.servoright.setPosition(0);
@@ -165,8 +170,8 @@ public class DeepTeleop extends LinearOpMode {
 
                 }
                 if (gamepad2.dpad_right) {
-                    robot.servoAngularRight.setPosition(.19);
-                    robot.servoAngularLeft.setPosition(.19);
+                    robot.servoAngularRight.setPosition(.18);
+                    robot.servoAngularLeft.setPosition(.18);
 
                 }
 
@@ -197,11 +202,20 @@ public class DeepTeleop extends LinearOpMode {
                     robot.servoright.setPosition(.22);
                 }
             }
-            if (gamepad2.y) {
+            if (gamepad2.a) {
                 robot.servopinch.setPosition(open);  // Example: partially open position
-            } else if (gamepad2.a) {
+            } else if (gamepad2.y) {
                 robot.servopinch.setPosition(close);   // Fully closed position
             }
+            boolean pinchOpen = false; // Tracks if the servo is open
+
+            if (gamepad2.a) {
+                pinchOpen = !pinchOpen; // Toggle state
+                robot.servopinch.setPosition(pinchOpen ? open : close);
+
+                while (gamepad2.a); // Wait until the button is released to prevent rapid toggling
+            }
+
             //VERY USEFUL FOR FINDING SERVO POSTION DONT DELTE
             if (gamepad2.back){for (double pos = 0.0; pos <= 1.0; pos += 0.05) {  // Adjust max range if needed
                 robot.servoAngularLeft.setPosition(pos);

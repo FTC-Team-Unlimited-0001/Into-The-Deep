@@ -12,8 +12,11 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.teamcode.GoBildaPinpointDriver;
+import org.firstinspires.ftc.teamcode.R;
 
 @Config
 public class machine {
@@ -35,7 +38,7 @@ public class machine {
     public Servo servopinch;
    public Servo servoAngularRight;
     public Servo servoAngularLeft;
-
+public VoltageSensor voltageSensor;
     public PIDFController armPIDFController;
     public PIDFController slidesPIDFController;
     public static double armTargetPosition;
@@ -75,6 +78,11 @@ public class machine {
 
         spoolleft = hardwareMap.get(DcMotor.class, "spoolleft");
         spoolright = hardwareMap.get(DcMotor.class, "spoolright");
+        voltageSensor = hardwareMap.voltageSensor.iterator().next();
+        RobotLog.dd("Machine", "Voltage: &d", voltageSensor.getVoltage());
+
+
+
 
         servoleft = hardwareMap.get(Servo.class, "servoleft");
         servoright = hardwareMap.get(Servo.class, "servoright");

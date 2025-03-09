@@ -28,10 +28,10 @@ public class AllFunc {
 
 
 
-    public Action clawopen(){
+    public Action clawclose(){
         return new OpenClawAction(teleop);
     }
-    public Action clawclose(){
+    public Action clawopen(){
         return new CloseClawAction(teleop);
     }
     public Action diffdeposit(){return new MoveDiff(teleop,0);}
@@ -42,7 +42,7 @@ public class AllFunc {
     public Action bucketExtendSlides(){return new ExtendSlides(teleop,-950);
     }
     public Action specimanExtendSlides(){return new ExtendSlides(teleop,-420);}
-    public Action halfExtendSlides(){return new ExtendSlides(teleop,-250);}
+    public Action halfExtendSlides(){return new ExtendSlides(teleop,-190 );}
 
     public Action retractSlides(){return new retractSlides(teleop,0);}
     public Action stopOnDime(){return new StopOnDime(teleop);}

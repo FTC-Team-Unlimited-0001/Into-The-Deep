@@ -37,21 +37,85 @@ public class bucketAuto extends DeepTeleop {
 
         Actions.runBlocking(new ParallelAction(
                         drive.actionBuilder(initialPose)
-                                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+                                .afterTime(0,new ParallelAction(
+                                        allFunc.specimanAngle()
+                                ))
+                                .strafeToLinearHeading(new Vector2d(65, 65), Math.toRadians(-135))
+                                .waitSeconds(3)
+                                .afterDisp(20.61,new SequentialAction(
+                                        allFunc.diffdeposit(),
+                                        allFunc.bucketExtendSlides(),
+                                        allFunc.stopSlides(),
 
-                                .strafeToLinearHeading(new Vector2d(48, 45), Math.toRadians(-90))
-                                .waitSeconds(1)
-                                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
-                                .waitSeconds(2)
-                                .strafeToLinearHeading(new Vector2d(55, 45), Math.toRadians(-90))
-                                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
-                                .strafeToLinearHeading(new Vector2d(55, 42), Math.toRadians(-40))
+                                        allFunc.diffdeposit(),
+
+
+
+                                        allFunc.clawopen(),
+                                        allFunc.diffput(),
+                                        allFunc.retractSlides(),
+                                        allFunc.stopSlides()
+
+                                ))
+                                .waitSeconds(3)
+
+                                .strafeToLinearHeading(new Vector2d(62,55), Math.toRadians(-90))
+//                               .waitSeconds(3)
+//                                .afterDisp(0, new ParallelAction(
+//                                        allFunc.angleDown(),
+//                                        allFunc.clawopen()
+//
+//                                        ))
+//                                .strafeToLinearHeading(new Vector2d(62,55), Math.toRadians(-90))
+//                                .afterDisp(0,new ParallelAction(
+//                                        allFunc.clawclose()
+//
+//                                ))
+                        //        .waitSeconds(1)
+
+                                // .strafeToLinearHeading(new Vector2d(62,55), Math.toRadians(-90))
+
+//                                .afterDisp(0, new ParallelAction(
+//                                        allFunc.specimanAngle()
+//
+//                                ))
+
+
+//                                .strafeToLinearHeading(new Vector2d(65, 65), Math.toRadians(-135))
+//
+//                                .afterDisp(8.54,new ParallelAction(
+//                                        allFunc.diffdeposit(),
+//                                        allFunc.bucketExtendSlides(),
+//                                        allFunc.stopSlides(),
+//
+//                                        allFunc.diffdeposit(),
+//                                        allFunc.clawopen(),
+//                                        allFunc.diffput(),
+//                                        allFunc.retractSlides(),
+//                                        allFunc.stopSlides()
+//                                ))
+                               // .strafeToLinearHeading(new Vector2d(65, 65), Math.toRadians(-135))
+
+
+                                //  .waitSeconds(1)
+
+                           //    .strafeToLinearHeading(new Vector2d(65, 65), Math.toRadians(-135))
+//                                .waitSeconds(1)
+//                                .strafeToLinearHeading(new Vector2d(68, 53), Math.toRadians(-90))
+//                                .waitSeconds(1)
+//
+//                                .strafeToLinearHeading(new Vector2d(63, 63), Math.toRadians(-135))
+//                                .waitSeconds(1)
+//
+//                                .strafeToLinearHeading(new Vector2d(70, 52), Math.toRadians(-40))
+//                                .waitSeconds(1)
+
 
 //                                .afterDisp(0, new ParallelAction(
 //                                        allFunc.clawclose(),
 //                                        allFunc.specimanAngle()
 //                                ))
-//                                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+//                                .strafeToLinearHeading(new Vector2d(62, 62), Math.toRadians(-135))
 //                                .afterDisp(18.36, new SequentialAction(
 //                                        allFunc.bucketExtendSlides(),
 //                                        allFunc.stopSlides(),
@@ -68,7 +132,7 @@ public class bucketAuto extends DeepTeleop {
 //                                        allFunc.specimanAngle()
 //                                ))
 //                                .waitSeconds(1)
-//                                .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
+//                                .strafeToLinearHeading(new Vector2d(62, 62), Math.toRadians(-135))
 //                                .afterDisp(16.49, new SequentialAction(
 //                                        allFunc.bucketExtendSlides(),
 //                                        allFunc.stopSlides(),

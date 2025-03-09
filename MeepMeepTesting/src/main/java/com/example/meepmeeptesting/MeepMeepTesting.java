@@ -18,96 +18,15 @@ public class MeepMeepTesting {
                 .build();
 
 
-    //SPEC STARTPOINT //   myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
-                myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(40, 62, Math.toRadians(-180)))
-
-
-                        .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
-
-                                .strafeToLinearHeading(new Vector2d(48, 45), Math.toRadians(-90))
-//                                .afterDisp(32, new SequentialAction(
-//                                        allFunc.angleDown(),
-//                                        allFunc.clawclose(),
-//                                        allFunc.specimanAngle()
-//                                ))
-                              .waitSeconds(1)
-                        .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
-
-//                                .afterDisp(16.49, new SequentialAction(
-//                                        allFunc.bucketExtendSlides(),
-//                                        allFunc.stopSlides(),
-//                                        allFunc.diffdeposit(),
-//                                        allFunc.clawopen(),
-//                                        allFunc.diffput(),
-//                                        allFunc.retractSlides(),
-//                                        allFunc.stopSlides()
-//                                ))
-//                                .waitSeconds(2)
-
-
-
-
-
-
-//                                .afterDisp(22.83,new SequentialAction(
-//
-//                                        allFunc.bucketExtendSlides(),
-//                                        allFunc.stopSlides(),
-//                                        allFunc.diffdeposit(),
-//                                        allFunc.clawopen(),
-//                                        allFunc.diffdeposit(),
-//                                        allFunc.retractSlides(),
-//                                        allFunc.stopSlides()
-//
-//
-//                                ))
-                                 .waitSeconds(2)
-                        .strafeToLinearHeading(new Vector2d(55, 45), Math.toRadians(-90))
-//                                .afterDisp(35, new SequentialAction(
-//                                        new ParallelAction(
-//                                                allFunc.angleDown(),
-//                                                allFunc.clawopen(),
-//                                                allFunc.diffdeposit()
-//                                        ),
-//                                        allFunc.clawclose()
-//
-//                                )
-//
-//                                )
-//
-                        .strafeToLinearHeading(new Vector2d(54, 54), Math.toRadians(-135))
-//
-//                                .afterDisp(18.03,new SequentialAction(
-//                                        allFunc.specimanAngle(),
-//                                        allFunc.bucketExtendSlides(),
-//                                        allFunc.stopSlides(),
-//                                        allFunc.diffput(),
-//                                        allFunc.clawopen(),
-//                                        allFunc.diffdeposit(),
-//                                        allFunc.retractSlides(),
-//                                        allFunc.stopSlides()
-//
-//
-//                                ))
-//
-                        .strafeToLinearHeading(new Vector2d(55, 42), Math.toRadians(-40))
-//
-//                                .afterDisp(12.21,new SequentialAction(
-//                                        allFunc.angleDown(),
-//                                        allFunc.clawclose(),
-//                                        allFunc.specimanAngle()
-//                                ))
-//
-//                                .afterDisp(12.21,new SequentialAction(
-//                                        allFunc.bucketExtendSlides(),
-//                                        allFunc.stopSlides(),
-//                                        allFunc.diffput(),
-//                                        allFunc.clawopen(),
-//                                        allFunc.diffdeposit(),
-//                                        allFunc.retractSlides(),
-//                                        allFunc.stopSlides()
-//                                ))
-
+ //   SPEC STARTPOINT
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
+         //       myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(40, 62, Math.toRadians(-180)))
+                .strafeToConstantHeading(new Vector2d(27, -40))
+                .splineToConstantHeading(new Vector2d(34, -14), Math.toRadians(-90))
+                .strafeTo(new Vector2d(46, -14) )
+                .strafeTo(new Vector2d(46, -51) )
+                .splineToConstantHeading(new Vector2d(52, -15),Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(52,-51.2),Math.toRadians(-90))
 
 
 
