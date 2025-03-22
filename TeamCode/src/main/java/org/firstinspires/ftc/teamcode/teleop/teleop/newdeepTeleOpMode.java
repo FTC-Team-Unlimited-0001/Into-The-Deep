@@ -26,7 +26,7 @@ public class newdeepTeleOpMode extends BaseOpMode {
     @Override
     public void initialize() {
         robot = new machine(hardwareMap);
-        Limelight limelight = new Limelight(robot.limelight, telemetry);
+       // Limelight limelight = new Limelight(robot.limelight, telemetry);
         int high_basket = 250;
         int pickup = 950;
         int clipper = 450;

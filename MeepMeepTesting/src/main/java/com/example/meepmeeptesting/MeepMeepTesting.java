@@ -21,13 +21,20 @@ public class MeepMeepTesting {
  //   SPEC STARTPOINT
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
          //       myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(40, 62, Math.toRadians(-180)))
-                .strafeToConstantHeading(new Vector2d(27, -40))
+                .strafeToConstantHeading(new Vector2d(30, -40))
                 .splineToConstantHeading(new Vector2d(34, -14), Math.toRadians(-90))
-                .strafeTo(new Vector2d(46, -14) )
-                .strafeTo(new Vector2d(46, -51) )
+                .strafeTo(new Vector2d(48, -14) )
+                .strafeTo(new Vector2d(48, -51) )
                 .splineToConstantHeading(new Vector2d(52, -15),Math.toRadians(-90))
-                .splineToConstantHeading(new Vector2d(52,-51.2),Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(52,-54),Math.toRadians(-90))
 
+
+
+                .strafeTo(new Vector2d(63, -12) )
+                .strafeTo(new Vector2d(63,-45))
+                .waitSeconds(.1)
+                .strafeTo(new Vector2d(63,-53.762))
+                .waitSeconds(.2)
 
 
 //                START OF SPEC AUTO

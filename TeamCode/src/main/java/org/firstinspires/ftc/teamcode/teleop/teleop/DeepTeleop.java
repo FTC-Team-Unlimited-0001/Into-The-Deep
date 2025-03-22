@@ -42,7 +42,7 @@ public class DeepTeleop extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         robot = new machine(hardwareMap);
-        Limelight limelight = new Limelight(robot.limelight, telemetry);
+      //  Limelight limelight = new Limelight(robot.limelight, telemetry);
 
         int high_basket = 250;
         int pickup = 950;
@@ -235,7 +235,7 @@ public class DeepTeleop extends LinearOpMode {
 
           //  limelight.getDistanceToTarget();
 
-            limelight.getCorners(telemetry);
+          //  limelight.getCorners(telemetry);
 
             // controlArmsWithPIDF();
             slidecontrol();

@@ -32,7 +32,7 @@ public class machine {
     public DcMotor hangrright;
     public DcMotor hangleft;
 
-    public  Limelight3A limelight;
+    //public  Limelight3A limelight;
     public Servo servoright;
     public Servo servoleft;
     public Servo servopinch;
@@ -65,7 +65,7 @@ public VoltageSensor voltageSensor;
 
     private void initialize(HardwareMap hwMap) {
         hardwareMap = hwMap;
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        //limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
         //Connect Motors
         frontRight = hardwareMap.get(DcMotor.class, "rightFront");
@@ -98,7 +98,7 @@ public VoltageSensor voltageSensor;
         backRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
         hangleft.setDirection(DcMotorSimple.Direction.REVERSE);
-        hangrright.setDirection(DcMotorSimple.Direction.FORWARD);
+        hangrright.setDirection(DcMotorSimple.Direction.REVERSE);
 
         spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -108,7 +108,7 @@ public VoltageSensor voltageSensor;
         spoolleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         spoolright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         spoolright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        spoolleft.setDirection(DcMotor.Direction.REVERSE);
+        spoolleft.setDirection(DcMotor.Direction.FORWARD);
         servoleft.setDirection(Servo.Direction.REVERSE);
         //servo right reverse after
 
