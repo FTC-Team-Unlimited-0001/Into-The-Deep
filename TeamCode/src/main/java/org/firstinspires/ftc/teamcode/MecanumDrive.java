@@ -472,6 +472,25 @@ public class MecanumDrive {
         c.setStroke("#3F51B5");
         c.strokePolyline(xPoints, yPoints);
     }
+    public void goToTarget(Pose2dDual<Time> target, Canvas fieldOverlay) {
+        updatePoseEstimate();
+
+        PoseVelocity2d robotVelRobot = updatePoseEstimate();
+
+        PoseVelocity2dDual<Time> command = new HolonomicController(
+                PARAMS.axialGain, PARAMS.lateralGain, PARAMS.headingGain,
+                PARAMS.axialVelGain, PARAMS.lateralVelGain, PARAMS.headingVelGain
+        ).compute(target, pose, robotVelRobot);
+
+        setDrivePowers(command.value());
+
+        // Optionally draw debug info
+        fieldOverlay.setStroke("#4CAF50");
+        Drawing.drawRobot(fieldOverlay, target.value());
+
+        fieldOverlay.setStroke("#3F51B5");
+        Drawing.drawRobot(fieldOverlay, pose);
+    }
 
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose) {
         return new TrajectoryActionBuilder(

@@ -3,8 +3,14 @@ package org.firstinspires.ftc.teamcode.teleop.teleop;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Vision.Visionnew;
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -12,24 +18,42 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.teamcode.PinpointDrive;
 import org.firstinspires.ftc.teamcode.Vision.Limelight;
 import org.firstinspires.ftc.teamcode.commands.BucketDropCommandGroup;
 import org.firstinspires.ftc.teamcode.commands.DiffMoveCommandGroup;
 import org.firstinspires.ftc.teamcode.ttquckstart.base.BaseOpMode;
 import org.firstinspires.ftc.teamcode.util.machine;
-
+import org.firstinspires.ftc.teamcode.util.p2p;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.roadrunner.Action;
 @TeleOp
 public class newdeepTeleOpMode extends BaseOpMode {
     private machine robot;
     ElapsedTime  timer;
+    private PinpointDrive odometryDrive;
+    private Visionnew vision;
+    private Action currentAction = null;
+    private FtcDashboard dashboard = FtcDashboard.getInstance();
+
+
     @Override
     public void initialize() {
         robot = new machine(hardwareMap);
-       // Limelight limelight = new Limelight(robot.limelight, telemetry);
+        vision = new Visionnew(hardwareMap, telemetry);
+        vision.initializeCamera();
+        p2p.drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+
+        // Limelight limelight = new Limelight(robot.limelight, telemetry);
         int high_basket = 250;
         int pickup = 950;
         int clipper = 450;
+        Pose2d initialPose = new Pose2d(1, -62.625, Math.toRadians(270)); // or your actual field starting point
+        odometryDrive = new PinpointDrive(hardwareMap, initialPose);
+
+
+        PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
 
 
         //Claw presets
@@ -61,6 +85,8 @@ public class newdeepTeleOpMode extends BaseOpMode {
         manipulatorGamepad.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON).whenPressed(diffMoveCommandGroup);
         BucketDropCommandGroup example = new BucketDropCommandGroup(robot);
       //  driverGamepad.getGamepadButton(GamepadKeys.Button.A).whenPressed(example);
+        p2p.drive.pose = odometryDrive.getPoseEstimate();
+
     }
 
     @Override
@@ -70,6 +96,18 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
     @Override
     public void update() {
+        p2p.drive.pose = odometryDrive.getPoseEstimate();
+
+        TelemetryPacket packet = new TelemetryPacket();
+        if (currentAction != null) {
+            boolean running = currentAction.run(packet);
+            if (!running) {
+                currentAction = null;  // done with the action
+            }
+            dashboard.sendTelemetryPacket(packet);
+            return;  // skip the rest of update() while driving
+        }
+
         double y = -gamepad1.left_stick_y; // Remember, this is reversed!
         double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
@@ -100,7 +138,6 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
 
 
-
         if (gamepad1.left_bumper) {
             robot.frontLeft.setPower(frontLeftPower / 2);
             robot.backLeft.setPower(backLeftPower / 2);
@@ -127,6 +164,14 @@ public class newdeepTeleOpMode extends BaseOpMode {
             robot.frontRight.setPower(frontRightPower);
             robot.backRight.setPower(backRightPower);
         }
+        vision.getDistance();         // Distance to target
+        vision.getStrafeOffset();     // How far to move sideways
+        vision.isTargetVisible();     // Whether a target is seen
+        vision.getTurnServoDegree();  // Value from Python pipeline
+        telemetry.addData("Target Visible", vision.isTargetVisible());
+        telemetry.addData("Target Distance (mm)", vision.getDistance());
+        telemetry.addData("Strafe Offset", vision.getStrafeOffset());
+        telemetry.addData("Turn Servo Angle", vision.getTurnServoDegree());
 
 
         //Preset variables:
@@ -271,6 +316,13 @@ slidecontrol();
 //        telemetry.addData("Right Servo", robot.servoright.getPosition());
 //        telemetry.addData("Left Servo", robot.servoleft.getPosition());
     }
+
+    public void goToPosition(double targetX, double targetY, double targetH, double speed){
+
+
+
+    }
+
 }
 
 

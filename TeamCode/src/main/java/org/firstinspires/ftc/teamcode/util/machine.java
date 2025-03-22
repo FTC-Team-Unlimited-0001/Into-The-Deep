@@ -41,6 +41,9 @@ public class machine {
 public VoltageSensor voltageSensor;
     public PIDFController armPIDFController;
     public PIDFController slidesPIDFController;
+    public PIDFController headingController;
+    public PIDFController forwardController;
+    public PIDFController strafeController;
     public static double armTargetPosition;
     public static double slidesTargetPosition;
 
@@ -53,6 +56,21 @@ public VoltageSensor voltageSensor;
     public static double kIs = 0;
     public static double kDs = 0;
     public static double kFs = 0.0006;
+    public static double hP;
+    public static double hI;
+    public static double hD;
+    public static double hF;
+
+    public static double fP;
+    public static double fI;
+    public static double fD;
+    public static double fF;
+
+    public static double sP;
+    public static double sI;
+    public static double sD;
+    public static double sF;
+
 //f is for predicting the power before something has happened.
 
 
@@ -113,9 +131,12 @@ public VoltageSensor voltageSensor;
         //servo right reverse after
 
 
-        // Initialize the PID controller for the arms
+        // Initialize the PID controller
         armPIDFController = new PIDFController(kP, kI, kD, kF);
         slidesPIDFController = new PIDFController(kPs, kIs, kDs, kFs);
+        headingController = new PIDFController(hP, hI, hD, hF);
+        forwardController = new PIDFController(fP, fI, fD, fF);
+        strafeController  = new PIDFController(sP, sI, sD, sF);
         // Set an initial target position for the arms (e.g., 500 ticks)
         armTargetPosition = 0;
         slidesTargetPosition = 0;

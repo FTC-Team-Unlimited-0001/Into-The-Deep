@@ -142,6 +142,9 @@ public class PinpointDrive extends MecanumDrive {
         }
     }
 
+    public Pose2d getPoseEstimate() {
+        return pose;
+    }
 
 
 }

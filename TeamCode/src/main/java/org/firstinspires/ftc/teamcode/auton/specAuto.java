@@ -31,6 +31,7 @@ public class specAuto extends DeepTeleop {
 
 
         Pose2d initialPose = new Pose2d(1, -62.625, Math.toRadians(270));
+
         PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
 //        allFunc.clawclose().run(new TelemetryPacket());
 //        allFunc.diffpick().run(new TelemetryPacket());
