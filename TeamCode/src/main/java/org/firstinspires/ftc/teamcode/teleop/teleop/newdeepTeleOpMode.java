@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.Vision.Visionnew;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.Actions;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
@@ -101,6 +102,14 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
         TelemetryPacket packet = new TelemetryPacket();
         if (currentAction != null) {
+            // Cancel currentAction if joystick is moved
+            if (currentAction != null && (
+                    Math.abs(gamepad1.left_stick_x) > 0.05 ||
+                            Math.abs(gamepad1.left_stick_y) > 0.05 ||
+                            Math.abs(gamepad1.right_stick_x) > 0.05)) {
+                currentAction = null;
+            }
+
             boolean running = currentAction.run(packet);
             if (!running) {
                 currentAction = null;  // done with the action
@@ -119,62 +128,36 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
 
 
-        double y = -gamepad1.left_stick_y; // Remember, this is reversed!
-        double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
-        double rx = gamepad1.right_stick_x;
+        if (currentAction == null) {
+            double y = -gamepad1.left_stick_y;
+            double x = gamepad1.left_stick_x * 1.1;
+            double rx = gamepad1.right_stick_x;
 
-        // Denominator is the largest motor power (absolute value) or 1
-        // This ensures all the powers maintain the same ratio, but only when
-        // at least one is out of the range [-1, 1]
-        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-        double frontLeftPower = (y + x + rx) / denominator;
-        double backLeftPower = (y - x + rx) / denominator;
-        double frontRightPower = (y - x - rx) / denominator;
-        double backRightPower = (y + x - rx) / denominator;
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            double frontLeftPower = (y + x + rx) / denominator;
+            double backLeftPower = (y - x + rx) / denominator;
+            double frontRightPower = (y - x - rx) / denominator;
+            double backRightPower = (y + x - rx) / denominator;
 
-        DcMotor.ZeroPowerBehavior brake = gamepad1.left_bumper ? DcMotor.ZeroPowerBehavior.BRAKE : DcMotor.ZeroPowerBehavior.FLOAT;
-        robot.frontLeft.setZeroPowerBehavior(brake);
-        robot.backRight.setZeroPowerBehavior(brake);
-        robot.backLeft.setZeroPowerBehavior(brake);
-        robot.frontRight.setZeroPowerBehavior(brake);
+            DcMotor.ZeroPowerBehavior brake = gamepad1.left_bumper ? DcMotor.ZeroPowerBehavior.BRAKE : DcMotor.ZeroPowerBehavior.FLOAT;
+            robot.frontLeft.setZeroPowerBehavior(brake);
+            robot.backRight.setZeroPowerBehavior(brake);
+            robot.backLeft.setZeroPowerBehavior(brake);
+            robot.frontRight.setZeroPowerBehavior(brake);
 
-        robot.spoolleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.spoolright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.hangleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.hangrright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-        double open = 0.35;
-        double close = 0;
-
-
-
-        if (gamepad1.left_bumper) {
-            robot.frontLeft.setPower(frontLeftPower / 2);
-            robot.backLeft.setPower(backLeftPower / 2);
-            robot.frontRight.setPower(frontRightPower / 2);
-            robot.backRight.setPower(backRightPower / 2);
-        } else {
-            robot.frontLeft.setPower(frontLeftPower);
-            robot.backLeft.setPower(backLeftPower);
-            robot.frontRight.setPower(frontRightPower);
-            robot.backRight.setPower(backRightPower);
+            if (gamepad1.left_bumper) {
+                robot.frontLeft.setPower(frontLeftPower / 2);
+                robot.backLeft.setPower(backLeftPower / 2);
+                robot.frontRight.setPower(frontRightPower / 2);
+                robot.backRight.setPower(backRightPower / 2);
+            } else {
+                robot.frontLeft.setPower(frontLeftPower);
+                robot.backLeft.setPower(backLeftPower);
+                robot.frontRight.setPower(frontRightPower);
+                robot.backRight.setPower(backRightPower);
+            }
         }
 
-
-        //Preset variables:
-
-        if (gamepad1.left_bumper) {
-            robot.frontLeft.setPower(frontLeftPower / 2);
-            robot.backLeft.setPower(backLeftPower / 2);
-            robot.frontRight.setPower(frontRightPower / 2);
-            robot.backRight.setPower(backRightPower / 2);
-        } else {
-            robot.frontLeft.setPower(frontLeftPower);
-            robot.backLeft.setPower(backLeftPower);
-            robot.frontRight.setPower(frontRightPower);
-            robot.backRight.setPower(backRightPower);
-        }
 //        vision.getDistance();         // Distance to target
 //        vision.getStrafeOffset();     // How far to move sideways
 //        vision.isTargetVisible();     // Whether a target is seen
@@ -255,11 +238,11 @@ public class newdeepTeleOpMode extends BaseOpMode {
                 robot.servoright.setPosition(.22);
             }
             if (gamepad2.a) {
-                robot.servopinch.setPosition(open);
+                robot.servopinch.setPosition(.35);
 
             }
             if (gamepad2.y) {
-                robot.servopinch.setPosition(close);
+                robot.servopinch.setPosition(0);
                  ;
             }
         }
@@ -298,6 +281,11 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
 slidecontrol();
         // controlArmsWithPIDF();
+        if (currentAction != null) {
+            telemetry.addData("Drive Mode", "MOVING_TO_TARGET");
+        } else {
+            telemetry.addData("Drive Mode", "MANUAL");
+        }
 
 
     }

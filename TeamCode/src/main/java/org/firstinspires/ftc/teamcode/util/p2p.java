@@ -35,6 +35,7 @@ public class p2p implements Action {
         double posError = targetPose.minusExp(currentPose).position.norm();
         double headingError = Math.abs(Math.toDegrees(targetPose.minusExp(currentPose).heading.toDouble()));
 
-        return posError < translationalAccuracy && headingError < headingAccuracy;
+        return !(posError < translationalAccuracy && headingError < headingAccuracy);
+
     }
 }
