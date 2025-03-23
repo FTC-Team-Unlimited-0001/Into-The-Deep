@@ -33,7 +33,7 @@ public class newdeepTeleOpMode extends BaseOpMode {
     private machine robot;
     ElapsedTime  timer;
     private PinpointDrive odometryDrive;
-    private Visionnew vision;
+    //private Visionnew vision;
     private Action currentAction = null;
     private FtcDashboard dashboard = FtcDashboard.getInstance();
 
@@ -41,8 +41,8 @@ public class newdeepTeleOpMode extends BaseOpMode {
     @Override
     public void initialize() {
         robot = new machine(hardwareMap);
-        vision = new Visionnew(hardwareMap, telemetry);
-        vision.initializeCamera();
+//        vision = new Visionnew(hardwareMap, telemetry);
+//        vision.initializeCamera();
         p2p.drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
 
         // Limelight limelight = new Limelight(robot.limelight, telemetry);
@@ -96,6 +96,7 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
     @Override
     public void update() {
+        odometryDrive.updatePoseEstimate();
         p2p.drive.pose = odometryDrive.getPoseEstimate();
 
         TelemetryPacket packet = new TelemetryPacket();
@@ -107,6 +108,16 @@ public class newdeepTeleOpMode extends BaseOpMode {
             dashboard.sendTelemetryPacket(packet);
             return;  // skip the rest of update() while driving
         }
+        if (gamepad1.dpad_up && currentAction == null && timer.seconds() > 1.0) {
+            currentAction = new p2p(
+                    new Pose2d(-10, -50, Math.toRadians(270)),  // Target pose to move to
+                    1.0,  // Translation tolerance (inches)
+                    3.0   // Heading tolerance (degrees)
+            );
+            timer.reset();  // restart the cooldown
+        }
+
+
 
         double y = -gamepad1.left_stick_y; // Remember, this is reversed!
         double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
@@ -164,18 +175,23 @@ public class newdeepTeleOpMode extends BaseOpMode {
             robot.frontRight.setPower(frontRightPower);
             robot.backRight.setPower(backRightPower);
         }
-        vision.getDistance();         // Distance to target
-        vision.getStrafeOffset();     // How far to move sideways
-        vision.isTargetVisible();     // Whether a target is seen
-        vision.getTurnServoDegree();  // Value from Python pipeline
-        telemetry.addData("Target Visible", vision.isTargetVisible());
-        telemetry.addData("Target Distance (mm)", vision.getDistance());
-        telemetry.addData("Strafe Offset", vision.getStrafeOffset());
-        telemetry.addData("Turn Servo Angle", vision.getTurnServoDegree());
+//        vision.getDistance();         // Distance to target
+//        vision.getStrafeOffset();     // How far to move sideways
+//        vision.isTargetVisible();     // Whether a target is seen
+//        vision.getTurnServoDegree();  // Value from Python pipeline
+//        telemetry.addData("Target Visible", vision.isTargetVisible());
+//        telemetry.addData("Target Distance (mm)", vision.getDistance());
+//        telemetry.addData("Strafe Offset", vision.getStrafeOffset());
+//        telemetry.addData("Turn Servo Angle", vision.getTurnServoDegree());
 
 
         //Preset variables:
 
+        Pose2d pose = p2p.drive.pose;
+
+        telemetry.addData("Odometry X", pose.position.x);
+        telemetry.addData("Odometry Y", pose.position.y);
+        telemetry.addData("Odometry Heading (deg)", Math.toDegrees(pose.heading.toDouble()));
 
         if (timer.milliseconds() > 100) {
             // Handle servo positions
