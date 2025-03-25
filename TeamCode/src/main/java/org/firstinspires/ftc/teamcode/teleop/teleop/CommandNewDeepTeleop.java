@@ -11,6 +11,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Actions;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
@@ -24,19 +25,23 @@ import org.firstinspires.ftc.teamcode.Vision.Limelight;
 import org.firstinspires.ftc.teamcode.commands.BucketDropCommandGroup;
 import org.firstinspires.ftc.teamcode.commands.DiffMoveCommandGroup;
 import org.firstinspires.ftc.teamcode.ttquckstart.base.BaseOpMode;
+import org.firstinspires.ftc.teamcode.util.NEWp2p;
 import org.firstinspires.ftc.teamcode.util.machine;
 import org.firstinspires.ftc.teamcode.util.p2p;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.roadrunner.Action;
 @TeleOp
-public class newdeepTeleOpMode extends BaseOpMode {
+public class CommandNewDeepTeleop extends BaseOpMode {
     private machine robot;
     ElapsedTime  timer;
-    private PinpointDrive odometryDrive;
+
     //private Visionnew vision;
     private Action currentAction = null;
     private FtcDashboard dashboard = FtcDashboard.getInstance();
+    private NEWp2p newp2p;
+    private MecanumDrive drive;
+
 
 
     @Override
@@ -44,18 +49,19 @@ public class newdeepTeleOpMode extends BaseOpMode {
         robot = new machine(hardwareMap);
 //        vision = new Visionnew(hardwareMap, telemetry);
 //        vision.initializeCamera();
-        p2p.drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
 
         // Limelight limelight = new Limelight(robot.limelight, telemetry);
         int high_basket = 250;
         int pickup = 950;
         int clipper = 450;
         Pose2d initialPose = new Pose2d(1, -62.625, Math.toRadians(270)); // or your actual field starting point
-        odometryDrive = new PinpointDrive(hardwareMap, initialPose);
 
 
-        PinpointDrive drive = new PinpointDrive(hardwareMap, initialPose);
+        drive = new MecanumDrive(hardwareMap, initialPose);
 
+
+
+        newp2p = new NEWp2p(drive); // Replace `drive` with your MecanumDrive instance
 
         //Claw presets
         double open = 0.35;
@@ -86,7 +92,6 @@ public class newdeepTeleOpMode extends BaseOpMode {
         manipulatorGamepad.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON).whenPressed(diffMoveCommandGroup);
         BucketDropCommandGroup example = new BucketDropCommandGroup(robot);
       //  driverGamepad.getGamepadButton(GamepadKeys.Button.A).whenPressed(example);
-        p2p.drive.pose = odometryDrive.getPoseEstimate();
 
     }
 
@@ -97,34 +102,35 @@ public class newdeepTeleOpMode extends BaseOpMode {
 
     @Override
     public void update() {
-        odometryDrive.updatePoseEstimate();
-        p2p.drive.pose = odometryDrive.getPoseEstimate();
 
         TelemetryPacket packet = new TelemetryPacket();
         if (currentAction != null) {
-            // Cancel currentAction if joystick is moved
-            if (currentAction != null && (
+            boolean cancelRequested = (
                     Math.abs(gamepad1.left_stick_x) > 0.05 ||
                             Math.abs(gamepad1.left_stick_y) > 0.05 ||
-                            Math.abs(gamepad1.right_stick_x) > 0.05)) {
+                            Math.abs(gamepad1.right_stick_x) > 0.05
+            );
+
+            if (cancelRequested) {
                 currentAction = null;
+                drive.setDrivePowers(new PoseVelocity2d(new Vector2d(0, 0), 0)); // stop the bot
+            } else {
+                boolean running = currentAction.run(packet);
+                if (!running) {
+                    currentAction = null;
+                    drive.setDrivePowers(new PoseVelocity2d(new Vector2d(0, 0), 0)); // stop after done
+                }
             }
 
-            boolean running = currentAction.run(packet);
-            if (!running) {
-                currentAction = null;  // done with the action
-            }
             dashboard.sendTelemetryPacket(packet);
-            return;  // skip the rest of update() while driving
+            return;
         }
+
         if (gamepad1.dpad_up && currentAction == null && timer.seconds() > 1.0) {
-            currentAction = new p2p(
-                    new Pose2d(-10, -50, Math.toRadians(270)),  // Target pose to move to
-                    1.0,  // Translation tolerance (inches)
-                    3.0   // Heading tolerance (degrees)
-            );
+            currentAction = newp2p.roughp2p(new Pose2d(-10, -50, Math.toRadians(270)));
             timer.reset();  // restart the cooldown
         }
+
 
 
 
