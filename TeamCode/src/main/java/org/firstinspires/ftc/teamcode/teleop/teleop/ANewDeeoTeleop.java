@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.ttquckstart.base.BaseOpMode;
 import org.firstinspires.ftc.teamcode.util.machine;
 
 @TeleOp
-public class newdeepTeleOpMode extends BaseOpMode {
+public class ANewDeeoTeleop extends BaseOpMode {
     private machine robot;
     ElapsedTime  timer;
     @Override
