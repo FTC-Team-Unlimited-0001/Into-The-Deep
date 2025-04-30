@@ -15,12 +15,14 @@ public class MoveDiff implements Action {
     private boolean ranOnce;
     private ElapsedTime timer;
     private double target;
+    private double targettwo;
 
-    public MoveDiff(DeepTeleop teleop, double target) {
+    public MoveDiff(DeepTeleop teleop, double target, double targettwo) {
         this.teleop = teleop;
         ranOnce = false;
         timer = new ElapsedTime();
         this.target = target;
+        this.targettwo = targettwo;
 
     }
 
@@ -31,7 +33,7 @@ public class MoveDiff implements Action {
             ranOnce = true;
         }
         teleop.robot.servoleft.setPosition(target);
-        teleop.robot.servoright.setPosition(target);
+        teleop.robot.servoright.setPosition(targettwo);
         return timer.milliseconds() < 200;
     }
 }

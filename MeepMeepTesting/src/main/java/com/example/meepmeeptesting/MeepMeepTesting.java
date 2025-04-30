@@ -19,22 +19,62 @@ public class MeepMeepTesting {
 
 
  //   SPEC STARTPOINT
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
-         //       myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(40, 62, Math.toRadians(-180)))
-                .strafeToConstantHeading(new Vector2d(30, -40))
-                .splineToConstantHeading(new Vector2d(34, -14), Math.toRadians(-90))
-                .strafeTo(new Vector2d(48, -14) )
-                .strafeTo(new Vector2d(48, -51) )
-                .splineToConstantHeading(new Vector2d(52, -15),Math.toRadians(-90))
-                .splineToConstantHeading(new Vector2d(52,-54),Math.toRadians(-90))
+       // myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(1, -62.625, Math.toRadians(270)))
+               myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(40, 62, Math.toRadians(-180)))
+
+
+                .strafeToLinearHeading(new Vector2d(64.9, 65), Math.toRadians(-135))
 
 
 
-                .strafeTo(new Vector2d(63, -12) )
-                .strafeTo(new Vector2d(63,-45))
-                .waitSeconds(.1)
-                .strafeTo(new Vector2d(63,-53.762))
-                .waitSeconds(.2)
+
+
+
+                .strafeToLinearHeading(new Vector2d(65,65.1), Math.toRadians(-135))
+                .waitSeconds(1)
+// 1 is done
+                .strafeToLinearHeading(new Vector2d(60,55), Math.toRadians(-90))
+
+                .strafeToLinearHeading(new Vector2d(61,55), Math.toRadians(-90))
+                .waitSeconds(1)
+
+                .strafeToLinearHeading(new Vector2d(61.1,55), Math.toRadians(-90))
+                .waitSeconds(1)
+
+
+                .strafeToLinearHeading(new Vector2d(65, 65), Math.toRadians(-135))
+                .waitSeconds(1)
+
+                .strafeToLinearHeading(new Vector2d(65,65.1), Math.toRadians(-135))
+
+                .waitSeconds(1)
+//2 is done
+                .strafeToLinearHeading(new Vector2d(67.99,55), Math.toRadians(-90))
+
+                .strafeToLinearHeading(new Vector2d(70.2,55), Math.toRadians(-90))
+                .waitSeconds(1)
+
+                .strafeToLinearHeading(new Vector2d(70.3,55), Math.toRadians(-90))
+                .waitSeconds(1)
+
+
+                .waitSeconds(1)
+                .strafeToLinearHeading(new Vector2d(64.9, 65), Math.toRadians(-135))
+
+
+
+
+
+
+                .strafeToLinearHeading(new Vector2d(65,65.1), Math.toRadians(-135))
+                .waitSeconds(1)
+
+                       .strafeToLinearHeading(new Vector2d(65,55), Math.toRadians(-90))
+                       .strafeToLinearHeading(new Vector2d(74,55), Math.toRadians(-90))
+
+
+
+
 
 
 //                START OF SPEC AUTO

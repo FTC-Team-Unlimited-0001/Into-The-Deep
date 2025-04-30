@@ -11,11 +11,11 @@ public class DiffMoveCommandGroup extends SequentialCommandGroup {
         addCommands(
 
                 new SequentialCommandGroup(
-                new MoveDiffCommand(machine, 0,300),
+                new MoveDiffCommand(machine, 0,280),
                 new ParallelCommandGroup(
-                        new MoveClawCommand(machine,0,310)
+                        new MoveClawCommand(machine,0,240)
                 ),
-                new MoveDiffCommand(machine,.63,220)
+                new MoveDiffCommand(machine,.63,150 )
                 )
         );
     }

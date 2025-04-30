@@ -162,8 +162,8 @@ public class ANewDeeoTeleop extends BaseOpMode {
 
             }
             if (gamepad2.dpad_right) {
-                robot.servoAngularRight.setPosition(.18);
-                robot.servoAngularLeft.setPosition(.18);
+                robot.servoAngularRight.setPosition(.16);
+                robot.servoAngularLeft.setPosition(.16);
 
             }
 

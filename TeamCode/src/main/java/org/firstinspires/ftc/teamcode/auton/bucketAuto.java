@@ -67,7 +67,7 @@ public class bucketAuto extends DeepTeleop {
                                 .strafeToLinearHeading(new Vector2d(65,65.1), Math.toRadians(-135))
                                 .waitSeconds(1)
 // 1 is done
-                                .strafeToLinearHeading(new Vector2d(60,55), Math.toRadians(-90))
+                                .strafeToLinearHeading(new Vector2d(59.5,55), Math.toRadians(-90))
                                 .afterDisp(0,new ParallelAction(
                                         allFunc.angleDown(),
                                         allFunc.diffput()
@@ -96,9 +96,6 @@ public class bucketAuto extends DeepTeleop {
                                         allFunc.clawopen(),
 
                                         allFunc.diffdeposit(),
-
-
-
                                         allFunc.diffput(),
                                         allFunc.retractSlides(),
                                         allFunc.stopSlides()
@@ -153,28 +150,65 @@ public class bucketAuto extends DeepTeleop {
 
                                 .strafeToLinearHeading(new Vector2d(65,65.1), Math.toRadians(-135))
                                 .waitSeconds(1)
-// 3 is done
-
-                                .afterDisp(0,new ParallelAction(
+                                .afterDisp(1, new SequentialAction(
                                         allFunc.angleDown(),
                                         allFunc.diffput()
-
-
                                 ))
-                                .strafeToLinearHeading(new Vector2d(70,55), Math.toRadians(180))
+                                .strafeToLinearHeading(new Vector2d(60,55), Math.toRadians(0))
                                 .waitSeconds(1)
+                                .strafeToLinearHeading(new Vector2d(72,50), Math.toRadians(0))
+                                .waitSeconds(1)
+                                .strafeToLinearHeading(new Vector2d(72.01,50), Math.toRadians(0))
+
                                 .afterDisp(0,new SequentialAction(
+                                        allFunc.ninty(),
                                         allFunc.clawclose()
                                 ))
-
-                                .strafeToLinearHeading(new Vector2d(70.3,55), Math.toRadians(180))
-                                .waitSeconds(1)
-
-                                .afterTime(1,new ParallelAction(
+                                .strafeToLinearHeading(new Vector2d(65, 65), Math.toRadians(-135))
+                                .afterDisp(0,new SequentialAction(
                                         allFunc.specimanAngle()
                                 ))
+                                .strafeToLinearHeading(new Vector2d(65, 65.01), Math.toRadians(-135))
+
                                 .waitSeconds(1)
-                                .strafeToLinearHeading(new Vector2d(64.9, 65), Math.toRadians(-135))
+                                .afterDisp(0,new SequentialAction(
+                                        allFunc.diffdeposit(),
+                                        allFunc.bucketExtendSlides(),
+                                        allFunc.stopSlides(),
+                                        allFunc.clawopen(),
+
+                                        allFunc.diffdeposit(),
+                                        allFunc.diffput(),
+                                        allFunc.retractSlides(),
+                                        allFunc.stopSlides()
+
+                                ))
+
+                                .strafeToLinearHeading(new Vector2d(65,65.1), Math.toRadians(-135))
+
+
+// 3 is done
+
+//                                .afterDisp(0,new ParallelAction(
+//                                        allFunc.angleDown(),
+//                                        allFunc.diffput()
+//
+//
+//                                ))
+//                                .strafeToLinearHeading(new Vector2d(70,55), Math.toRadians(180))
+//                                .waitSeconds(1)
+//                                .afterDisp(0,new SequentialAction(
+//                                        allFunc.clawclose()
+//                                ))
+//
+//                                .strafeToLinearHeading(new Vector2d(70.3,55), Math.toRadians(180))
+//                                .waitSeconds(1)
+//
+//                                .afterTime(1,new ParallelAction(
+//                                        allFunc.specimanAngle()
+//                                ))
+//                                .waitSeconds(1)
+//                                .strafeToLinearHeading(new Vector2d(64.9, 65), Math.toRadians(-135))
 
                                 .build()
 
